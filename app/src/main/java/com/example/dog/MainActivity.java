@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
     private String KEY_NAME = "name";
 
     private Button cameraButton, logBtn;
-    private ImageButton historyBtn;
     private ImageView pictureImageView;
 
     private TextView logTitleTextView;
@@ -73,18 +72,6 @@ public class MainActivity extends AppCompatActivity {
         titlePicTextView = findViewById(R.id.pictureTitleTextView);
         pictureImageView = findViewById(R.id.pictureImageView);
         logBtn = findViewById(R.id.logButton);
-        historyBtn = findViewById(R.id.historyButton);
-
-        historyBtn.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            // Move to DogInfo activity
-            Intent intent = new Intent(MainActivity.this, History.class);
-            startActivity(intent);
-            finish(); // Finish current activity to prevent going back to it with the back button
-        }
-        });
-
 
         appNavigation = findViewById(R.id.homeBottomNavigation);
         appNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -169,12 +156,6 @@ public class MainActivity extends AppCompatActivity {
         countTextView.setText(key + ": " + count);
         countTextView.setVisibility(count > 0 ? View.VISIBLE : View.GONE);
     }
-    
-       
-
-
-        
-
 
     private void displayPhoto(String photoPath) {
         pictureImageView.setImageURI(Uri.parse(photoPath));
@@ -253,15 +234,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        historyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Move to DogInfo activity
-                Intent intent = new Intent(MainActivity.this, History.class);
-                startActivity(intent);
-                finish(); // Finish current activity to prevent going back to it with the back button
-            }
-        });
         displayInfo();
     }
 }

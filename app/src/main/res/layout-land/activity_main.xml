@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".MainActivity"
+    android:gravity="center_horizontal"
+    >
+    <TextView
+        android:id="@+id/logTitleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_horizontal"
+        android:padding="5dp"
+
+        android:text="Dogs Name"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+
+            <TextView
+                android:id="@+id/pictureTitleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/logTitleTextView"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:text="Picture of the Day"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/pictureImageView"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:src="@drawable/placeholder_image" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:maxWidth="200dp"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <Button
+                    android:id="@+id/cameraButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/camera_alt_24"
+                    android:drawableTint="@color/white"
+                    android:gravity="center"
+                    android:onClick="takePhoto"
+                    android:padding="20dp"
+                    android:text="Add Photo"
+                    android:textColor="@color/white"
+                    android:textSize="20dp">
+
+                </Button>
+
+                <Button
+                    android:id="@+id/logButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5sp"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/add_circle_24"
+                    android:drawableTint="@color/white"
+                    android:padding="20dp"
+                    android:text="Add Log"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
+
+
+            </LinearLayout>
+
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/currentLogTableView"
+                android:minWidth="500dp">
+                <TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Today's Log"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/poopCountTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Number of poops:"
+                        android:textSize="16sp"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        />
+                    <TextView
+                        android:id="@+id/poopDateTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="Last Poop Time:"
+                        android:textSize="16sp"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        />
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/peeCountTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+                        android:text="Number of pee:"
+                        android:textSize="16sp"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        />
+                    <TextView
+                        android:id="@+id/peeDateTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Last pee time:"
+                        android:textSize="16sp"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        />
+
+                </TableRow>
+
+                <TableRow>
+                    <TextView
+                        android:id="@+id/foodCountTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Number of food:"
+                        android:textSize="16sp"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        />
+                    <TextView
+                        android:id="@+id/foodDateTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Last food time:"
+                        android:textSize="16sp"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        />
+
+
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/walkCountTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Number of walk:"
+                        android:textSize="16sp"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        />
+                    <TextView
+                        android:id="@+id/walkTimeTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Walk Time:"
+                        android:textSize="16sp"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+
+
+                        />
+
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/stepsTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="5sp"
+                        android:text="Steps:"
+                        android:textSize="16sp"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        />
+
+                </TableRow>
+
+
+
+            </TableLayout>
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/homeBottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_menu"/>        
+
+
+
+</LinearLayout>
