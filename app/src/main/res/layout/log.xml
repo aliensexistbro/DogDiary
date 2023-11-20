@@ -17,16 +17,21 @@
         android:rowCount="2"
         android:padding="16dp"
         android:alignmentMode="alignMargins"
+
         android:columnOrderPreserved="false">
 
         <ImageButton
             android:id="@+id/walkBtn"
+            android:background="@drawable/card_button_rounded_corners"
+            android:padding="20sp"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
+            android:layout_margin="5dp"
             android:layout_rowWeight="1"
             android:scaleType="fitCenter"
-            android:src="@drawable/dog_walk" />
+            android:src="@drawable/dog_walk"
+           />
 
         <!-- ImageButton 2 -->
         <ImageButton
@@ -34,6 +39,9 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
+            android:background="@drawable/card_button_rounded_corners"
+            android:padding="20sp"
+            android:layout_margin="5dp"
             android:layout_rowWeight="1"
             android:scaleType="fitCenter"
             android:src="@drawable/food" />
@@ -43,6 +51,9 @@
             android:id="@+id/peeBtn"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@drawable/card_button_rounded_corners"
+            android:padding="20sp"
+            android:layout_margin="5dp"
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:scaleType="fitCenter"
@@ -54,9 +65,12 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_columnWeight="1"
+            android:layout_margin="5dp"
             android:layout_rowWeight="1"
             android:scaleType="fitCenter"
-            android:src="@drawable/dog_poo" />
+            android:src="@drawable/dog_poo"
+            android:background="@drawable/card_button_rounded_corners"
+            android:padding="20sp"/>
 
     </GridLayout>
 

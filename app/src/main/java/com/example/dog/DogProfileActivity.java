@@ -7,13 +7,13 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ImageViewActivity extends AppCompatActivity implements View.OnClickListener {
+public class DogProfileActivity extends AppCompatActivity implements View.OnClickListener {
     private Button homeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_image_view);
+        setContentView(R.layout.activity_dog_profile);
         homeButton = (Button) findViewById(R.id.imageViewBackButton);
         homeButton.setOnClickListener(this);
     }
