@@ -15,12 +15,17 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -52,6 +57,7 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
     private boolean isTracking = false;
 
     private TextView temperatureTextView;
+    private BottomNavigationView appNavigation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,6 +123,27 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
                 finish(); // Finish current activity to prevent going back to it with the back button
             }
         });
+
+        appNavigation = findViewById(R.id.walkBottomNavigation);
+        appNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent;
+                if (item.getItemId() == R.id.homeMenuItem){
+                    intent = new Intent(Walk.this, MainActivity.class);
+                    startActivity(intent);
+                }
+                if(item.getItemId() == R.id.historyMenuItem){
+                    intent = new Intent(Walk.this, History.class);
+                    startActivity(intent);
+
+                }
+                if(item.getItemId() == R.id.profileMenuItem){
+                }
+                return true;
+            }
+        });
+        //sensorManager.unregisterListener(this);
     }
 
 

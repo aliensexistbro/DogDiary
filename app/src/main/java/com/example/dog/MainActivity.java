@@ -10,12 +10,16 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.json.JSONException;
@@ -34,7 +38,13 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.dog.databinding.ActivityMainBinding;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -43,13 +53,17 @@ public class MainActivity extends AppCompatActivity {
     private static final String ACTIVITY_PREF_NAME = "ActivityPrefs";
     private String KEY_NAME = "name";
 
-    private ImageButton cameraButton, logBtn, historyBtn;
+    private Button cameraButton, logBtn;
+    private ImageButton historyBtn;
     private ImageView pictureImageView;
 
     private TextView logTitleTextView;
     private TextView titlePicTextView;
 
-    @SuppressLint("Range")
+    BottomNavigationView appNavigation;
+
+
+    @SuppressLint({"Range", "NonConstantResourceId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +75,41 @@ public class MainActivity extends AppCompatActivity {
         logBtn = findViewById(R.id.logButton);
         historyBtn = findViewById(R.id.historyButton);
 
+        historyBtn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            // Move to DogInfo activity
+            Intent intent = new Intent(MainActivity.this, History.class);
+            startActivity(intent);
+            finish(); // Finish current activity to prevent going back to it with the back button
+        }
+        });
+
+        
+        appNavigation = findViewById(R.id.homeBottomNavigation);
+        appNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent;
+                if (item.getItemId() == R.id.homeMenuItem){
+                }
+                if(item.getItemId() == R.id.historyMenuItem){
+                    intent = new Intent(MainActivity.this, History.class);
+                    startActivity(intent);
+                }
+                if(item.getItemId() == R.id.profileMenuItem){
+                }
+                return true;
+            }
+        });
+
         if (!hasDogInfo()) {
             displayWelcomePage();
         } else {
             displayWelcomeMessage();
         }
+
+
     }
 
     private void displayInfo()
@@ -125,6 +169,12 @@ public class MainActivity extends AppCompatActivity {
         countTextView.setText(key + ": " + count);
         countTextView.setVisibility(count > 0 ? View.VISIBLE : View.GONE);
     }
+    
+       
+
+
+        
+
 
     private void displayPhoto(String photoPath) {
         pictureImageView.setImageURI(Uri.parse(photoPath));

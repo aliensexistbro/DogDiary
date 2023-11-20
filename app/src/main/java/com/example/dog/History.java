@@ -3,14 +3,19 @@ package com.example.dog;
 import android.content.Intent;
 import android.hardware.SensorEventListener;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.CalendarView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+
 public class History extends AppCompatActivity{
         private CalendarView calendarView;
+        private BottomNavigationView appNavigation;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -36,5 +41,24 @@ public class History extends AppCompatActivity{
                     startActivity(intent);
                 }
             });
+
+            appNavigation = findViewById(R.id.historyBottomNavigation);
+            appNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    Intent intent;
+                    if (item.getItemId() == R.id.homeMenuItem){
+                        intent = new Intent(History.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                    if(item.getItemId() == R.id.historyMenuItem){
+
+                    }
+                    if(item.getItemId() == R.id.profileMenuItem){
+                    }
+                    return true;
+                }
+            });
         }
+
 }

@@ -1,59 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".Walk">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/walkTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start your Walk!"
+            android:layout_marginTop="16dp"
+            android:layout_centerHorizontal="true"/>
 
-    <TextView
-        android:id="@+id/walkTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start your Walk!"
-        android:layout_marginTop="16dp"
-        android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/stepsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Steps: 0"
+            android:layout_below="@id/walkTextView"
+            android:layout_marginTop="16dp"
+            android:layout_centerHorizontal="true"/>
 
-    <TextView
-        android:id="@+id/stepsTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Steps: 0"
-        android:layout_below="@id/walkTextView"
-        android:layout_marginTop="16dp"
-        android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/temperatureTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Temperature: N/A"
+            android:layout_below="@id/stepsTextView"
+            android:layout_marginTop="16dp"
+            android:layout_centerHorizontal="true"/>
 
-    <TextView
-        android:id="@+id/temperatureTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Temperature: N/A"
-        android:layout_below="@id/stepsTextView"
-        android:layout_marginTop="16dp"
-        android:layout_centerHorizontal="true"/>
+        <TextView
+            android:id="@+id/timeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Time: N/A"
+            android:layout_below="@id/temperatureTextView"
+            android:layout_marginTop="16dp"
+            android:layout_centerHorizontal="true"/>
 
-    <TextView
-        android:id="@+id/timeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Time: N/A"
-        android:layout_below="@id/temperatureTextView"
-        android:layout_marginTop="16dp"
-        android:layout_centerHorizontal="true"/>
+        <Button
+            android:id="@+id/startStopButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start"
+            android:layout_below="@id/timeTextView"
+            android:layout_marginTop="16dp"
+            android:layout_centerHorizontal="true"/>
+        <Button
+            android:id="@+id/endButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="End Walk"
+            android:layout_below="@id/startStopButton"
+            android:layout_marginTop="16dp"
+            android:layout_centerHorizontal="true"/>
 
-    <Button
-        android:id="@+id/startStopButton"
-        android:layout_width="wrap_content"
+
+    </LinearLayout>
+
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/walkBottomNavigation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Start"
-        android:layout_below="@id/timeTextView"
-        android:layout_marginTop="16dp"
-        android:layout_centerHorizontal="true"/>
-    <Button
-        android:id="@+id/endButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="End Walk"
-        android:layout_below="@id/startStopButton"
-        android:layout_marginTop="16dp"
-        android:layout_centerHorizontal="true"/>
-</RelativeLayout>
+        app:menu="@menu/bottom_menu"/>
+
+</LinearLayout>
