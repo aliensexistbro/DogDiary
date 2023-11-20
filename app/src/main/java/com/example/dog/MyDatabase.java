@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,6 +18,60 @@ public class MyDatabase {
     public MyDatabase(Context c) {
         context = c;
         helper = new MyHelper(context);
+    }
+    public Cursor getAllData() {
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        // Include all columns in the table
+        String[] columns = {
+                Constants.UID,
+                Constants.PHOTO_PATH,
+                Constants.TIMESTAMP,
+                Constants.POOP_COUNT,
+                Constants.PEE_COUNT,
+                Constants.FOOD_COUNT,
+                Constants.WALK_COUNT,
+                Constants.WALK_STEP_COUNT,
+                Constants.WALK_TIME
+                // Add other column names as needed
+        };
+
+        // Query the database without any conditions
+        return db.query(Constants.TABLE_NAME, columns, null, null, null, null, null);
+    }
+
+    public void printAllData() {
+        Cursor cursor = getAllData();
+
+        try {
+            // Iterate through the result set and print each item
+            while (cursor.moveToNext()) {
+                long uid = cursor.getLong(cursor.getColumnIndexOrThrow(Constants.UID));
+                String photoPath = cursor.getString(cursor.getColumnIndexOrThrow(Constants.PHOTO_PATH));
+                String timestamp = cursor.getString(cursor.getColumnIndexOrThrow(Constants.TIMESTAMP));
+                int poopCount = cursor.getInt(cursor.getColumnIndexOrThrow(Constants.POOP_COUNT));
+                int peeCount = cursor.getInt(cursor.getColumnIndexOrThrow(Constants.PEE_COUNT));
+                int foodCount = cursor.getInt(cursor.getColumnIndexOrThrow(Constants.FOOD_COUNT));
+                int walkCount = cursor.getInt(cursor.getColumnIndexOrThrow(Constants.WALK_COUNT));
+                int walkStepCount = cursor.getInt(cursor.getColumnIndexOrThrow(Constants.WALK_STEP_COUNT));
+                int walkTime = cursor.getInt(cursor.getColumnIndexOrThrow(Constants.WALK_TIME));
+                // Retrieve other columns as needed
+
+                // Print the item details (you can log or display them as needed)
+                Log.d("Database", "UID: " + uid +
+                        ", PhotoPath: " + photoPath +
+                        ", Timestamp: " + timestamp +
+                        ", Poop Count: " + poopCount +
+                        ", Pee Count: " + peeCount +
+                        ", Food Count: " + foodCount +
+                        ", Walk Count: " + walkCount +
+                        ", Walk Step Count: " + walkStepCount +
+                        ", Walk Time: " + walkTime);
+            }
+        } finally {
+            // Close the cursor to release resources
+            cursor.close();
+        }
     }
 
     public long insertPhotoData(String photoPath, String timestamp, int poop_count, int pee_count, int food_count, int walk_count,
@@ -52,18 +107,28 @@ public class MyDatabase {
         return db.query(Constants.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
     }
 
-    public Cursor getPhotoDataForDate(String date) {
+    public Cursor getDataForDate(String date) {
         SQLiteDatabase db = helper.getWritableDatabase();
         // Define the selection and selectionArgs for the WHERE clause
         String selection = "SUBSTR(" + Constants.TIMESTAMP + ", 1, 10) = ?";
         String[] selectionArgs = { date };
-
-        String[] columns = {Constants.PHOTO_PATH, Constants.TIMESTAMP};
+        // Include all columns in the table
+        String[] columns = {
+                Constants.UID,
+                Constants.PHOTO_PATH,
+                Constants.TIMESTAMP,
+                Constants.POOP_COUNT,
+                Constants.PEE_COUNT,
+                Constants.FOOD_COUNT,
+                Constants.WALK_COUNT,
+                Constants.WALK_STEP_COUNT,
+                Constants.WALK_TIME
+                // Add other column names as needed
+        };
 
         // Query the database with the WHERE clause
         return db.query(Constants.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
     }
-
 
     public Cursor getColumnDataForToday() {
         SQLiteDatabase db = helper.getWritableDatabase();
