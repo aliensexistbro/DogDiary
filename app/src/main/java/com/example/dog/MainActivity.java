@@ -41,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private static final String PREF_NAME = "DogPrefs";
     private String KEY_NAME = "name";
 
-    private ImageButton cameraButton, logBtn, historyBtn;
+    private Button cameraButton, logBtn;
+    private ImageButton historyBtn;
     private ImageView pictureImageView;
 
     private TextView logTitleTextView;
