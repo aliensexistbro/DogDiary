@@ -130,8 +130,6 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 if(item.getItemId() == R.id.profileMenuItem){
-                    intent = new Intent(MainActivity.this, Walk.class);
-                    startActivity(intent);
                 }
                 return true;
             }
