@@ -140,27 +140,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-    @Override
-    public boolean onOptionsItemSelected (MenuItem item){
-        MenuItem home = findViewById(R.id.homeMenuItem);
-        MenuItem history = findViewById(R.id.historyMenuItem);
-        MenuItem profile = findViewById(R.id.profileMenuItem);
-        Intent intent;
-        if (item.getItemId() == home.getItemId()){
-            Toast.makeText(this, "Home has been pushed", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        if  (item.getItemId() == history.getItemId()){
-            Toast.makeText(this, "History has been pushed", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        if (item.getItemId() == profile.getItemId()){
-            Toast.makeText(this, "Profile has been pushed", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        return false;
-
-    }
     private void displayPhoto(String photoPath) {
         pictureImageView.setImageURI(Uri.parse(photoPath));
         // Or load the image using a library like Glide or Picasso
