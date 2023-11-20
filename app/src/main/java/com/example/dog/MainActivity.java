@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String PREF_NAME = "DogPrefs";
     private String KEY_NAME = "name";
 
-    private ImageButton cameraButton, logBtn;
+    private ImageButton cameraButton, logBtn, historyBtn;
     private ImageView pictureImageView;
 
     private TextView logTitleTextView;
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         titlePicTextView = findViewById(R.id.pictureTitleTextView);
         pictureImageView = findViewById(R.id.pictureImageView);
         logBtn = findViewById(R.id.logButton);
+        historyBtn = findViewById(R.id.historyButton);
         if (!hasDogInfo()) {
             // User doesn't have dog information, display welcome page
             displayWelcomePage();
@@ -88,6 +89,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Move to DogInfo activity
                 Intent intent = new Intent(MainActivity.this, ActivityLog.class);
+                startActivity(intent);
+                finish(); // Finish current activity to prevent going back to it with the back button
+            }
+        });
+
+        historyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Move to DogInfo activity
+                Intent intent = new Intent(MainActivity.this, History.class);
                 startActivity(intent);
                 finish(); // Finish current activity to prevent going back to it with the back button
             }
