@@ -1,5 +1,6 @@
 package com.example.dog;
 
+import android.content.Intent;
 import android.hardware.SensorEventListener;
 import android.os.Bundle;
 import android.widget.CalendarView;
@@ -25,6 +26,14 @@ public class History extends AppCompatActivity{
                     // Handle the selected date change
                     String selectedDate = year + "-" + (month + 1) + "-" + dayOfMonth;
                     Toast.makeText(History.this, "Selected Date: " + selectedDate, Toast.LENGTH_SHORT).show();
+                    // Create an Intent to start the new activity
+                    Intent intent = new Intent(History.this, HistoryItem.class);
+
+                    // Pass the selected date as an extra to the new activity
+                    intent.putExtra("SELECTED_DATE", selectedDate);
+
+                    // Start the new activity
+                    startActivity(intent);
                 }
             });
         }

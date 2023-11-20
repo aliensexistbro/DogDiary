@@ -79,6 +79,9 @@
         <activity
             android:name=".History"
             android:exported="false" />
+        <activity
+            android:name=".HistoryItem"
+            android:exported="false" />
     </application>
 
 

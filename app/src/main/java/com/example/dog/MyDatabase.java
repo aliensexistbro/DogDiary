@@ -52,6 +52,19 @@ public class MyDatabase {
         return db.query(Constants.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
     }
 
+    public Cursor getPhotoDataForDate(String date) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+        // Define the selection and selectionArgs for the WHERE clause
+        String selection = "SUBSTR(" + Constants.TIMESTAMP + ", 1, 10) = ?";
+        String[] selectionArgs = { date };
+
+        String[] columns = {Constants.PHOTO_PATH, Constants.TIMESTAMP};
+
+        // Query the database with the WHERE clause
+        return db.query(Constants.TABLE_NAME, columns, selection, selectionArgs, null, null, null);
+    }
+
+
     public Cursor getColumnDataForToday() {
         SQLiteDatabase db = helper.getWritableDatabase();
 

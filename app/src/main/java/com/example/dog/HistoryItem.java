@@ -1,13 +1,11 @@
 package com.example.dog;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,32 +16,12 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import androidx.appcompat.app.AppCompatActivity;
-
-public class MainActivity extends AppCompatActivity {
+public class HistoryItem extends AppCompatActivity {
 
     private static final String PREF_NAME = "DogPrefs";
 
     private static final String ACTIVITY_PREF_NAME = "ActivityPrefs";
     private String KEY_NAME = "name";
-
-    private ImageButton cameraButton, logBtn, historyBtn;
     private ImageView pictureImageView;
 
     private TextView logTitleTextView;
@@ -53,19 +31,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.history_item);
         logTitleTextView = findViewById(R.id.logTitleTextView);
-        cameraButton = findViewById(R.id.cameraButton);
         titlePicTextView = findViewById(R.id.pictureTitleTextView);
         pictureImageView = findViewById(R.id.pictureImageView);
-        logBtn = findViewById(R.id.logButton);
-        historyBtn = findViewById(R.id.historyButton);
-
-        if (!hasDogInfo()) {
-            displayWelcomePage();
-        } else {
-            displayWelcomeMessage();
-        }
+        displayWelcomeMessage();
     }
 
     private void displayInfo()
@@ -83,11 +53,9 @@ public class MainActivity extends AppCompatActivity {
                 @SuppressLint("Range") int walkStep = cursor.getInt(cursor.getColumnIndex(Constants.WALK_STEP_COUNT));
                 @SuppressLint("Range") int walkTime = cursor.getInt(cursor.getColumnIndex(Constants.WALK_TIME));
                 // Display the counts in TextViews and set visibility
-                if(hasActivityInfo()) {
-                    displayActivityInfo(poopCount, Constants.POOP_COUNT, R.id.poopCountTextView, R.id.poopDateTextView);
-                    displayActivityInfo(peeCount, Constants.PEE_COUNT, R.id.peeCountTextView, R.id.peeDateTextView);
-                    displayActivityInfo(foodCount, Constants.FOOD_COUNT, R.id.foodCountTextView, R.id.foodDateTextView);
-                }
+                displayActivityInfo(poopCount, Constants.POOP_COUNT, R.id.poopCountTextView);
+                displayActivityInfo(peeCount, Constants.PEE_COUNT, R.id.peeCountTextView);
+                displayActivityInfo(foodCount, Constants.FOOD_COUNT, R.id.foodCountTextView);
                 displayActivityInfo(walkCount, Constants.WALK_COUNT, R.id.walkCountTextView);
                 displayActivityInfo(walkStep, Constants.WALK_STEP_COUNT, R.id.stepsTextView);
                 displayActivityInfo(walkTime, Constants.WALK_TIME, R.id.walkTimeTextView);
@@ -130,11 +98,6 @@ public class MainActivity extends AppCompatActivity {
         pictureImageView.setImageURI(Uri.parse(photoPath));
     }
 
-    private boolean hasDogInfo() {
-        SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        // Check if any key exists in SharedPreferences (indicating dog information)
-        return sharedPreferences.getAll().size() > 0;
-    }
 
     private boolean hasActivityInfo() {
         SharedPreferences sharedPreferences = getSharedPreferences(ACTIVITY_PREF_NAME, Context.MODE_PRIVATE);
@@ -142,37 +105,15 @@ public class MainActivity extends AppCompatActivity {
         return sharedPreferences.getAll().size() > 0;
     }
 
-    private void displayWelcomePage() {
-        setContentView(R.layout.activity_welcome);
-
-        Button nextButton = findViewById(R.id.buttonNext);
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Move to DogInfo activity
-                Intent intent = new Intent(MainActivity.this, DogInfo.class);
-                startActivity(intent);
-                finish(); // Finish current activity to prevent going back to it with the back button
-            }
-        });
-    }
 
     private void displayWelcomeMessage() {
         SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         // Display name
+        String selectedDate = getIntent().getStringExtra("SELECTED_DATE");
         String name = sharedPreferences.getString(KEY_NAME, "");
-        logTitleTextView.setText(name + "'s Day");
-        cameraButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Move to DogInfo activity
-                Intent intent = new Intent(MainActivity.this, CameraActivity.class);
-                startActivity(intent);
-                finish(); // Finish current activity to prevent going back to it with the back button
-            }
-        });
+        logTitleTextView.setText(name + "'s Day " + selectedDate);
         MyDatabase myDatabase = new MyDatabase(this);
-        Cursor cursor = myDatabase.getPhotoDataForToday();
+        Cursor cursor = myDatabase.getPhotoDataForDate(selectedDate);
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
             @SuppressLint("Range") String photoPath = cursor.getString(cursor.getColumnIndex(Constants.PHOTO_PATH));
@@ -182,37 +123,17 @@ public class MainActivity extends AppCompatActivity {
                 titlePicTextView.setText("Picture of the Day");
             } else
             {
-                titlePicTextView.setText("Take a Picture of the Day!");
+                titlePicTextView.setText("No Picture of the Day");
             }
+            displayInfo();
         } else {
             // Handle case where there is no data for today
-            titlePicTextView.setText("Take a Picture of the Day!");
+            titlePicTextView.setText("No Entry");
+            pictureImageView.setVisibility(View.GONE);
         }
         // Close the cursor to free up resources
         if (cursor != null) {
             cursor.close();
         }
-
-        logBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Move to DogInfo activity
-                Intent intent = new Intent(MainActivity.this, ActivityLog.class);
-                startActivity(intent);
-                finish(); // Finish current activity to prevent going back to it with the back button
-            }
-        });
-
-        historyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Move to DogInfo activity
-                Intent intent = new Intent(MainActivity.this, History.class);
-                startActivity(intent);
-                finish(); // Finish current activity to prevent going back to it with the back button
-            }
-        });
-        displayInfo();
     }
 }
-
