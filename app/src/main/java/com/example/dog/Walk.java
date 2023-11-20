@@ -4,6 +4,7 @@ import static com.example.dog.ActivityLog.getCurrentTime;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -58,6 +60,8 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
 
     private TextView temperatureTextView;
     private BottomNavigationView appNavigation;
+
+    private boolean alert = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -232,6 +236,27 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
 
     private void updateTemperatureView(float temperatureCelsius) {
         temperatureTextView.setText("Temperature: " + temperatureCelsius + "°C");
+        if(!alert) {
+            if (temperatureCelsius <= 0 ) {
+                // It's cold, and more than 5 minutes have elapsed
+                if(elapsedTime >= TimeUnit.MINUTES.toMillis(5))
+                    showDialog("Brr! It's cold out! Head back home soon.");
+                else
+                    showDialog("Brr! It's cold out! Make sure to have your dog wear a coat before leaving the house");
+                alert = true;
+            }
+        }
+    }
+
+    private void showDialog(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Walk.this);
+        builder.setMessage(message)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // Do nothing or add any action you want
+                    }
+                });
+        builder.create().show();
     }
 
     private void detectStep(float x, float y, float z, long timestamp) {
