@@ -20,6 +20,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -48,7 +49,7 @@ import java.util.concurrent.Executors;
 
 public class CameraActivity extends AppCompatActivity implements View.OnClickListener {
     PreviewView previewView;
-    private Button buttonCaptureSave;
+    private ImageButton buttonCaptureSave;
     private ImageCapture imageCapture;
     private Executor executor = Executors.newSingleThreadExecutor();
     private int REQUEST_CODE_PERMISSIONS = 1001;
