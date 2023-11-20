@@ -8,62 +8,67 @@
     tools:context=".MainActivity"
     android:gravity="center_horizontal"
     >
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
+
         <TextView
             android:id="@+id/logTitleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
             android:gravity="center_horizontal"
+            android:padding="20dp"
+
             android:text="Dogs Name"
             android:textSize="40sp"
+            android:textStyle="bold" />
 
-            android:padding="20dp"
-            android:textStyle="bold"
-            android:layout_centerHorizontal="true" />
         <TextView
             android:id="@+id/pictureTitleTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/logTitleTextView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
             android:text="Picture of the Day"
-            android:layout_below="@id/logTitleTextView"
-            android:layout_marginTop="10dp"
-            android:textSize="14sp"
-            android:layout_centerHorizontal="true"
-            />
+            android:textSize="14sp" />
 
         <ImageView
             android:id="@+id/pictureImageView"
             android:layout_width="200dp"
             android:layout_height="200dp"
-            android:src="@drawable/placeholder_image"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center"
+            android:src="@drawable/placeholder_image" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:gravity="center"
-            android:padding="15dp"
-            android:maxWidth="200dp">
+            android:maxWidth="200dp"
+            android:orientation="horizontal"
+            android:padding="15dp">
+
             <Button
                 android:id="@+id/cameraButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Add Photo"
+                android:layout_margin="5sp"
+                android:layout_weight="1"
                 android:drawableLeft="@drawable/camera"
                 android:drawableTint="@color/white"
-                android:textColor="@color/white"
-                android:layout_weight="1"
-                android:padding="20dp"
-                android:textSize="20dp"
+                android:gravity="center"
                 android:onClick="takePhoto"
-                android:layout_margin="5sp">
+                android:padding="20dp"
+                android:text="Add Photo"
+                android:textColor="@color/white"
+                android:textSize="20dp">
 
             </Button>
 
@@ -71,117 +76,122 @@
                 android:id="@+id/logButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="5sp"
+                android:layout_weight="1"
                 android:drawableLeft="@drawable/add"
                 android:drawableTint="@color/white"
                 android:padding="20dp"
-                android:layout_weight="1"
-                android:layout_margin="5sp"
-                android:textSize="20dp"
                 android:text="Add Log"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                android:textSize="20dp" />
 
 
         </LinearLayout>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Today's Log"
             android:textSize="24sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:minWidth="375dp"
-            >
+            android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/poopCountTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingTop="5sp"
                     android:text="Number of poops:"
                     android:textSize="18sp"
-                    android:paddingTop="5sp"
-                    android:visibility="gone"
-                    />
+                    android:visibility="gone" />
+
                 <TextView
                     android:id="@+id/peeCountTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingTop="5sp"
                     android:text="Number of pee:"
                     android:textSize="18sp"
-                    android:paddingTop="5sp"
-                    android:visibility="gone"
-                    />
+                    android:visibility="gone" />
 
                 <TextView
                     android:id="@+id/foodCountTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingTop="5sp"
                     android:text="Number of pee:"
                     android:textSize="18sp"
-                    android:paddingTop="5sp"
-                    android:visibility="gone"
-                    />
+                    android:visibility="gone" />
+
                 <TextView
                     android:id="@+id/walkCountTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingTop="5sp"
                     android:text="Number of walk:"
                     android:textSize="18sp"
-                    android:paddingTop="5sp"
                     android:visibility="gone"
 
                     />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_weight="1"
-                >
+                android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/poopDateTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingTop="5sp"
                     android:text="Last Poop Time:"
                     android:textSize="18sp"
-                    android:paddingTop="5sp"
                     android:visibility="gone"
 
 
                     />
+
                 <TextView
                     android:id="@+id/peeDateTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingTop="5sp"
                     android:text="Last Dee time:"
                     android:textSize="18sp"
-                    android:paddingTop="5sp"
                     android:visibility="gone"
 
                     />
+
                 <TextView
                     android:id="@+id/foodDateTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingTop="5sp"
                     android:text="Last pee time:"
                     android:textSize="18sp"
-                    android:paddingTop="5sp"
-                    android:visibility="gone"
-                    />
+                    android:visibility="gone" />
+
                 <TextView
                     android:id="@+id/walkTimeTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingTop="5sp"
                     android:text="Walk Time:"
                     android:textSize="18sp"
-                    android:paddingTop="5sp"
                     android:visibility="gone"
 
                     />
@@ -190,19 +200,16 @@
                     android:id="@+id/stepsTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingTop="5sp"
                     android:text="Steps:"
                     android:textSize="18sp"
-                    android:paddingTop="5sp"
-                    android:visibility="gone"
-                    />
+                    android:visibility="gone" />
 
             </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
-
-
 
     <ImageButton
         android:id="@+id/historyButton"
