@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         }
         });
 
-        
+
         appNavigation = findViewById(R.id.homeBottomNavigation);
         appNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override

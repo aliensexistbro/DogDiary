@@ -17,5 +17,5 @@ public class Constants {
     public static final String WALK_TIME = "WalkTimeCount";
 
     public static final String WALK_COUNT = "WalkCount";
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
 }
