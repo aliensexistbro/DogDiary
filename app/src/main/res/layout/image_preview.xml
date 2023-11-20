@@ -3,17 +3,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ImagePreviewActivity"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-        <Button
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Home"
-            android:id="@+id/imgPrevHomeButton"/>
+            android:src="@drawable/baseline_arrow_back_ios_new_24"
+            android:id="@+id/imgBackButton"
+            android:padding="15dp"
+            android:background="@null"
+
+            />
     </LinearLayout>
     <!-- add ImageView to display the captured image -->
     <ImageView
@@ -23,30 +28,11 @@
         android:layout_weight="1"
         android:scaleType="fitCenter"/>
 
-    <LinearLayout
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Save"
-            android:id="@+id/imgPrevSaveButton"
-            android:layout_weight="1"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Share"
-            android:id="@+id/imgPrevShareButton"
-            android:layout_weight="1"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Trash"
-            android:id="@+id/imgPrevDeleteButton"
-            android:layout_weight="1"/>
-    </LinearLayout>
+        android:id="@+id/imageOptionsMenuView"
+        app:menu="@menu/image_preview_option_menu"/>
 
 </LinearLayout>

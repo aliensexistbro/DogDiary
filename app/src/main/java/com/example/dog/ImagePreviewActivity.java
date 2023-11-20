@@ -11,13 +11,19 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,24 +32,17 @@ public class ImagePreviewActivity extends AppCompatActivity {
 
     private ImageView imageViewPreview;
     private EditText nameEditText;
-    private Button saveBtn;
-    private Button deleteBtn;
-    private Button shareBtn;
 
-    private Button homeBtn;
+    private ImageButton backButton;
     private Uri imageUri;
     private String timestamp;
-
+    private BottomNavigationView imageOptionsMenu;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.image_preview);
 
         imageViewPreview = findViewById(R.id.image_preview);
-        saveBtn = findViewById(R.id.imgPrevSaveButton);
-        deleteBtn = findViewById(R.id.imgPrevDeleteButton);
-        shareBtn = findViewById(R.id.imgPrevShareButton);
-        homeBtn = findViewById(R.id.imgPrevHomeButton);
         // Get the image path and timestamp from the intent
         imageUri = getIntent().getParcelableExtra("imageUri");
         timestamp = getIntent().getStringExtra("date");
@@ -62,34 +61,36 @@ public class ImagePreviewActivity extends AppCompatActivity {
         } else {
             Log.e("ImagePreviewActivity", "Image URI is null");
         }
+        //Set Back Button
+        backButton = findViewById(R.id.imgBackButton);
+        backButton.setOnClickListener(new View.OnClickListener(){
 
-        // Save button click listener
-        saveBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                saveToDatabase();
+            public void onClick(View v) {
+                Intent intent = new Intent(ImagePreviewActivity.this, CameraActivity.class);
+                startActivity(intent);
             }
         });
 
-        homeBtn.setOnClickListener(v -> {
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
-        });
-        // Delete button click listener
-        deleteBtn.setOnClickListener(new View.OnClickListener() {
+        // Menu Initialization and onSelectListener implementation
+
+        imageOptionsMenu = findViewById(R.id.imageOptionsMenuView);
+        imageOptionsMenu.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
-            public void onClick(View view) {
-                deletePhoto();
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                if (item.getItemId() == R.id.imageHomeItem){
+                    Intent intent = new Intent(ImagePreviewActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
+                if(item.getItemId() == R.id.imageSaveItem) saveToDatabase();
+                if(item.getItemId() == R.id.imageShareItem) sharePhoto();
+                if(item.getItemId() == R.id.imageDeleteItem) deletePhoto();
+                return true;
             }
         });
 
-        // Share button click listener
-        shareBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sharePhoto();
-            }
-        });
+
     }
 
     private void saveToDatabase() {

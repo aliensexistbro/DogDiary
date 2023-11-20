@@ -8,13 +8,18 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class HistoryItem extends AppCompatActivity {
 
@@ -26,6 +31,9 @@ public class HistoryItem extends AppCompatActivity {
 
     private TextView logTitleTextView;
     private TextView titlePicTextView;
+    private ImageButton historyItemButton;
+
+    private BottomNavigationView appNavigation;
 
     @SuppressLint("Range")
     @Override
@@ -36,6 +44,37 @@ public class HistoryItem extends AppCompatActivity {
         titlePicTextView = findViewById(R.id.pictureTitleTextView);
         pictureImageView = findViewById(R.id.pictureImageView);
         displayWelcomeMessage();
+
+        historyItemButton = findViewById(R.id.historyItemBackButton);
+        historyItemButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HistoryItem.this, History.class);
+                startActivity(intent);
+
+
+            }
+        });
+        appNavigation = findViewById(R.id.historyItemBottomNavigation);
+        appNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent;
+                if (item.getItemId() == R.id.homeMenuItem){
+                    intent = new Intent(HistoryItem.this, MainActivity.class);
+                    startActivity(intent);
+                }
+                if(item.getItemId() == R.id.historyMenuItem){
+                    intent = new Intent(HistoryItem.this, History.class);
+                    startActivity(intent);
+
+                }
+                if(item.getItemId() == R.id.profileMenuItem){
+                }
+                return true;
+            }
+        });
+
     }
 
     private void displayInfo(Cursor cursor1)
@@ -65,6 +104,8 @@ public class HistoryItem extends AppCompatActivity {
         if (cursor != null) {
             cursor.close();
         }
+
+
 
     }
 
