@@ -141,12 +141,11 @@ public class ActivityLog extends AppCompatActivity {
         // Format the time as a string
         return String.format(Locale.getDefault(), "%02d:%02d", hours, minutes);
     }
+
     private void saveDogInfo(String constant, String time) {
         SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(constant, time);
         editor.apply();
-
-        
     }
 }

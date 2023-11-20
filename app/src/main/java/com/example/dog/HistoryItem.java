@@ -38,10 +38,11 @@ public class HistoryItem extends AppCompatActivity {
         displayWelcomeMessage();
     }
 
-    private void displayInfo()
+    private void displayInfo(Cursor cursor1)
     {
+        String selectedDate = getIntent().getStringExtra("SELECTED_DATE");
         MyDatabase myDatabase = new MyDatabase(this);
-        Cursor cursor = myDatabase.getColumnDataForToday();
+        Cursor cursor = myDatabase.getDataForDate(selectedDate);
         if (cursor != null && cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
                 // Assuming you have a method to display photos, replace the following line accordingly
@@ -113,7 +114,9 @@ public class HistoryItem extends AppCompatActivity {
         String name = sharedPreferences.getString(KEY_NAME, "");
         logTitleTextView.setText(name + "'s Day " + selectedDate);
         MyDatabase myDatabase = new MyDatabase(this);
-        Cursor cursor = myDatabase.getPhotoDataForDate(selectedDate);
+        myDatabase.printAllData();
+        Cursor cursor = myDatabase.getDataForDate(selectedDate);
+        Log.d("cursor count ", "girl" + cursor.getCount() +selectedDate);
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
             @SuppressLint("Range") String photoPath = cursor.getString(cursor.getColumnIndex(Constants.PHOTO_PATH));
@@ -125,12 +128,13 @@ public class HistoryItem extends AppCompatActivity {
             {
                 titlePicTextView.setText("No Picture of the Day");
             }
-            displayInfo();
+            displayInfo(cursor);
         } else {
             // Handle case where there is no data for today
             titlePicTextView.setText("No Entry");
             pictureImageView.setVisibility(View.GONE);
         }
+
         // Close the cursor to free up resources
         if (cursor != null) {
             cursor.close();

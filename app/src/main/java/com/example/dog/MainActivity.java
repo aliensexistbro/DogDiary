@@ -42,7 +42,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.dog.databinding.ActivityMainBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -150,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(ACTIVITY_PREF_NAME, MODE_PRIVATE);
         String storedCount = sharedPreferences.getString(key, "");
 
-        if (storedCount != null && !storedCount.equals("")) {
+        if (count >0 && storedCount != null && !storedCount.equals("")) {
             dateTextView.setText("Last Time: " + storedCount);
             dateTextView.setVisibility(View.VISIBLE);
             Log.d("Stored ", key + storedCount);
