@@ -98,11 +98,10 @@ public class ImagePreviewActivity extends AppCompatActivity {
         MyDatabase myDatabase = new MyDatabase(this);
         Cursor cursor = myDatabase.getPhotoDataForToday();
         if (cursor != null && cursor.getCount() > 0) {
-            //(String oldTimestamp, String newPhotoPath, String newTimestamp)
             myDatabase.updateData(Constants.PHOTO_PATH, timestamp.toString(), imageUri.toString());
         } else {
             // Handle case where there is no data for today
-            long id = myDatabase.insertPhotoData(imageUri.toString(), timestamp.toString(), 0,0,0, 0);
+            long id = myDatabase.insertPhotoData(imageUri.toString(), timestamp.toString(), 0,0,0, 0,0,0);
             if (id != -1) {
                 Toast.makeText(this, "Data saved to database" + timestamp, Toast.LENGTH_SHORT).show();
             } else {

@@ -80,12 +80,17 @@ public class MainActivity extends AppCompatActivity {
                 @SuppressLint("Range") int peeCount = cursor.getInt(cursor.getColumnIndex(Constants.PEE_COUNT));
                 @SuppressLint("Range") int foodCount = cursor.getInt(cursor.getColumnIndex(Constants.FOOD_COUNT));
                 @SuppressLint("Range") int walkCount = cursor.getInt(cursor.getColumnIndex(Constants.WALK_COUNT));
-
+                @SuppressLint("Range") int walkStep = cursor.getInt(cursor.getColumnIndex(Constants.WALK_STEP_COUNT));
+                @SuppressLint("Range") int walkTime = cursor.getInt(cursor.getColumnIndex(Constants.WALK_TIME));
                 // Display the counts in TextViews and set visibility
-                displayActivityInfo(poopCount, Constants.POOP_COUNT, R.id.poopCountTextView, R.id.poopDateTextView);
-                displayActivityInfo(peeCount, Constants.PEE_COUNT, R.id.peeCountTextView, R.id.peeDateTextView);
-                displayActivityInfo(foodCount, Constants.FOOD_COUNT, R.id.foodCountTextView, R.id.foodDateTextView);
-                displayActivityInfo(walkCount, Constants.WALK_COUNT, R.id.walkCountTextView, R.id.walkDateTextView);
+                if(hasActivityInfo()) {
+                    displayActivityInfo(poopCount, Constants.POOP_COUNT, R.id.poopCountTextView, R.id.poopDateTextView);
+                    displayActivityInfo(peeCount, Constants.PEE_COUNT, R.id.peeCountTextView, R.id.peeDateTextView);
+                    displayActivityInfo(foodCount, Constants.FOOD_COUNT, R.id.foodCountTextView, R.id.foodDateTextView);
+                }
+                displayActivityInfo(walkCount, R.id.walkCountTextView);
+                displayActivityInfo(walkStep, R.id.stepsTextView);
+                displayActivityInfo(walkTime, R.id.walkTimeTextView);
             }
         }
         if (cursor != null) {
@@ -111,6 +116,13 @@ public class MainActivity extends AppCompatActivity {
 
         countTextView.setText(key + ": " + count);
         // Set visibility based on count
+        countTextView.setVisibility(count > 0 ? View.VISIBLE : View.GONE);
+    }
+
+    private void displayActivityInfo(int count, int countTextViewId) {
+        TextView countTextView = findViewById(countTextViewId);
+        // Set visibility based on count
+        countTextView.setText("Walk " + ": " + count);
         countTextView.setVisibility(count > 0 ? View.VISIBLE : View.GONE);
     }
 
@@ -200,9 +212,7 @@ public class MainActivity extends AppCompatActivity {
                 finish(); // Finish current activity to prevent going back to it with the back button
             }
         });
-        if(hasActivityInfo()) {
-            displayInfo();
-        }
+        displayInfo();
     }
 }
 

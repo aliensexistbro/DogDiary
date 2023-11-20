@@ -87,11 +87,11 @@ public class ActivityLog extends AppCompatActivity {
             }
         } else {
             if (constant.equals(Constants.POOP_COUNT)) {
-                long id = myDatabase.insertPhotoData("none", getCurrentDate(), 1, 0, 0, 0);
+                long id = myDatabase.insertPhotoData("none", getCurrentDate(), 1, 0, 0, 0,0,0);
             } else if (constant.equals(Constants.PEE_COUNT)) {
-                long id = myDatabase.insertPhotoData("none", getCurrentDate(), 0, 1, 0, 0);
+                long id = myDatabase.insertPhotoData("none", getCurrentDate(), 0, 1, 0, 0, 0,0);
             } else if (constant.equals(Constants.FOOD_COUNT)) {
-                long id = myDatabase.insertPhotoData("none", getCurrentDate(), 0, 0, 1, 0);
+                long id = myDatabase.insertPhotoData("none", getCurrentDate(), 0, 0, 1, 0,0,0);
             }
             saveDogInfo(constant, getCurrentTime());
         }

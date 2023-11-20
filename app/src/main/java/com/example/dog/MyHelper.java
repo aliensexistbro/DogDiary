@@ -18,7 +18,9 @@ public class MyHelper extends SQLiteOpenHelper {
                     Constants.POOP_COUNT + " INTEGER, " +
                     Constants.PEE_COUNT + " INTEGER, " +
                     Constants.FOOD_COUNT + " INTEGER , " +
-                    Constants.WALK_COUNT + " INTEGER);";
+                    Constants.WALK_COUNT + " INTEGER, " +
+                    Constants.WALK_STEP_COUNT + " INTEGER , " +
+                    Constants.WALK_TIME + " INTEGER);";
 
     private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + Constants.TABLE_NAME;
 

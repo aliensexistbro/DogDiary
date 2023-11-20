@@ -19,7 +19,8 @@ public class MyDatabase {
         helper = new MyHelper(context);
     }
 
-    public long insertPhotoData(String photoPath, String timestamp, int poop_count, int pee_count, int food_count, int walk_count) {
+    public long insertPhotoData(String photoPath, String timestamp, int poop_count, int pee_count, int food_count, int walk_count,
+                                int step_count, int time_count) {
         db = helper.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(Constants.PHOTO_PATH, photoPath);
@@ -28,6 +29,8 @@ public class MyDatabase {
         contentValues.put(Constants.PEE_COUNT, pee_count);
         contentValues.put(Constants.FOOD_COUNT, food_count);
         contentValues.put(Constants.WALK_COUNT, walk_count);
+        contentValues.put(Constants.WALK_STEP_COUNT, step_count);
+        contentValues.put(Constants.WALK_TIME, time_count);
         long id = db.insert(Constants.TABLE_NAME, null, contentValues);
         return id;
     }
@@ -68,7 +71,9 @@ public class MyDatabase {
                 Constants.POOP_COUNT,
                 Constants.PEE_COUNT,
                 Constants.FOOD_COUNT,
-                Constants.WALK_COUNT
+                Constants.WALK_COUNT,
+                Constants.WALK_STEP_COUNT,
+                Constants.WALK_TIME
                 // Add other column names as needed
         };
 

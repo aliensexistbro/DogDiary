@@ -12,6 +12,10 @@ public class Constants {
 
     public static final String FOOD_COUNT = "FoodCount";
 
+    public static final String WALK_STEP_COUNT = "StepCount";
+
+    public static final String WALK_TIME = "WalkTimeCount";
+
     public static final String WALK_COUNT = "WalkCount";
     public static final int DATABASE_VERSION = 1;
 }

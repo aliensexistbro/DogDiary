@@ -1,5 +1,12 @@
 package com.example.dog;
+import static com.example.dog.ActivityLog.getCurrentDate;
+import static com.example.dog.ActivityLog.getCurrentTime;
+
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -11,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,27 +31,23 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class Walk extends AppCompatActivity implements SensorEventListener {
 
     private SensorManager sensorManager;
     private Sensor stepCounterSensor;
     private TextView stepsTextView;
-
     private Sensor temperatureSensor;
-
     private Sensor accelometer;
-
     private int stepCount = 0;
     private static final long TIMER_UPDATE_INTERVAL = 1000; // 1 second
     private long elapsedTime = 0;
     private Handler timerHandler;
     private Runnable timerRunnable;
-
-    // Constants for step detection
     private static final float STEP_THRESHOLD = 12.0f; // Adjust this threshold based on your testing
     private static final int STEP_DELAY_NS = 250000000; // 250ms
-
     private long lastStepTimeNs = 0;
     private boolean isTracking = false;
 
@@ -58,11 +62,13 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
         temperatureTextView = findViewById(R.id.temperatureTextView);
         // Get the sensor manager
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+
         // Replace "YOUR_API_KEY" with your OpenWeatherMap API key
         String apiKey = "942622e72df2c7325f9f997a8adc8a1a";
         String city = "TORONTO";
         String apiUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid=686a979a082d839e1167a81db85dfcf0";
         new FetchWeatherTask().execute(apiUrl);
+
         // Check if the step counter sensor is available
         stepCounterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
         // Check if the temperature sensor is available
@@ -81,17 +87,82 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
                 if (isTracking) {
                     // Stop tracking
                     isTracking = false;
-                    startStopButton.setText("Start");
+                    startStopButton.setText("Start Walk");
+                    timerHandler.removeCallbacks(timerRunnable);
                 } else {
                     // Start tracking
                     isTracking = true;
-                    startStopButton.setText("Stop");
+                    startStopButton.setText("End");
+                    timerHandler.postDelayed(timerRunnable, TIMER_UPDATE_INTERVAL);
                 }
             }
         });
-        //sensorManager.unregisterListener(this);
+        timerHandler = new Handler();
+        timerRunnable = new Runnable() {
+            @Override
+            public void run() {
+                elapsedTime += TIMER_UPDATE_INTERVAL;
+                updateElapsedTimeView();
+                timerHandler.postDelayed(this, TIMER_UPDATE_INTERVAL);
+            }
+        };
+        final Button endBtn = findViewById(R.id.endButton);
+        endBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                long seconds = TimeUnit.MILLISECONDS.toSeconds(elapsedTime) % 60;
+                saveInfo();
+                Intent intent = new Intent(Walk.this, MainActivity.class);
+                startActivity(intent);
+                finish(); // Finish current activity to prevent going back to it with the back button
+            }
+        });
     }
 
+
+    private void saveInfo()
+    {
+        MyDatabase myDatabase = new MyDatabase(this);
+        Cursor cursor = myDatabase.getColumnDataForToday();
+        int hours = (int) TimeUnit.MILLISECONDS.toHours(elapsedTime);
+        if (cursor != null && cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                // Assuming you have a method to display photos, replace the following line accordingly
+                cursor.moveToFirst();
+                // Get the count values
+                @SuppressLint("Range") int count = cursor.getInt(cursor.getColumnIndex(Constants.WALK_COUNT)) +1;
+                myDatabase.updateIntData(Constants.WALK_COUNT, getCurrentDate(), count);
+                @SuppressLint("Range") int count2 = cursor.getInt(cursor.getColumnIndex(Constants.WALK_STEP_COUNT)) + stepCount;
+                myDatabase.updateIntData(Constants.WALK_STEP_COUNT, getCurrentDate(), count2);
+                @SuppressLint("Range") int count3 = cursor.getInt(cursor.getColumnIndex(Constants.WALK_TIME)) + hours;
+                myDatabase.updateIntData(Constants.WALK_TIME, getCurrentDate(), count3);
+            }
+        } else {
+            long id = myDatabase.insertPhotoData("none", getCurrentDate(), 0, 0, 0, 1, stepCount, hours);
+            if (id != -1) {
+                Toast.makeText(this, "Data saved to database", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Error saving data to database", Toast.LENGTH_SHORT).show();
+            }
+        }
+        if (cursor != null) {
+            cursor.close();
+        }
+    }
+    // Method to update the elapsed time view
+    private void updateElapsedTimeView() {
+        // Assuming you have a TextView named elapsedTimeTextView in your layout
+        TextView elapsedTimeTextView = findViewById(R.id.timeTextView);
+        elapsedTimeTextView.setText("Time: " + formatElapsedTime(elapsedTime));
+    }
+
+    private String formatElapsedTime(long elapsedTime) {
+        long hours = TimeUnit.MILLISECONDS.toHours(elapsedTime);
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(elapsedTime) % 60;
+        long seconds = TimeUnit.MILLISECONDS.toSeconds(elapsedTime) % 60;
+
+        return String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds);
+    }
     @Override
     protected void onResume() {
         super.onResume();
@@ -163,7 +234,7 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
             String result = "";
             try {
                 URL url = new URL(params[0]);
-                Log.d("Walk", params[0]);
+                Log.d("Temp", params[0]);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 InputStream inputStream = connection.getInputStream();
                 InputStreamReader reader = new InputStreamReader(inputStream);
