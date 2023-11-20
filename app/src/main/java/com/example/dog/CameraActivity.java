@@ -61,7 +61,6 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
 
         buttonCaptureSave = findViewById(R.id.buttonCaptureSave);
         previewView = findViewById(R.id.previewView);
-
         buttonCaptureSave.setOnClickListener(this);
 
         if (allPermissionsGranted()) {
