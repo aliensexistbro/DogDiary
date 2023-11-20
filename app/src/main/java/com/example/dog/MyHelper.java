@@ -14,7 +14,11 @@ public class MyHelper extends SQLiteOpenHelper {
             "CREATE TABLE " + Constants.TABLE_NAME + " (" +
                     Constants.UID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                     Constants.PHOTO_PATH + " TEXT, " +
-                    Constants.TIMESTAMP + " TEXT);";
+                    Constants.TIMESTAMP + " TEXT, " +
+                    Constants.POOP_COUNT + " INTEGER, " +
+                    Constants.PEE_COUNT + " INTEGER, " +
+                    Constants.FOOD_COUNT + " INTEGER , " +
+                    Constants.WALK_COUNT + " INTEGER);";
 
     private static final String DROP_TABLE = "DROP TABLE IF EXISTS " + Constants.TABLE_NAME;
 

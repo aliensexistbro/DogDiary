@@ -39,6 +39,8 @@ import androidx.appcompat.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
     private static final String PREF_NAME = "DogPrefs";
+
+    private static final String ACTIVITY_PREF_NAME = "ActivityPrefs";
     private String KEY_NAME = "name";
 
     private ImageButton cameraButton, logBtn, historyBtn;
@@ -58,60 +60,72 @@ public class MainActivity extends AppCompatActivity {
         pictureImageView = findViewById(R.id.pictureImageView);
         logBtn = findViewById(R.id.logButton);
         historyBtn = findViewById(R.id.historyButton);
+
         if (!hasDogInfo()) {
-            // User doesn't have dog information, display welcome page
             displayWelcomePage();
         } else {
-            // User has dog information, display welcome message
             displayWelcomeMessage();
         }
+    }
+
+    private void displayInfo()
+    {
         MyDatabase myDatabase = new MyDatabase(this);
-        Cursor cursor = myDatabase.getPhotoDataForToday();
+        Cursor cursor = myDatabase.getColumnDataForToday();
         if (cursor != null && cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
                 // Assuming you have a method to display photos, replace the following line accordingly
                 cursor.moveToFirst();
-                String photoPath = cursor.getString(cursor.getColumnIndex(Constants.PHOTO_PATH));
-                displayPhoto(photoPath);
-                titlePicTextView.setText("Picture of the Day");
+                @SuppressLint("Range") int poopCount = cursor.getInt(cursor.getColumnIndex(Constants.POOP_COUNT));
+                @SuppressLint("Range") int peeCount = cursor.getInt(cursor.getColumnIndex(Constants.PEE_COUNT));
+                @SuppressLint("Range") int foodCount = cursor.getInt(cursor.getColumnIndex(Constants.FOOD_COUNT));
+                @SuppressLint("Range") int walkCount = cursor.getInt(cursor.getColumnIndex(Constants.WALK_COUNT));
+
+                // Display the counts in TextViews and set visibility
+                displayActivityInfo(poopCount, Constants.POOP_COUNT, R.id.poopCountTextView, R.id.poopDateTextView);
+                displayActivityInfo(peeCount, Constants.PEE_COUNT, R.id.peeCountTextView, R.id.peeDateTextView);
+                displayActivityInfo(foodCount, Constants.FOOD_COUNT, R.id.foodCountTextView, R.id.foodDateTextView);
+                displayActivityInfo(walkCount, Constants.WALK_COUNT, R.id.walkCountTextView, R.id.walkDateTextView);
             }
-        } else {
-            // Handle case where there is no data for today
-            titlePicTextView.setText("Take a Picture of the Day!");
         }
-        // Close the cursor to free up resources
         if (cursor != null) {
             cursor.close();
         }
 
-        logBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Move to DogInfo activity
-                Intent intent = new Intent(MainActivity.this, ActivityLog.class);
-                startActivity(intent);
-                finish(); // Finish current activity to prevent going back to it with the back button
-            }
-        });
+    }
 
-        historyBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Move to DogInfo activity
-                Intent intent = new Intent(MainActivity.this, History.class);
-                startActivity(intent);
-                finish(); // Finish current activity to prevent going back to it with the back button
-            }
-        });
+    private void displayActivityInfo(int count, String key, int countTextViewId, int dateTextViewId) {
+        TextView countTextView = findViewById(countTextViewId);
+        TextView dateTextView = findViewById(dateTextViewId);
+
+        SharedPreferences sharedPreferences = getSharedPreferences(ACTIVITY_PREF_NAME, MODE_PRIVATE);
+        String storedCount = sharedPreferences.getString(key, "");
+
+        if (storedCount != null && !storedCount.equals("")) {
+            dateTextView.setText("Last Time: " + storedCount);
+            dateTextView.setVisibility(View.VISIBLE);
+            Log.d("Stored ", key + storedCount);
+        } else {
+            dateTextView.setVisibility(View.GONE);
+        }
+
+        countTextView.setText(key + ": " + count);
+        // Set visibility based on count
+        countTextView.setVisibility(count > 0 ? View.VISIBLE : View.GONE);
     }
 
     private void displayPhoto(String photoPath) {
         pictureImageView.setImageURI(Uri.parse(photoPath));
-        // Or load the image using a library like Glide or Picasso
     }
 
     private boolean hasDogInfo() {
         SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        // Check if any key exists in SharedPreferences (indicating dog information)
+        return sharedPreferences.getAll().size() > 0;
+    }
+
+    private boolean hasActivityInfo() {
+        SharedPreferences sharedPreferences = getSharedPreferences(ACTIVITY_PREF_NAME, Context.MODE_PRIVATE);
         // Check if any key exists in SharedPreferences (indicating dog information)
         return sharedPreferences.getAll().size() > 0;
     }
@@ -145,6 +159,50 @@ public class MainActivity extends AppCompatActivity {
                 finish(); // Finish current activity to prevent going back to it with the back button
             }
         });
+        MyDatabase myDatabase = new MyDatabase(this);
+        Cursor cursor = myDatabase.getPhotoDataForToday();
+        if (cursor != null && cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            @SuppressLint("Range") String photoPath = cursor.getString(cursor.getColumnIndex(Constants.PHOTO_PATH));
+            if(!photoPath.equals("none")){
+                Log.d("photo", photoPath);
+                displayPhoto(photoPath);
+                titlePicTextView.setText("Picture of the Day");
+            } else
+            {
+                titlePicTextView.setText("Take a Picture of the Day!");
+            }
+        } else {
+            // Handle case where there is no data for today
+            titlePicTextView.setText("Take a Picture of the Day!");
+        }
+        // Close the cursor to free up resources
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        logBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Move to DogInfo activity
+                Intent intent = new Intent(MainActivity.this, ActivityLog.class);
+                startActivity(intent);
+                finish(); // Finish current activity to prevent going back to it with the back button
+            }
+        });
+
+        historyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Move to DogInfo activity
+                Intent intent = new Intent(MainActivity.this, History.class);
+                startActivity(intent);
+                finish(); // Finish current activity to prevent going back to it with the back button
+            }
+        });
+        if(hasActivityInfo()) {
+            displayInfo();
+        }
     }
 }
 

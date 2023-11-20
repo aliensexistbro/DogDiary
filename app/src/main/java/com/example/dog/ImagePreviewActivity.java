@@ -1,4 +1,8 @@
 package com.example.dog;
+import static com.example.dog.Constants.DATABASE_NAME;
+import static com.example.dog.Constants.PHOTO_PATH;
+
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -92,13 +96,25 @@ public class ImagePreviewActivity extends AppCompatActivity {
         // Get name from EditText
         // Save to database (replace this with your database handling logic)
         MyDatabase myDatabase = new MyDatabase(this);
-        //String photoPath, String timestamp, String name
-        long id = myDatabase.insertPhotoData(imageUri.toString(), timestamp.toString());
-        if (id != -1) {
-            Toast.makeText(this, "Data saved to database" + timestamp, Toast.LENGTH_SHORT).show();
+        Cursor cursor = myDatabase.getPhotoDataForToday();
+        if (cursor != null && cursor.getCount() > 0) {
+            //(String oldTimestamp, String newPhotoPath, String newTimestamp)
+            myDatabase.updateData(Constants.PHOTO_PATH, timestamp.toString(), imageUri.toString());
         } else {
-            Toast.makeText(this, "Error saving data to database", Toast.LENGTH_SHORT).show();
+            // Handle case where there is no data for today
+            long id = myDatabase.insertPhotoData(imageUri.toString(), timestamp.toString(), 0,0,0, 0);
+            if (id != -1) {
+                Toast.makeText(this, "Data saved to database" + timestamp, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Error saving data to database", Toast.LENGTH_SHORT).show();
+            }
         }
+        // Close the cursor to free up resources
+        if (cursor != null) {
+            cursor.close();
+        }
+        //String photoPath, String timestamp, String name
+
     }
 
     private void deletePhoto() {
