@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Dog</string>
+    <string name="photo_gallery_name">Photo Gallery</string>
+    <string name="home_button">Home</string>
+</resources>

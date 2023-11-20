@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dog Information"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:inputType="text"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="16dp"/>
+
+    <EditText
+        android:id="@+id/editTextBirthday"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Birthday"
+        android:inputType="date"
+        android:layout_below="@+id/editTextName"
+        android:layout_marginTop="16dp"/>
+
+    <EditText
+        android:id="@+id/editTextAge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Age"
+        android:inputType="number"
+        android:layout_below="@+id/editTextBirthday"
+        android:layout_marginTop="16dp"/>
+
+    <EditText
+        android:id="@+id/editTextBreed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Breed"
+        android:inputType="text"
+        android:layout_below="@+id/editTextAge"
+        android:layout_marginTop="16dp"/>
+
+    <EditText
+        android:id="@+id/editTextCity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="City"
+        android:inputType="text"
+        android:layout_below="@+id/editTextBreed"
+        android:layout_marginTop="16dp"/>
+
+    <EditText
+        android:id="@+id/editTextChip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Chip"
+        android:inputType="text"
+        android:layout_below="@+id/editTextCity"
+        android:layout_marginTop="16dp"/>
+
+    <EditText
+        android:id="@+id/editTextWeight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Weight"
+        android:inputType="numberDecimal"
+        android:layout_below="@+id/editTextChip"
+        android:layout_marginTop="16dp"/>
+
+    <EditText
+        android:id="@+id/editTextFurType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Fur Type"
+        android:inputType="text"
+        android:layout_below="@+id/editTextWeight"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/buttonSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextFurType"
+        android:layout_marginTop="16dp"
+        android:text="Save"/>
+</RelativeLayout>
+
+
