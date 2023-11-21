@@ -31,8 +31,6 @@ import java.io.IOException;
 public class ImagePreviewActivity extends AppCompatActivity {
 
     private ImageView imageViewPreview;
-    private EditText nameEditText;
-
     private ImageButton backButton;
     private Uri imageUri;
     private String timestamp;
@@ -43,7 +41,7 @@ public class ImagePreviewActivity extends AppCompatActivity {
         setContentView(R.layout.image_preview);
 
         imageViewPreview = findViewById(R.id.image_preview);
-        // Get the image path and timestamp from the intent
+        // Getting extras from camera activity
         imageUri = getIntent().getParcelableExtra("imageUri");
         timestamp = getIntent().getStringExtra("date");
 
@@ -61,7 +59,6 @@ public class ImagePreviewActivity extends AppCompatActivity {
         } else {
             Log.e("ImagePreviewActivity", "Image URI is null");
         }
-        //Set Back Button
         backButton = findViewById(R.id.imgBackButton);
         backButton.setOnClickListener(new View.OnClickListener(){
 
@@ -73,7 +70,6 @@ public class ImagePreviewActivity extends AppCompatActivity {
         });
 
         // Menu Initialization and onSelectListener implementation
-
         imageOptionsMenu = findViewById(R.id.imageOptionsMenuView);
         imageOptionsMenu.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -94,11 +90,10 @@ public class ImagePreviewActivity extends AppCompatActivity {
     }
 
     private void saveToDatabase() {
-        // Get name from EditText
-        // Save to database (replace this with your database handling logic)
+        // Save photo to database
         MyDatabase myDatabase = new MyDatabase(this);
         Cursor cursor = myDatabase.getPhotoDataForToday();
-        if (cursor != null && cursor.getCount() > 0) {
+        if (cursor != null && cursor.getCount() > 0) { // Edit database if entry found today
             myDatabase.updateData(Constants.PHOTO_PATH, timestamp.toString(), imageUri.toString());
         } else {
             // Handle case where there is no data for today
@@ -113,8 +108,8 @@ public class ImagePreviewActivity extends AppCompatActivity {
         if (cursor != null) {
             cursor.close();
         }
-        //String photoPath, String timestamp, String name
-
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 
     private void deletePhoto() {
@@ -152,7 +147,7 @@ public class ImagePreviewActivity extends AppCompatActivity {
 
 
     private void sharePhoto() {
-        // Share the photo using Intent
+        // Share the photo using Implicit Intent
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("image/*");
         shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
