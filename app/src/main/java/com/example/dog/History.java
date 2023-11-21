@@ -22,7 +22,7 @@ public class History extends AppCompatActivity{
         private CalendarView calendarView;
         //View for bottom navigation
         private BottomNavigationView appNavigation;
-        private Button deleteLogButton;
+
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class History extends AppCompatActivity{
             setContentView(R.layout.history);
 
             calendarView = findViewById(R.id.calendarView);
-            deleteLogButton = findViewById(R.id.deleteDailyLogButton); 
+
 
 
             // Set the listener for date selection
