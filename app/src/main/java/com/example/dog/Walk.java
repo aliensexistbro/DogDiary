@@ -143,6 +143,8 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
 
                 }
                 if(item.getItemId() == R.id.profileMenuItem){
+                    intent = new Intent(Walk.this, DogInfo.class);
+                    startActivity(intent);
                 }
                 return true;
             }

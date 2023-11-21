@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.hardware.SensorEventListener;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.CalendarView;
 import android.widget.Toast;
 
+import androidx.activity.OnBackPressedDispatcher;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -51,6 +53,8 @@ public class History extends AppCompatActivity{
 
                     }
                     if(item.getItemId() == R.id.profileMenuItem){
+                        intent = new Intent(History.this, DogInfo.class);
+                        startActivity(intent);
                     }
                     return true;
                 }

@@ -1,100 +1,239 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Dog Information"
-        android:textSize="40sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"/>
-
-    <EditText
-        android:id="@+id/editTextName"
+    android:orientation="vertical"
+    tools:context=".DogInfo">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Name"
-        android:inputType="text"
-        android:layout_below="@+id/textView"
-        android:layout_marginTop="16dp"/>
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:gravity="center">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dog Profile"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:gravity="center"/>
 
-    <EditText
-        android:id="@+id/editTextBirthday"
+        <TableLayout
+            android:id="@+id/doggyInformationTable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            >
+            <TableRow
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
+                    android:textStyle="bold"
+
+                    android:textSize="20sp"
+                    android:id="@+id/personalInfoNameTV"/>
+
+                <EditText
+                    android:id="@+id/editTextName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+
+                    android:inputType="text"
+                    android:gravity="right"
+                    android:hint="Samuel"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Age"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:id="@+id/personalInfoAgeTV"/>
+
+                <EditText
+                    android:id="@+id/editTextAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:inputType="number"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:gravity="right"
+                    android:hint="10"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Birthday"
+                    android:textStyle="bold"
+
+                    android:textSize="20sp"
+                    android:id="@+id/birthdayTextView"/>
+
+                <EditText
+                    android:id="@+id/editTextBirthday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:inputType="date"
+                    android:gravity="right"
+                    android:hint="2015-10-03"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Breed"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:id="@+id/personalInfoBreedTV"/>
+
+                <EditText
+                    android:id="@+id/editTextBreed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:gravity="right"
+                    android:hint="Poodle"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="City"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:id="@+id/personalInfoCityTV"/>
+
+                <EditText
+                    android:id="@+id/editTextCity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:gravity="right"
+                    android:hint="Vancouver"
+                    android:inputType="text"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Chip #"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:id="@+id/personalInfoChipTV"/>
+
+                <EditText
+                    android:id="@+id/editTextChip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:gravity="right"
+                    android:inputType="text"
+                    android:hint="123456789"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </TableRow>
+            <TableRow
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Weight (lbs)"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+
+                    android:id="@+id/personalInfoWeightTV"/>
+
+                <EditText
+                    android:id="@+id/editTextWeight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:inputType="numberDecimal"
+                    android:gravity="right"
+                    android:hint="60"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </TableRow>
+
+            <TableRow
+                android:layout_marginTop="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fur Type"
+                    android:textStyle="bold"
+                    android:textSize="20sp"
+                    android:id="@+id/personalInfoFurTV"/>
+
+                <EditText
+                    android:id="@+id/editTextFurType"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@android:color/transparent"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:gravity="right"
+                    android:hint="Short"
+                    tools:ignore="TouchTargetSizeCheck" />
+            </TableRow>
+
+
+        </TableLayout>
+        <Button
+            android:id="@+id/buttonSubmit"
+            android:layout_width="match_parent"
+            android:layout_margin="20sp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/editTextFurType"
+            android:layout_marginTop="16dp"
+            android:text="Save"/>
+
+
+    </LinearLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/profileBottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Birthday"
-        android:inputType="date"
-        android:layout_below="@+id/editTextName"
-        android:layout_marginTop="16dp"/>
+        app:menu="@menu/bottom_menu"
+        android:visibility="gone"/>
 
-    <EditText
-        android:id="@+id/editTextAge"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Age"
-        android:inputType="number"
-        android:layout_below="@+id/editTextBirthday"
-        android:layout_marginTop="16dp"/>
 
-    <EditText
-        android:id="@+id/editTextBreed"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Breed"
-        android:inputType="text"
-        android:layout_below="@+id/editTextAge"
-        android:layout_marginTop="16dp"/>
 
-    <EditText
-        android:id="@+id/editTextCity"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="City"
-        android:inputType="text"
-        android:layout_below="@+id/editTextBreed"
-        android:layout_marginTop="16dp"/>
 
-    <EditText
-        android:id="@+id/editTextChip"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Chip"
-        android:inputType="text"
-        android:layout_below="@+id/editTextCity"
-        android:layout_marginTop="16dp"/>
 
-    <EditText
-        android:id="@+id/editTextWeight"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Weight"
-        android:inputType="numberDecimal"
-        android:layout_below="@+id/editTextChip"
-        android:layout_marginTop="16dp"/>
 
-    <EditText
-        android:id="@+id/editTextFurType"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Fur Type"
-        android:inputType="text"
-        android:layout_below="@+id/editTextWeight"
-        android:layout_marginTop="16dp"/>
 
-    <Button
-        android:id="@+id/buttonSubmit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/editTextFurType"
-        android:layout_marginTop="16dp"
-        android:text="Save"/>
-</RelativeLayout>
-
+</LinearLayout>
 

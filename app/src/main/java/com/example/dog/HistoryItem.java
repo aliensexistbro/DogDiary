@@ -70,6 +70,8 @@ public class HistoryItem extends AppCompatActivity {
 
                 }
                 if(item.getItemId() == R.id.profileMenuItem){
+                    intent = new Intent(HistoryItem.this, DogInfo.class);
+                    startActivity(intent);
                 }
                 return true;
             }
