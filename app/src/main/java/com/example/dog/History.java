@@ -5,6 +5,7 @@ import android.hardware.SensorEventListener;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ public class History extends AppCompatActivity{
         private CalendarView calendarView;
         //View for bottom navigation
         private BottomNavigationView appNavigation;
+        private Button deleteLogButton;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,8 @@ public class History extends AppCompatActivity{
             setContentView(R.layout.history);
 
             calendarView = findViewById(R.id.calendarView);
+            deleteLogButton = findViewById(R.id.deleteDailyLogButton); 
+
 
             // Set the listener for date selection
             calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
