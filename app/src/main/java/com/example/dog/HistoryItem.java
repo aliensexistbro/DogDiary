@@ -78,7 +78,6 @@ public class HistoryItem extends AppCompatActivity {
         });
 
     }
-
     private void displayInfo(Cursor cursor1)
     {
         String selectedDate = getIntent().getStringExtra("SELECTED_DATE");
@@ -86,7 +85,6 @@ public class HistoryItem extends AppCompatActivity {
         Cursor cursor = myDatabase.getDataForDate(selectedDate);
         if (cursor != null && cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
-                // Assuming you have a method to display photos, replace the following line accordingly
                 cursor.moveToFirst();
                 @SuppressLint("Range") int poopCount = cursor.getInt(cursor.getColumnIndex(Constants.POOP_COUNT));
                 @SuppressLint("Range") int peeCount = cursor.getInt(cursor.getColumnIndex(Constants.PEE_COUNT));
@@ -107,28 +105,6 @@ public class HistoryItem extends AppCompatActivity {
             cursor.close();
         }
 
-
-
-    }
-
-    private void displayActivityInfo(int count, String key, int countTextViewId, int dateTextViewId) {
-        TextView countTextView = findViewById(countTextViewId);
-        TextView dateTextView = findViewById(dateTextViewId);
-
-        SharedPreferences sharedPreferences = getSharedPreferences(ACTIVITY_PREF_NAME, MODE_PRIVATE);
-        String storedCount = sharedPreferences.getString(key, "");
-
-        if (storedCount != null && !storedCount.equals("")) {
-            dateTextView.setText("Last Time: " + storedCount);
-            dateTextView.setVisibility(View.VISIBLE);
-            Log.d("Stored ", key + storedCount);
-        } else {
-            dateTextView.setVisibility(View.GONE);
-        }
-
-        countTextView.setText(key + ": " + count);
-        // Set visibility based on count
-        countTextView.setVisibility(count > 0 ? View.VISIBLE : View.GONE);
     }
 
     private void displayActivityInfo(int count, String key, int countTextViewId) {
@@ -141,14 +117,6 @@ public class HistoryItem extends AppCompatActivity {
     private void displayPhoto(String photoPath) {
         pictureImageView.setImageURI(Uri.parse(photoPath));
     }
-
-
-    private boolean hasActivityInfo() {
-        SharedPreferences sharedPreferences = getSharedPreferences(ACTIVITY_PREF_NAME, Context.MODE_PRIVATE);
-        // Check if any key exists in SharedPreferences (indicating dog information)
-        return sharedPreferences.getAll().size() > 0;
-    }
-
 
     private void displayWelcomeMessage() {
         SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
