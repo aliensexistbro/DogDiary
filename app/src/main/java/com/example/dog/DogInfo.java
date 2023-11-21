@@ -37,7 +37,6 @@ public class DogInfo extends AppCompatActivity {
                 int chip = Integer.parseInt(((EditText) findViewById(R.id.editTextChip)).getText().toString());
                 double weight = Double.parseDouble(((EditText) findViewById(R.id.editTextWeight)).getText().toString());
                 String furType = ((EditText) findViewById(R.id.editTextFurType)).getText().toString();
-
                 // Save the values in SharedPreferences
                 saveDogInfo(name, birthday, age, breed, city, chip, weight, furType);
             }
@@ -64,11 +63,7 @@ public class DogInfo extends AppCompatActivity {
                     return true;
                 }
             });
-
-
         }
-
-
     }
 
     private void saveDogInfo(String name, String birthday, int age, String breed, String city,
@@ -115,9 +110,8 @@ public class DogInfo extends AppCompatActivity {
         breed.setText(sharedPreferences.getString("breed", ""));
         chip.setText(String.valueOf(sharedPreferences.getInt("age", 0)));
         city.setText(sharedPreferences.getString("city", ""));
-
+        weight.setText(sharedPreferences.getString("weight", ""));
         furType.setText(sharedPreferences.getString("furType", ""));
-
 
 
     }
