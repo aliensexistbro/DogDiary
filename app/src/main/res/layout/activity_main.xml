@@ -180,6 +180,19 @@
                     android:layout_weight="1"
                     android:visibility="gone"
                     />
+
+                <TextView
+                    android:id="@+id/lastWalkTimeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="5sp"
+                    android:text="Time of walk:"
+                    android:textSize="18sp"
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                    />
+            </TableRow>
+            <TableRow>
                 <TextView
                     android:id="@+id/walkTimeTextView"
                     android:layout_width="wrap_content"
@@ -192,9 +205,6 @@
 
 
                     />
-
-            </TableRow>
-            <TableRow>
                 <TextView
                     android:id="@+id/stepsTextView"
                     android:layout_width="wrap_content"

@@ -9,6 +9,9 @@
         android:name="android.hardware.sensor.ambient_temperature"
         android:required="true" />
     <uses-feature
+        android:name="android.hardware.sensor.temperature"
+        android:required="true" />
+    <uses-feature
         android:name="android.hardware.sensor.accelerometer"
         android:required="true" />
 

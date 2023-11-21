@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                 displayActivityInfo(cursor.getInt(cursor.getColumnIndex(Constants.FOOD_COUNT)),
                         Constants.FOOD_COUNT, R.id.foodCountTextView, R.id.foodDateTextView);
                 displayActivityInfo(cursor.getInt(cursor.getColumnIndex(Constants.WALK_COUNT)),
-                        Constants.WALK_COUNT, R.id.walkCountTextView);
+                        Constants.WALK_COUNT, R.id.walkCountTextView, R.id.lastWalkTimeTextView);
                 displayActivityInfo(cursor.getInt(cursor.getColumnIndex(Constants.WALK_STEP_COUNT)),
                         Constants.WALK_STEP_COUNT, R.id.stepsTextView);
                 displayActivityInfo(cursor.getInt(cursor.getColumnIndex(Constants.WALK_TIME)),
