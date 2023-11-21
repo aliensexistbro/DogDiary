@@ -81,12 +81,13 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
         temperatureSensor = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
         temperatureSensor2 = sensorManager.getDefaultSensor(Sensor.TYPE_TEMPERATURE);
         accelometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        if (stepCounterSensor == null) {
+        /*if (stepCounterSensor == null) {
             // Handle the case where the step counter sensor is not available on the device
             sensorManager.registerListener(this, accelometer, SensorManager.SENSOR_DELAY_NORMAL);
         } else {
             sensorManager.registerListener(this, stepCounterSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        }
+        }*/
+        sensorManager.registerListener(this, accelometer, SensorManager.SENSOR_DELAY_NORMAL);
         if(temperatureSensor != null)
             sensorManager.registerListener(this, temperatureSensor,SensorManager.SENSOR_DELAY_NORMAL);
         else if (temperatureSensor2 != null)
@@ -233,7 +234,7 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
         // Check if the event is from the step counter sensor
         if (isTracking) {
-            if (stepCounterSensor == null) { // Checks for step sensor, uses accelometer instead if null
+            /*if (stepCounterSensor == null) { // Checks for step sensor, uses accelometer instead if null
                 detectStep(event.values[0], event.values[1], event.values[2], event.timestamp);
             } else {
                 if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
@@ -241,7 +242,9 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
                     stepCount = (int) event.values[0];
                     updateStepsView();
                 }
-            }
+            }*/
+            if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
+                    detectStep(event.values[0], event.values[1], event.values[2], event.timestamp);
         }
         // Check for temperature event
         if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE || event.sensor.getType() == Sensor.TYPE_TEMPERATURE) {

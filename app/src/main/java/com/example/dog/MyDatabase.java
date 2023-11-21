@@ -182,5 +182,21 @@ public class MyDatabase {
 
         return rowsUpdated;
     }
+
+    // Delete data for a specific date
+    public boolean deleteDataForDate(String date) {
+        SQLiteDatabase db = helper.getWritableDatabase();
+
+        // Specify the WHERE clause based on the timestamp
+        String whereClause = "SUBSTR(" + Constants.TIMESTAMP + ", 1, 10) = ?";
+        String[] whereArgs = { date };
+
+        // Perform the delete operation
+        int rowsDeleted = db.delete(Constants.TABLE_NAME, whereClause, whereArgs);
+
+        // Check if any rows were deleted
+        return rowsDeleted > 0;
+    }
+
 }
 

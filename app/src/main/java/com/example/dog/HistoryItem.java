@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,7 +41,7 @@ public class HistoryItem extends AppCompatActivity {
     private ImageButton historyItemButton;
     private BottomNavigationView appNavigation;
 
-
+    private Button deleteBtn;
     @SuppressLint("Range")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class HistoryItem extends AppCompatActivity {
         titlePicTextView = findViewById(R.id.pictureTitleTextView);
         pictureImageView = findViewById(R.id.pictureImageView);
         historyItemButton = findViewById(R.id.historyItemBackButton);
-
+        deleteBtn = findViewById(R.id.deleteDailyLogButton);
         // Display welcome message and set up navigation
         displayWelcomeMessage();
         setUpNavigation();
@@ -64,6 +65,27 @@ public class HistoryItem extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        deleteBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteData();
+            }
+        });
+    }
+    // Method to delete data based on the selected date
+    private void deleteData() {
+        String selectedDate = getIntent().getStringExtra("SELECTED_DATE");
+        MyDatabase myDatabase = new MyDatabase(this);
+        boolean deleted = myDatabase.deleteDataForDate(selectedDate);
+        if (deleted) {
+            // Row deleted successfully
+            Toast.makeText(this, "Entry deleted successfully", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(HistoryItem.this, History.class);
+            startActivity(intent);
+        } else {
+            // Failed to delete row
+            Toast.makeText(this, "Failed to delete entry", Toast.LENGTH_SHORT).show();
+        }
     }
 
     // Display user activity information
