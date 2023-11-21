@@ -162,6 +162,35 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
             }
         });
     }
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+
+        // Restore the saved instance state
+        stepCount = savedInstanceState.getInt("stepCount");
+        elapsedTime = savedInstanceState.getLong("elapsedTime");
+        isTracking = savedInstanceState.getBoolean("isTracking");
+
+        // Update the UI based on the restored state
+        updateStepsView();
+        updateElapsedTimeView();
+
+        if (isTracking) {
+            // If tracking was in progress, resume the timer
+            timerHandler.postDelayed(timerRunnable, TIMER_UPDATE_INTERVAL);
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        // Save the relevant data to the bundle
+        outState.putInt("stepCount", stepCount);
+        outState.putLong("elapsedTime", elapsedTime);
+        outState.putBoolean("isTracking", isTracking);
+
+        // Always call the superclass so it can save the view hierarchy state
+        super.onSaveInstanceState(outState);
+    }
 
     public void unregSensor()
     {
