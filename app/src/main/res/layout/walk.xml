@@ -18,6 +18,7 @@
             android:layout_height="wrap_content"
             android:text="Start your Walk!"
             android:layout_marginTop="16dp"
+            android:textSize="40dp"
             android:layout_centerHorizontal="true"/>
 
         <TextView
