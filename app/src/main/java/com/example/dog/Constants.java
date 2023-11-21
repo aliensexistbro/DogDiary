@@ -1,6 +1,7 @@
 package com.example.dog;
 
 public class Constants {
+    // Defining all constants for DB
     public static final String DATABASE_NAME = "dog_info";
     public static final String TABLE_NAME = "PHOTOSTABLE";
     public static final String UID = "_id";

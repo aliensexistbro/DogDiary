@@ -48,11 +48,18 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 public class CameraActivity extends AppCompatActivity implements View.OnClickListener {
-    PreviewView previewView;
+
+    // UI elements
+    private PreviewView previewView;
     private ImageButton buttonCaptureSave;
+
+    // Camera components
     private ImageCapture imageCapture;
-    private Executor executor = Executors.newSingleThreadExecutor();
-    private int REQUEST_CODE_PERMISSIONS = 1001;
+
+    // Permission request code
+    private final int REQUEST_CODE_PERMISSIONS = 1001;
+
+    // Required camera permissions
     private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA"};
 
     @Override
@@ -60,99 +67,99 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
+        // Initialize UI elements
         buttonCaptureSave = findViewById(R.id.buttonCaptureSave);
         previewView = findViewById(R.id.previewView);
         buttonCaptureSave.setOnClickListener(this);
 
+        // Check and request camera permissions
         if (allPermissionsGranted()) {
-            startCamera(); //start camera if permission has been granted by user
+            startCamera(); // Start the camera if permissions have been granted
         } else {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
         }
     }
+
+    // Helper method to get the executor
     private Executor getExecutor() {
         return ContextCompat.getMainExecutor(this);
     }
 
+    // Start the camera
     private void startCamera() {
-
         final ListenableFuture<ProcessCameraProvider> cameraProviderFuture = ProcessCameraProvider.getInstance(this);
 
-        cameraProviderFuture.addListener(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
-                    bindPreview(cameraProvider);
-
-                } catch (ExecutionException | InterruptedException e) {
-                    // This should never be reached.
-                }
+        cameraProviderFuture.addListener(() -> {
+            try {
+                ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
+                bindPreview(cameraProvider);
+            } catch (ExecutionException | InterruptedException e) {
+                // Handle exceptions
+                e.printStackTrace();
             }
-        }, ContextCompat.getMainExecutor(this));
+        }, getExecutor());
     }
 
-
-
+    // Bind the camera preview
     void bindPreview(@NonNull ProcessCameraProvider cameraProvider) {
-
         cameraProvider.unbindAll();
 
-        Preview preview = new Preview.Builder()
-            .build();
+        Preview preview = new Preview.Builder().build();
 
         CameraSelector cameraSelector = new CameraSelector.Builder()
-            .requireLensFacing(CameraSelector.LENS_FACING_BACK)
-            .build();
+                .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+                .build();
 
         imageCapture = new ImageCapture.Builder()
-            .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
-            .build();
+                .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
+                .build();
+
         preview.setSurfaceProvider(previewView.getSurfaceProvider());
         cameraProvider.bindToLifecycle(this, cameraSelector, preview, imageCapture);
-
     }
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == buttonCaptureSave.getId()) {
+        if (view.getId() == buttonCaptureSave.getId()) {
             capturePhoto();
         }
     }
+
+    // Capture a photo
     private void capturePhoto() {
         long timeStamp = System.currentTimeMillis();
         ContentValues contentValues = new ContentValues();
         contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, timeStamp);
         contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg");
 
-
         imageCapture.takePicture(
-            new ImageCapture.OutputFileOptions.Builder(
-                getContentResolver(),
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                contentValues
-            ).build(),
-            getExecutor(),
-            new ImageCapture.OnImageSavedCallback() {
-                @Override
-                public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
-                    Uri savedImageUri = outputFileResults.getSavedUri();
-                    String date = getCurrentDate();
-                    Intent previewIntent = new Intent(CameraActivity.this, ImagePreviewActivity.class);
-                    previewIntent.putExtra("imageUri", savedImageUri);
-                    previewIntent.putExtra("date", date);
-                    startActivity(previewIntent);
-                }
+                new ImageCapture.OutputFileOptions.Builder( // Saving photo
+                        getContentResolver(),
+                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+                        contentValues
+                ).build(),
+                getExecutor(),
+                new ImageCapture.OnImageSavedCallback() {
+                    @Override
+                    public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
+                        Uri savedImageUri = outputFileResults.getSavedUri();
+                        String date = getCurrentDate(); //Sending the uri and date to preview activity
+                        Intent previewIntent = new Intent(CameraActivity.this, ImagePreviewActivity.class);
+                        previewIntent.putExtra("imageUri", savedImageUri);
+                        previewIntent.putExtra("date", date);
+                        startActivity(previewIntent);
+                    }
 
-                @Override
-                public void onError(@NonNull ImageCaptureException exception) {
-                    Toast.makeText(CameraActivity.this, "Error: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
+                    @Override
+                    public void onError(@NonNull ImageCaptureException exception) {
+                        // Handle image capture errors
+                        Toast.makeText(CameraActivity.this, "Error: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
+    // Check if all required permissions are granted
     private boolean allPermissionsGranted() {
-
         for (String permission : REQUIRED_PERMISSIONS) {
             if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
                 return false;
@@ -161,6 +168,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         return true;
     }
 
+    // Get the current date in "yyyy-MM-dd" format
     public static String getCurrentDate() {
         Calendar calendar = Calendar.getInstance();
         Date currentDate = calendar.getTime();
@@ -169,3 +177,4 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         return dateFormat.format(currentDate);
     }
 }
+

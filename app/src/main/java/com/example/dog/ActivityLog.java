@@ -76,6 +76,7 @@ public class ActivityLog extends AppCompatActivity {
             }
         });
 
+        // App navigation
         appNavigation = findViewById(R.id.logBottomNavigation);
         appNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -97,13 +98,11 @@ public class ActivityLog extends AppCompatActivity {
         });
     }
     private void saveToDatabase(String constant) {
-        // Get name from EditText
-        // Save to database (replace this with your database handling logic)
+        // Save to database
         MyDatabase myDatabase = new MyDatabase(this);
         Cursor cursor = myDatabase.getColumnDataForToday();
         if (cursor != null && cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
-                // Assuming you have a method to display photos, replace the following line accordingly
                 cursor.moveToFirst();
                 // Get the count values
                 @SuppressLint("Range") int count = cursor.getInt(cursor.getColumnIndex(constant)) +1;
@@ -124,7 +123,7 @@ public class ActivityLog extends AppCompatActivity {
             cursor.close();
         }
     }
-    public static String getCurrentDate() {
+    public static String getCurrentDate() { // Getting date
         Calendar calendar = Calendar.getInstance();
         Date currentDate = calendar.getTime();
 
@@ -142,7 +141,7 @@ public class ActivityLog extends AppCompatActivity {
         return String.format(Locale.getDefault(), "%02d:%02d", hours, minutes);
     }
 
-    private void saveDogInfo(String constant, String time) {
+    private void saveDogInfo(String constant, String time) { // Saving info to shared pref
         SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(constant, time);
