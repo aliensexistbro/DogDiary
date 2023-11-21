@@ -31,7 +31,8 @@
             android:layout_rowWeight="1"
             android:scaleType="fitCenter"
             android:src="@drawable/dog_walk"
-           />
+            android:backgroundTint="@color/cream"
+            app:tint="@color/darkRed" />
 
         <!-- ImageButton 2 -->
         <ImageButton
@@ -44,7 +45,9 @@
             android:layout_margin="5dp"
             android:layout_rowWeight="1"
             android:scaleType="fitCenter"
-            android:src="@drawable/food" />
+            android:src="@drawable/food"
+            android:backgroundTint="@color/cream"
+            app:tint="@color/darkRed"/>
 
         <!-- ImageButton 3 -->
         <ImageButton
@@ -57,7 +60,9 @@
             android:layout_columnWeight="1"
             android:layout_rowWeight="1"
             android:scaleType="fitCenter"
-            android:src="@drawable/pee" />
+            android:src="@drawable/pee"
+            android:backgroundTint="@color/cream"
+            app:tint="@color/darkRed"/>
 
         <!-- ImageButton 4 -->
         <ImageButton
@@ -70,7 +75,9 @@
             android:scaleType="fitCenter"
             android:src="@drawable/dog_poo"
             android:background="@drawable/card_button_rounded_corners"
-            android:padding="20sp"/>
+            android:padding="20sp"
+            android:backgroundTint="@color/cream"
+            app:tint="@color/darkRed"/>
 
     </GridLayout>
 
