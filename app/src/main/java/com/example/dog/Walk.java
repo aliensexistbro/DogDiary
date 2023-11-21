@@ -82,7 +82,7 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
         temperatureSensor2 = sensorManager.getDefaultSensor(Sensor.TYPE_TEMPERATURE);
         accelometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         if (stepCounterSensor == null) {
-            // Handle the case where the step counter sensor is not available on the device
+             //Handle the case where the step counter sensor is not available on the device
             sensorManager.registerListener(this, accelometer, SensorManager.SENSOR_DELAY_NORMAL);
         } else {
             sensorManager.registerListener(this, stepCounterSensor, SensorManager.SENSOR_DELAY_NORMAL);
@@ -215,8 +215,9 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
     protected void onResume() {
         super.onResume();
         // Register the sensor listener
-        if (stepCounterSensor != null) {
+        if (accelometer != null) {
             sensorManager.registerListener(this, stepCounterSensor, SensorManager.SENSOR_DELAY_NORMAL);
+
         }
     }
 
@@ -224,7 +225,7 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
     protected void onPause() {
         super.onPause();
         // Unregister the sensor listener
-        if (stepCounterSensor != null) {
+        if (accelometer != null) {
             sensorManager.unregisterListener(this);
         }
     }
