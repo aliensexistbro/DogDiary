@@ -18,7 +18,9 @@
             android:layout_height="wrap_content"
             android:text="Start your Walk!"
             android:layout_marginTop="16dp"
-            android:layout_centerHorizontal="true"/>
+            android:textSize="40dp"
+            android:layout_centerHorizontal="true"
+            android:textStyle="bold">
 
         <TextView
             android:id="@+id/stepsTextView"
@@ -35,6 +37,7 @@
             android:layout_height="wrap_content"
             android:text="Temperature: N/A"
             android:layout_below="@id/stepsTextView"
+
             android:layout_marginTop="16dp"
             android:layout_centerHorizontal="true"/>
 
@@ -46,23 +49,37 @@
             android:layout_below="@id/temperatureTextView"
             android:layout_marginTop="16dp"
             android:layout_centerHorizontal="true"/>
+        <LinearLayout
+            android:layout_marginTop="75dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:minWidth="350dp">
+            <Button
+                android:id="@+id/startStopButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Start"
+                android:layout_marginRight="15dp"
+                android:layout_below="@id/timeTextView"
 
-        <Button
-            android:id="@+id/startStopButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Start"
-            android:layout_below="@id/timeTextView"
-            android:layout_marginTop="16dp"
-            android:layout_centerHorizontal="true"/>
-        <Button
-            android:id="@+id/endButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="End Walk"
-            android:layout_below="@id/startStopButton"
-            android:layout_marginTop="16dp"
-            android:layout_centerHorizontal="true"/>
+                android:layout_centerHorizontal="true"/>
+            <Button
+                android:id="@+id/endButton"
+                android:layout_width="0dp"
+
+                android:layout_height="wrap_content"
+                android:text="Log Walk"
+                android:layout_weight="1"
+                android:layout_below="@id/startStopButton"
+
+                android:layout_centerHorizontal="true"/>
+
+        </LinearLayout>
+
+
 
 
     </LinearLayout>
