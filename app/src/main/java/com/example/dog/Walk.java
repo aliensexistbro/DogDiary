@@ -328,7 +328,7 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            Log.d("Walk", s);
+            //Log.d("Walk", s);
             if (s != null) {
                 try {
                     JSONObject jsonObject = new JSONObject(s);
