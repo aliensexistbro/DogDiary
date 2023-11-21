@@ -23,6 +23,7 @@
         android:src="@drawable/camera_aperture"
         app:tint="@color/white"
         android:background="@drawable/baseline_circle_75"
+        android:backgroundTint="@color/darkRed"
         />
 
 </LinearLayout>

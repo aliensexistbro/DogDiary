@@ -3,6 +3,12 @@
     <style name="Base.Theme.Dog" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/red</item>
+        <item name="colorPrimaryVariant">@color/darkRed</item>
+        <item name="colorOnPrimary">@color/cream</item>
+        <item name="colorSecondary">@color/lightBlue</item>
+        <item name="colorSecondaryVariant">@color/darkBlue</item>
+        <item name="colorOnSecondary">@color/black</item>
     </style>
 
     <style name="Theme.Dog" parent="Base.Theme.Dog" />
