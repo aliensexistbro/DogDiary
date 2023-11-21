@@ -92,7 +92,6 @@ public class DogInfo extends AppCompatActivity {
         return sharedPreferences.getAll().size() > 0;
     }
 
-<<<<<<< HEAD
     private void setDogInfo(){
         SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         EditText name = (EditText) findViewById(R.id.editTextName);
@@ -113,34 +112,6 @@ public class DogInfo extends AppCompatActivity {
         city.setText(sharedPreferences.getString("city", ""));
         weight.setText(sharedPreferences.getString("weight", ""));
         furType.setText(sharedPreferences.getString("furType", ""));
-
-
     }
-=======
-//    private void setDogInfo(){
-//        SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-//        EditText name = (EditText) findViewById(R.id.editTextName);
-//        EditText birthday = (EditText) findViewById(R.id.editTextBirthday);
-//        EditText age = (EditText) findViewById(R.id.editTextAge);
-//        EditText breed = (EditText) findViewById(R.id.editTextBreed);
-//        EditText city = (EditText) findViewById(R.id.editTextCity);
-//        EditText chip = (EditText) findViewById(R.id.editTextChip);
-//        EditText weight = (EditText) findViewById(R.id.editTextWeight);
-//        EditText furType = (EditText) findViewById(R.id.editTextFurType);
-//
-//
-//        name.setText(sharedPreferences.getString("name", ""));
-//        birthday.setText(sharedPreferences.getString("birthday", ""));
-//        age.setText(String.valueOf(sharedPreferences.getInt("age", 0)));
-//        breed.setText(sharedPreferences.getString("breed", ""));
-//        chip.setText(String.valueOf(sharedPreferences.getInt("age", 0)));
-//        city.setText(sharedPreferences.getString("city", ""));
-//
-//        furType.setText(sharedPreferences.getString("furType", ""));
-//
-//
-//
-//    }
->>>>>>> 50c94cf401e2cca9ffc3c76695a793a766fc5f54
 }
 
