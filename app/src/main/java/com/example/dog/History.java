@@ -16,7 +16,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class History extends AppCompatActivity{
+        //View for Calendar
         private CalendarView calendarView;
+        //View for bottom navigation
         private BottomNavigationView appNavigation;
 
         @Override
@@ -40,6 +42,7 @@ public class History extends AppCompatActivity{
                 }
             });
 
+            //Initializing and setting functionality for the bottom app navigation
             appNavigation = findViewById(R.id.historyBottomNavigation);
             appNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
                 @Override

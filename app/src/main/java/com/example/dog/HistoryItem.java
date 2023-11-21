@@ -70,7 +70,7 @@ public class HistoryItem extends AppCompatActivity {
 
                 }
                 if(item.getItemId() == R.id.profileMenuItem){
-                    intent = new Intent(HistoryItem.this, DogInfo.class);
+                    intent = new Intent(HistoryItem.this, DogProfile.class);
                     startActivity(intent);
                 }
                 return true;
@@ -118,6 +118,7 @@ public class HistoryItem extends AppCompatActivity {
         pictureImageView.setImageURI(Uri.parse(photoPath));
     }
 
+    //
     private void displayWelcomeMessage() {
         SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         // Display name

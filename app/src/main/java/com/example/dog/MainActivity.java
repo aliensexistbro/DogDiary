@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (item.getItemId() == R.id.profileMenuItem) {
                     // Move to DogInfo activity
-                    intent = new Intent(MainActivity.this, DogInfo.class);
+                    intent = new Intent(MainActivity.this, DogProfile.class);
                     startActivity(intent);
                 }
                 return true;
