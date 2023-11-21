@@ -53,7 +53,7 @@ public class History extends AppCompatActivity{
 
                     }
                     if(item.getItemId() == R.id.profileMenuItem){
-                        intent = new Intent(History.this, DogInfo.class);
+                        intent = new Intent(History.this, DogProfile.class);
                         startActivity(intent);
                     }
                     return true;

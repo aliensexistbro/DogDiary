@@ -17,7 +17,7 @@ import com.google.android.material.navigation.NavigationBarView;
 public class DogInfo extends AppCompatActivity {
 
     private static final String PREF_NAME = "DogPrefs";
-    BottomNavigationView appNavigation;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,28 +42,7 @@ public class DogInfo extends AppCompatActivity {
             }
         });
 
-        if (hasDogInfo()){
-//            setDogInfo();
-            appNavigation = findViewById(R.id.profileBottomNavigation);
-            appNavigation.setVisibility(View.VISIBLE);
-            appNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    Intent intent;
-                    if (item.getItemId() == R.id.homeMenuItem){
-                        intent = new Intent(DogInfo.this, MainActivity.class);
-                        startActivity(intent);
-                    }
-                    if(item.getItemId() == R.id.historyMenuItem){
-                        intent = new Intent(DogInfo.this, History.class);
-                        startActivity(intent);
-                    }
-                    if(item.getItemId() == R.id.profileMenuItem){
-                    }
-                    return true;
-                }
-            });
-        }
+
     }
 
     private void saveDogInfo(String name, String birthday, int age, String breed, String city,
@@ -92,26 +71,6 @@ public class DogInfo extends AppCompatActivity {
         return sharedPreferences.getAll().size() > 0;
     }
 
-    private void setDogInfo(){
-        SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        EditText name = (EditText) findViewById(R.id.editTextName);
-        EditText birthday = (EditText) findViewById(R.id.editTextBirthday);
-        EditText age = (EditText) findViewById(R.id.editTextAge);
-        EditText breed = (EditText) findViewById(R.id.editTextBreed);
-        EditText city = (EditText) findViewById(R.id.editTextCity);
-        EditText chip = (EditText) findViewById(R.id.editTextChip);
-        EditText weight = (EditText) findViewById(R.id.editTextWeight);
-        EditText furType = (EditText) findViewById(R.id.editTextFurType);
 
-
-        name.setText(sharedPreferences.getString("name", ""));
-        birthday.setText(sharedPreferences.getString("birthday", ""));
-        age.setText(String.valueOf(sharedPreferences.getInt("age", 0)));
-        breed.setText(sharedPreferences.getString("breed", ""));
-        chip.setText(String.valueOf(sharedPreferences.getInt("age", 0)));
-        city.setText(sharedPreferences.getString("city", ""));
-        weight.setText(sharedPreferences.getString("weight", ""));
-        furType.setText(sharedPreferences.getString("furType", ""));
-    }
 }
 

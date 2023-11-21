@@ -5,17 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".DogInfo">
+    tools:context=".DogProfile">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="1"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_weight="1">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Dog's Information"
+            android:text="Profile"
             android:textSize="40sp"
             android:textStyle="bold"
             android:gravity="center"/>
@@ -36,10 +37,10 @@
                     android:textStyle="bold"
 
                     android:textSize="20sp"
-                    android:id="@+id/personalInfoNameTV"/>
+                    android:id="@+id/prPersonalInfoNameTV"/>
 
                 <EditText
-                    android:id="@+id/editTextName"
+                    android:id="@+id/prEditTextName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -59,10 +60,10 @@
                     android:text="Age"
                     android:textStyle="bold"
                     android:textSize="20sp"
-                    android:id="@+id/personalInfoAgeTV"/>
+                    android:id="@+id/prPersonalInfoAgeTV"/>
 
                 <EditText
-                    android:id="@+id/editTextAge"
+                    android:id="@+id/prEditTextAge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -82,10 +83,10 @@
                     android:textStyle="bold"
 
                     android:textSize="20sp"
-                    android:id="@+id/birthdayTextView"/>
+                    android:id="@+id/prBirthdayTextView"/>
 
                 <EditText
-                    android:id="@+id/editTextBirthday"
+                    android:id="@+id/prEditTextBirthday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -104,10 +105,10 @@
                     android:text="Breed"
                     android:textStyle="bold"
                     android:textSize="20sp"
-                    android:id="@+id/personalInfoBreedTV"/>
+                    android:id="@+id/prPersonalInfoBreedTV"/>
 
                 <EditText
-                    android:id="@+id/editTextBreed"
+                    android:id="@+id/prEditTextBreed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -126,10 +127,10 @@
                     android:text="City"
                     android:textStyle="bold"
                     android:textSize="20sp"
-                    android:id="@+id/personalInfoCityTV"/>
+                    android:id="@+id/prPersonalInfoCityTV"/>
 
                 <EditText
-                    android:id="@+id/editTextCity"
+                    android:id="@+id/prEditTextCity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -148,10 +149,10 @@
                     android:text="Chip #"
                     android:textStyle="bold"
                     android:textSize="20sp"
-                    android:id="@+id/personalInfoChipTV"/>
+                    android:id="@+id/prPersonalInfoChipTV"/>
 
                 <EditText
-                    android:id="@+id/editTextChip"
+                    android:id="@+id/prEditTextChip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -171,10 +172,10 @@
                     android:textStyle="bold"
                     android:textSize="20sp"
 
-                    android:id="@+id/personalInfoWeightTV"/>
+                    android:id="@+id/prPersonalInfoWeightTV"/>
 
                 <EditText
-                    android:id="@+id/editTextWeight"
+                    android:id="@+id/prEditTextWeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -194,10 +195,10 @@
                     android:text="Fur Type"
                     android:textStyle="bold"
                     android:textSize="20sp"
-                    android:id="@+id/personalInfoFurTV"/>
+                    android:id="@+id/prPersonalInfoFurTV"/>
 
                 <EditText
-                    android:id="@+id/editTextFurType"
+                    android:id="@+id/prEditTextFurType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
@@ -212,17 +213,20 @@
 
         </TableLayout>
         <Button
-            android:id="@+id/buttonSubmit"
-            android:layout_width="match_parent"
-            android:layout_margin="20sp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/editTextFurType"
-            android:layout_marginTop="16dp"
-            android:text="Save"/>
+            android:id="@+id/saveProfileChangesButton"
+            android:text="Save Changes"/>
 
 
     </LinearLayout>
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/profileBottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/bottom_menu"
+
+        tools:ignore="MissingConstraints" />
 
 </LinearLayout>
-
