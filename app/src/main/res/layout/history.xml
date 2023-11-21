@@ -26,6 +26,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/baseline_delete_24"
+            android:drawableTint="@color/white"
+            android:text="Delete Selected Log from History"
+            android:id="@+id/deleteDailyLogButton"/>
 
 
     </LinearLayout>

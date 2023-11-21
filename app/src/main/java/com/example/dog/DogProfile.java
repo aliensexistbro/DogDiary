@@ -110,18 +110,17 @@ public class DogProfile extends AppCompatActivity{
             String breed = sharedPreferences.getString("breed", DEFAULT);
             String city = sharedPreferences.getString("city", DEFAULT);
             String furType = sharedPreferences.getString("furType", DEFAULT);
-
-
-
-
+            int age = sharedPreferences.getInt("age", 0);
+            int chip = sharedPreferences.getInt("chip", 0);
+            float weight = sharedPreferences.getFloat("weight", 0);
 
             nameET.setText(name);
             birthdayET.setText(birthday);
-//            ageET.setText(age);
+            ageET.setText(String.valueOf(age));
             breedET.setText(breed);
-//            chipET.setText(String.valueOf(sharedPreferences.getInt("age", 0)));
+            chipET.setText(String.valueOf(chip));
             cityET.setText(city);
-//            weightET.setText(sharedPreferences.getString("weight", ""));
+            weightET.setText(String.valueOf(weight));
             furTypeET.setText(furType);
 
         }

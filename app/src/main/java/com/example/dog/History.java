@@ -5,6 +5,7 @@ import android.hardware.SensorEventListener;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.Toast;
 
@@ -15,9 +16,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+//Activity that facilitates the viewing of the data stored in the SQL Database
 public class History extends AppCompatActivity{
+        //View for Calendar
         private CalendarView calendarView;
+        //View for bottom navigation
         private BottomNavigationView appNavigation;
+        private Button deleteLogButton;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +30,8 @@ public class History extends AppCompatActivity{
             setContentView(R.layout.history);
 
             calendarView = findViewById(R.id.calendarView);
+            deleteLogButton = findViewById(R.id.deleteDailyLogButton); 
+
 
             // Set the listener for date selection
             calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
@@ -40,6 +47,7 @@ public class History extends AppCompatActivity{
                 }
             });
 
+            //Initializing and setting functionality for the bottom app navigation
             appNavigation = findViewById(R.id.historyBottomNavigation);
             appNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
                 @Override

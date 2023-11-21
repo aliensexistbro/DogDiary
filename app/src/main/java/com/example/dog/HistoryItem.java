@@ -20,27 +20,32 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-
+//Displays the data specified by the History activity
 public class HistoryItem extends AppCompatActivity {
-
     // Shared Preferences
     private static final String PREF_NAME = "DogPrefs";
     private String KEY_NAME = "name";
 
     // UI elements
+    //Names of the Shared Preferences used to store data
+
+    private static final String ACTIVITY_PREF_NAME = "ActivityPrefs";
+
+    //The key for the data that will always be needed in this activity, the name
+
+    //UI variables for photo, text views, buttons and navigation
     private ImageView pictureImageView;
     private TextView logTitleTextView;
     private TextView titlePicTextView;
     private ImageButton historyItemButton;
     private BottomNavigationView appNavigation;
 
+
     @SuppressLint("Range")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.history_item);
-
-        // Initialize UI elements
         logTitleTextView = findViewById(R.id.logTitleTextView);
         titlePicTextView = findViewById(R.id.pictureTitleTextView);
         pictureImageView = findViewById(R.id.pictureImageView);
@@ -52,6 +57,7 @@ public class HistoryItem extends AppCompatActivity {
 
         // Back button click listener
         historyItemButton.setOnClickListener(new View.OnClickListener(){
+            //Set functionality to go back to the history activity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HistoryItem.this, History.class);
@@ -61,8 +67,9 @@ public class HistoryItem extends AppCompatActivity {
     }
 
     // Display user activity information
-    private void displayInfo(Cursor cursor1) {
-        // Retrieve selected date and fetch data from the database
+    //Gets the information from the database through iterating through the data of the date specified user and assigning that information to text views.
+    private void displayInfo(Cursor cursor1)
+    {
         String selectedDate = getIntent().getStringExtra("SELECTED_DATE");
         MyDatabase myDatabase = new MyDatabase(this);
         Cursor cursor = myDatabase.getDataForDate(selectedDate);
@@ -98,12 +105,13 @@ public class HistoryItem extends AppCompatActivity {
         countTextView.setVisibility(count > 0 ? View.VISIBLE : View.GONE);
     }
 
-    // Display the photo if available
+    //Method to display the photo if there is one
     private void displayPhoto(String photoPath) {
         pictureImageView.setImageURI(Uri.parse(photoPath));
     }
 
-    // Display welcome message based on user preferences
+    //Method that displays the headings of the page like the log date and name of the dog
+    //if there is a picture available in the database it will assign the picture to display, if not it will handle it.
     private void displayWelcomeMessage() {
         SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         String selectedDate = getIntent().getStringExtra("SELECTED_DATE");
