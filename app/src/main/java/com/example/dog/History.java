@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+//Activity that facilitates the viewing of the data stored in the SQL Database
 public class History extends AppCompatActivity{
         //View for Calendar
         private CalendarView calendarView;
