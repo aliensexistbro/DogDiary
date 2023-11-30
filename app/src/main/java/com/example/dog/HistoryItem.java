@@ -2,6 +2,7 @@ package com.example.dog;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -72,8 +74,60 @@ public class HistoryItem extends AppCompatActivity {
             }
         });
     }
-    // Method to delete data based on the selected date
     private void deleteData() {
+        String selectedDate = getIntent().getStringExtra("SELECTED_DATE");
+        MyDatabase myDatabase = new MyDatabase(this);
+        Cursor cursor = myDatabase.getDataForDate(selectedDate);
+
+        if (cursor != null && cursor.getCount() > 0) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Delete Entry");
+            builder.setMessage("Are you sure you want to delete this entry?");
+
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // User clicked Yes button
+                    proceedWithDelete();
+                }
+            });
+
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // User clicked No button, do nothing
+                    dialog.dismiss();
+                }
+            });
+
+            // Create and show the alert dialog
+            AlertDialog dialog = builder.create();
+            dialog.show();
+        } else {
+            // No entry to delete, show a dialog
+            AlertDialog.Builder noEntryBuilder = new AlertDialog.Builder(this);
+            noEntryBuilder.setTitle("No Entry");
+            noEntryBuilder.setMessage("There is no entry to delete.");
+
+            noEntryBuilder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // User clicked OK button, dismiss the dialog
+                    dialog.dismiss();
+                }
+            });
+
+            // Create and show the alert dialog for no entry
+            AlertDialog noEntryDialog = noEntryBuilder.create();
+            noEntryDialog.show();
+        }
+
+        if (cursor != null) {
+            cursor.close();
+        }
+    }
+
+    private void proceedWithDelete() {
         String selectedDate = getIntent().getStringExtra("SELECTED_DATE");
         MyDatabase myDatabase = new MyDatabase(this);
         boolean deleted = myDatabase.deleteDataForDate(selectedDate);
@@ -87,6 +141,7 @@ public class HistoryItem extends AppCompatActivity {
             Toast.makeText(this, "Failed to delete entry", Toast.LENGTH_SHORT).show();
         }
     }
+
 
     // Display user activity information
     //Gets the information from the database through iterating through the data of the date specified user and assigning that information to text views.

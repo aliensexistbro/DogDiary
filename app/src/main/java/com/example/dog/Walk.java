@@ -13,6 +13,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -29,6 +30,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,20 +40,31 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
-
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.os.Bundle;
 public class Walk extends AppCompatActivity implements SensorEventListener {
 
     // Sensor-related variables
+
     private SensorManager sensorManager;
     private Sensor stepCounterSensor;
     private TextView stepsTextView;
     private Sensor temperatureSensor;
     private Sensor accelometer;
 
+    private String apiKey = "942622e72df2c7325f9f997a8adc8a1a";
+    private SharedPreferences sharedPreferences;
+    private static final String PREF_NAME = "DogPrefs";
+    private static final String KEY_CITY = "city";
     // Step tracking variables
     private int stepCount = 0;
+    private double currentLatitude, currentLongitude;
     private static final long TIMER_UPDATE_INTERVAL = 1000; // 1 second
     private long elapsedTime = 0;
     private Handler timerHandler;
@@ -94,12 +107,18 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
         {
             sensorManager.registerListener(this, temperatureSensor2,SensorManager.SENSOR_DELAY_NORMAL);
         } else {
-            // To be changed, getting information from the api
-            String apiKey = "942622e72df2c7325f9f997a8adc8a1a";
-            String city = "TORONTO";
             String apiUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid=686a979a082d839e1167a81db85dfcf0";
             new FetchWeatherTask().execute(apiUrl);
         }
+        sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+
+        // Retrieve the city from shared preferences
+        String savedCity = sharedPreferences.getString(KEY_CITY, "");
+
+        String city = savedCity.isEmpty() ? "Vancouver" : savedCity; // Use the saved city if available, otherwise use a default city
+        String geoApiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=5&appid=" + apiKey;
+
+        new FetchCityCoordinatesTask().execute(geoApiUrl);
         final Button startStopButton = findViewById(R.id.startStopButton);
         startStopButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,6 +180,73 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
                 return true;
             }
         });
+
+    }
+
+    private class FetchCityCoordinatesTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            String result = "";
+            try {
+                URL url = new URL(params[0]);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                InputStream inputStream = connection.getInputStream();
+                InputStreamReader reader = new InputStreamReader(inputStream);
+
+                int data = reader.read();
+                while (data != -1) {
+                    char current = (char) data;
+                    result += current;
+                    data = reader.read();
+                }
+                Log.d("result", result);
+                return result;
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            if (s != null) {
+                try {
+                    JSONArray jsonArray = new JSONArray(s);
+                    JSONObject firstEntry = jsonArray.getJSONObject(0);
+                    currentLatitude = firstEntry.getDouble("lat");
+                    currentLongitude = firstEntry.getDouble("lon");
+
+                    DecimalFormat decimalFormat = new DecimalFormat("#.##");
+                    // Use the format method to round the latitude and longitude to two decimal places
+                    String roundedLatitude = decimalFormat.format(currentLatitude);
+                    String roundedLongitude = decimalFormat.format(currentLongitude);
+
+                    // Convert the formatted strings back to double values
+                    double roundedLatitudeValue = Double.parseDouble(roundedLatitude);
+                    double roundedLongitudeValue = Double.parseDouble(roundedLongitude);
+
+                    currentLatitude = roundedLatitudeValue;
+                    currentLongitude = roundedLongitudeValue;
+
+                    showToast("Latitude: " + currentLatitude + ", Longitude: " + currentLongitude);
+                    // Now, after obtaining the coordinates, fetch the weather data
+                    String apiUrl;
+                    if (currentLatitude != 0.0 && currentLongitude != 0.0) {
+                        apiUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + currentLatitude + "&lon=" + currentLongitude + "&appid=" + apiKey;
+                    } else {
+                        apiUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid=686a979a082d839e1167a81db85dfcf0";
+                    }
+                    new FetchWeatherTask().execute(apiUrl);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                // Handle the case where the API request fails or returns null
+            }
+        }
     }
     @Override
     protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
@@ -327,14 +413,12 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
         stepsTextView.setText("Steps: " + stepCount);
     }
 
-    // To be changed
     private class FetchWeatherTask extends AsyncTask<String, Void, String> {
         @Override
         protected String doInBackground(String... params) {
             String result = "";
             try {
                 URL url = new URL(params[0]);
-                Log.d("Temp", params[0]);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 InputStream inputStream = connection.getInputStream();
                 InputStreamReader reader = new InputStreamReader(inputStream);
@@ -345,7 +429,7 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
                     result += current;
                     data = reader.read();
                 }
-
+                Log.d("result", result);
                 return result;
 
             } catch (IOException e) {
@@ -357,17 +441,23 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            //Log.d("Walk", s);
+
             if (s != null) {
                 try {
                     JSONObject jsonObject = new JSONObject(s);
-                    JSONObject main = jsonObject.getJSONObject("main");
+                    JSONArray list = jsonObject.getJSONArray("list");
+                    JSONObject firstEntry = list.getJSONObject(0);
+                    JSONObject main = firstEntry.getJSONObject("main");
                     double temperature = main.getDouble("temp");
 
                     // Convert temperature from Kelvin to Celsius
                     temperature -= 273.15;
-
-                    updateTemperatureView((float) temperature);
+                    DecimalFormat decimalFormat = new DecimalFormat("#.#");
+                    // Use the format method to round the number to two decimal places
+                    String roundedNumber = decimalFormat.format(temperature);
+                    // Convert the formatted string back to a double if needed
+                    double roundedValue = Double.parseDouble(roundedNumber);
+                    updateTemperatureView((float) roundedValue);
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -376,6 +466,12 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
                 // Handle the case where the API request fails or returns null
             }
         }
+    }
+
+    public void showToast(String mess)
+    {
+        Toast.makeText(this, mess, Toast.LENGTH_SHORT).show();
+
     }
 }
 
