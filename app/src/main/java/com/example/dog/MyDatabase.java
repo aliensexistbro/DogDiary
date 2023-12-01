@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -197,6 +198,55 @@ public class MyDatabase {
         // Check if any rows were deleted
         return rowsDeleted > 0;
     }
+
+    public String getDataFromColumn(String columnName){
+        SQLiteDatabase db = helper.getWritableDatabase();
+        int inquiryIndex = 0;
+        String selection = "";
+        // All columns in the table
+        String[] columns = {
+                Constants.UID,
+                Constants.PHOTO_PATH,
+                Constants.TIMESTAMP,
+                Constants.POOP_COUNT,
+                Constants.PEE_COUNT,
+                Constants.FOOD_COUNT,
+                Constants.WALK_COUNT,
+                Constants.WALK_STEP_COUNT,
+                Constants.WALK_TIME
+        };
+        switch (columnName){
+            case "pee":
+                selection = Constants.PEE_COUNT;
+                break;
+            case "poo":
+                selection = Constants.POOP_COUNT;
+                break;
+            case "walk":
+                selection = Constants.WALK_COUNT;
+                break;
+            case "step":
+                selection = Constants.WALK_STEP_COUNT;
+                break;
+            default:
+                selection = Constants.TIMESTAMP;
+        }
+
+        Cursor cursor = db.query(Constants.TABLE_NAME, columns, selection, null, null, null, null);
+        StringBuffer buffer = new StringBuffer();
+        while (cursor.moveToNext()){
+            int timeIndex = cursor.getColumnIndex(Constants.TIMESTAMP);
+            int selectionIndex = cursor.getColumnIndex(selection);
+            String time = cursor.getString(timeIndex);
+            String selectData = cursor.getString(selectionIndex);
+            buffer.append(time + " " + selectData + "\n");
+
+        }
+
+        return buffer.toString();
+    }
+
+
 
 }
 
