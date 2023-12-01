@@ -212,6 +212,13 @@
 
 
         </TableLayout>
+        <com.github.mikephil.charting.charts.BarChart
+            android:layout_marginTop="20dp"
+            android:padding="40sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/testBarChart"
+            android:minHeight="150dp"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
