@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -28,17 +29,19 @@ import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
 
-public class DogProfile extends AppCompatActivity{
+public class DogProfile extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener{
     BottomNavigationView appNavigation;
     EditText nameET,birthdayET, ageET, breedET, cityET, chipET, weightET, furTypeET;
     Button saveProfileChange;
+
+    RadioGroup chartSelect;
     private static final String PREF_NAME = "DogPrefs";
 
     ArrayList barChartEntries;
     ArrayList xLabels;
     BarData barData;
     BarDataSet barDataSet;
-    BarChart testBarChart;
+    BarChart barChart;
 
 
     public static final String DEFAULT = "not availiable";
@@ -59,16 +62,10 @@ public class DogProfile extends AppCompatActivity{
         furTypeET= (EditText) findViewById(R.id.prEditTextFurType);
         saveProfileChange = findViewById(R.id.saveProfileChangesButton);
 
-        testBarChart = findViewById(R.id.testBarChart);
-        getBarEntries("pee");
-        barDataSet = new BarDataSet(barChartEntries, "Pees");
-        barData = new BarData(barDataSet);
-        testBarChart.setData(barData);
+        chartSelect = (RadioGroup) findViewById(R.id.chartSelect);
+        chartSelect.setOnCheckedChangeListener(this);
 
-        XAxis xAxis = testBarChart.getXAxis();
-        testBarChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xLabels));
-
-
+        barChart = findViewById(R.id.testBarChart);
 
 
         SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
@@ -108,9 +105,12 @@ public class DogProfile extends AppCompatActivity{
             }
         });
 
+
+
         MyDatabase database = new MyDatabase(this);
         String dataForPee = database.getDataFromColumn("pee");
         Toast.makeText(this, dataForPee, Toast.LENGTH_LONG).show();
+//        createChart("step", "Number of steps");
 
 
 
@@ -166,13 +166,60 @@ public class DogProfile extends AppCompatActivity{
         barChartEntries = new ArrayList<>();
         xLabels = new ArrayList<>();
         MyDatabase database = new MyDatabase(this);
-        String dataForPee = database.getDataFromColumn(columnName);
-        String[] data = dataForPee.split("\n");
-        for (int i = 0; i < data.length; i ++){
-            String[] indiBarData = data[i].split(" ");
-            xLabels.add(indiBarData[0]);
-            barChartEntries.add(new BarEntry((float) i, Float.parseFloat(indiBarData[1])));
-
+        String dataColumn = database.getDataFromColumn(columnName);
+        String[] data = dataColumn.split("\n");
+        if(data.length > 0){
+            for (int i = 0; i < data.length; i ++){
+                String[] indiBarData = data[i].split(" ");
+                xLabels.add(indiBarData[0]);
+                barChartEntries.add(new BarEntry((float) i, Float.parseFloat(indiBarData[1])));
+            }
         }
+
+    }
+
+    private void createChart (String columnName, String dataLabel){
+        getBarEntries(columnName);
+        barChart = findViewById(R.id.testBarChart);
+
+        barDataSet = new BarDataSet(barChartEntries, dataLabel);
+        barData = new BarData(barDataSet);
+        barChart.setData(barData);
+
+        XAxis xAxis = barChart.getXAxis();
+        barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xLabels));
+
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        if(group == chartSelect){
+          if(checkedId == R.id.poopChartRadio){
+              Toast.makeText(this, "poop checked", Toast.LENGTH_SHORT).show();
+              barChart.invalidate();
+              createChart("poo", "Number of Poops");
+
+          }
+          if(checkedId == R.id.peeChartRadio){
+              Toast.makeText(this, "pee checked", Toast.LENGTH_SHORT).show();
+              barChart.invalidate();
+              createChart("pee", "Number of Pees");
+
+          }
+          if(checkedId == R.id.stepChartRadio){
+              Toast.makeText(this, "steps checked", Toast.LENGTH_SHORT).show();
+              barChart.invalidate();
+              createChart("step", "Number of steps");
+
+          }
+        }
+
+    }
+
+    private void removeChart(){
+        barChartEntries = null;
+        barDataSet = null;
+        barData = null;
+        barChart.invalidate();
     }
 }

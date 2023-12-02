@@ -212,13 +212,56 @@
 
 
         </TableLayout>
-        <com.github.mikephil.charting.charts.BarChart
-            android:layout_marginTop="20dp"
-            android:padding="40sp"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/testBarChart"
-            android:minHeight="150dp"/>
+            android:id="@+id/barChartLayout"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/chartTitle"
+                android:text="Chart Title"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:gravity="center_horizontal"
+                android:padding="5sp"/>
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20sp"
+                android:id="@+id/chartSelect">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Poop Count"
+                    android:layout_weight="1"
+                    android:id="@+id/poopChartRadio"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Pee Count"
+                    android:id="@+id/peeChartRadio"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Step Count"
+                    android:id="@+id/stepChartRadio"/>
+            </RadioGroup>
+            <com.github.mikephil.charting.charts.BarChart
+
+                android:padding="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/testBarChart"
+                android:minHeight="150dp"/>
+
+
+        </LinearLayout>
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
