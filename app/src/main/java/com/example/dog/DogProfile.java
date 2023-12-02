@@ -12,16 +12,39 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.textfield.TextInputLayout;
 
-public class DogProfile extends AppCompatActivity{
+import java.util.ArrayList;
+
+public class DogProfile extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener{
     BottomNavigationView appNavigation;
     EditText nameET,birthdayET, ageET, breedET, cityET, chipET, weightET, furTypeET;
     Button saveProfileChange;
+    TextView chartTitleTV;
+
+    RadioGroup chartSelect;
     private static final String PREF_NAME = "DogPrefs";
+
+    ArrayList barChartEntries;
+    ArrayList xLabels;
+    BarData barData;
+    BarDataSet barDataSet;
+    BarChart barChart;
+
 
     public static final String DEFAULT = "not availiable";
 
@@ -40,6 +63,13 @@ public class DogProfile extends AppCompatActivity{
         weightET = (EditText) findViewById(R.id.prEditTextWeight);
         furTypeET= (EditText) findViewById(R.id.prEditTextFurType);
         saveProfileChange = findViewById(R.id.saveProfileChangesButton);
+
+        chartSelect = (RadioGroup) findViewById(R.id.chartSelect);
+        chartSelect.setOnCheckedChangeListener(this);
+
+        barChart = findViewById(R.id.testBarChart);
+        chartTitleTV = findViewById(R.id.chartTitle);
+
 
         SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         Log.i("Shared Preferences: ", "Shared Prefs" + sharedPreferences.getString("name", DEFAULT));
@@ -79,6 +109,10 @@ public class DogProfile extends AppCompatActivity{
         });
 
 
+
+        MyDatabase database = new MyDatabase(this);
+        String dataForPee = database.getDataFromColumn("pee");
+        Toast.makeText(this, dataForPee, Toast.LENGTH_LONG).show();
 
     }
 
@@ -123,6 +157,72 @@ public class DogProfile extends AppCompatActivity{
             weightET.setText(String.valueOf(weight));
             furTypeET.setText(furType);
 
+        }
+
+    }
+
+    private void getBarEntries(String columnName){
+        barChartEntries = new ArrayList<>();
+        xLabels = new ArrayList<>();
+        MyDatabase database = new MyDatabase(this);
+        try {
+            String dataColumn = database.getDataFromColumn(columnName);
+            String[] data = dataColumn.split("\n");
+            for (int i = 0; i < data.length; i ++){
+                String[] indiBarData = data[i].split(" ");
+                xLabels.add(indiBarData[0]);
+                barChartEntries.add(new BarEntry((float) i, Float.parseFloat(indiBarData[1])));
+            }
+
+        }
+        catch (Exception e){
+            Toast.makeText(this, "No Data Logged in this column", Toast.LENGTH_SHORT).show();
+        }
+
+
+
+
+    }
+
+    private void createChart (String columnName, String dataLabel){
+        getBarEntries(columnName);
+        barChart = findViewById(R.id.testBarChart);
+
+        if(barChartEntries.size() > 0){
+            barDataSet = new BarDataSet(barChartEntries, dataLabel);
+            barData = new BarData(barDataSet);
+            barChart.setData(barData);
+
+            XAxis xAxis = barChart.getXAxis();
+            barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xLabels));
+
+        }
+        else{
+
+        }
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        if(group == chartSelect){
+          if(checkedId == R.id.poopChartRadio){
+              barChart.invalidate();
+              chartTitleTV.setText("Number of Poops");
+              createChart("poo", "Number of Poops");
+
+          }
+          if(checkedId == R.id.peeChartRadio){
+              barChart.invalidate();
+              chartTitleTV.setText("Number of Pees");
+              createChart("pee", "Number of Pees");
+
+          }
+          if(checkedId == R.id.stepChartRadio){
+              barChart.invalidate();
+              chartTitleTV.setText("Number of Steps");
+              createChart("step", "Number of steps");
+
+          }
         }
 
     }

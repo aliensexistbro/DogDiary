@@ -20,6 +20,58 @@
             android:textSize="40sp"
             android:textStyle="bold"
             android:gravity="center"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/barChartLayout"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/chartTitle"
+                android:text="Chart Title"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:gravity="center_horizontal"
+                android:padding="5sp"/>
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20sp"
+                android:id="@+id/chartSelect">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Poop Count"
+                    android:layout_weight="1"
+                    android:textSize="12sp"
+                    android:id="@+id/poopChartRadio"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Pee Count"
+                    android:textSize="12sp"
+                    android:id="@+id/peeChartRadio"/>
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Step Count"
+                    android:textSize="12sp"
+                    android:id="@+id/stepChartRadio"/>
+            </RadioGroup>
+            <com.github.mikephil.charting.charts.BarChart
+
+                android:padding="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/testBarChart"
+                android:minHeight="150dp"/>
+
+
+        </LinearLayout>
 
         <TableLayout
             android:id="@+id/doggyInformationTable"
@@ -27,6 +79,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="40dp"
             android:paddingRight="40dp"
+            android:paddingBottom="20sp"
             >
             <TableRow
                 android:layout_marginTop="20dp">
@@ -36,7 +89,7 @@
                     android:text="Name"
                     android:textStyle="bold"
 
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:id="@+id/prPersonalInfoNameTV"/>
 
                 <EditText
@@ -46,7 +99,7 @@
                     android:layout_weight="2"
                     android:background="@android:color/transparent"
                     android:ems="10"
-
+                    android:textSize="16sp"
                     android:inputType="text"
                     android:gravity="right"
                     android:hint="Samuel"
@@ -59,7 +112,7 @@
                     android:layout_height="wrap_content"
                     android:text="Age"
                     android:textStyle="bold"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:id="@+id/prPersonalInfoAgeTV"/>
 
                 <EditText
@@ -72,7 +125,8 @@
                     android:ems="10"
                     android:gravity="right"
                     android:hint="10"
-                    tools:ignore="TouchTargetSizeCheck" />
+                    tools:ignore="TouchTargetSizeCheck"
+                    android:textSize="16sp"/>
             </TableRow>
             <TableRow
                 android:layout_marginTop="10dp">
@@ -81,8 +135,7 @@
                     android:layout_height="wrap_content"
                     android:text="Birthday"
                     android:textStyle="bold"
-
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:id="@+id/prBirthdayTextView"/>
 
                 <EditText
@@ -90,6 +143,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
+                    android:textSize="16sp"
                     android:background="@android:color/transparent"
                     android:ems="10"
                     android:inputType="date"
@@ -104,7 +158,7 @@
                     android:layout_height="wrap_content"
                     android:text="Breed"
                     android:textStyle="bold"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:id="@+id/prPersonalInfoBreedTV"/>
 
                 <EditText
@@ -116,6 +170,7 @@
                     android:ems="10"
                     android:inputType="text"
                     android:gravity="right"
+                    android:textSize="16sp"
                     android:hint="Poodle"
                     tools:ignore="TouchTargetSizeCheck" />
             </TableRow>
@@ -126,7 +181,7 @@
                     android:layout_height="wrap_content"
                     android:text="City"
                     android:textStyle="bold"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:id="@+id/prPersonalInfoCityTV"/>
 
                 <EditText
@@ -139,6 +194,7 @@
                     android:gravity="right"
                     android:hint="Vancouver"
                     android:inputType="text"
+                    android:textSize="16sp"
                     tools:ignore="TouchTargetSizeCheck" />
             </TableRow>
             <TableRow
@@ -147,8 +203,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Chip #"
+                    android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textSize="20sp"
                     android:id="@+id/prPersonalInfoChipTV"/>
 
                 <EditText
@@ -161,6 +217,7 @@
                     android:inputType="number"
                     android:gravity="right"
                     android:hint="123456789"
+                    android:textSize="16sp"
                     tools:ignore="TouchTargetSizeCheck" />
             </TableRow>
             <TableRow
@@ -170,7 +227,7 @@
                     android:layout_height="wrap_content"
                     android:text="Weight (lbs)"
                     android:textStyle="bold"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
 
                     android:id="@+id/prPersonalInfoWeightTV"/>
 
@@ -184,6 +241,7 @@
                     android:inputType="numberDecimal"
                     android:gravity="right"
                     android:hint="60"
+                    android:textSize="16sp"
                     tools:ignore="TouchTargetSizeCheck" />
             </TableRow>
 
@@ -194,7 +252,7 @@
                     android:layout_height="wrap_content"
                     android:text="Fur Type"
                     android:textStyle="bold"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     android:id="@+id/prPersonalInfoFurTV"/>
 
                 <EditText
@@ -204,6 +262,7 @@
                     android:layout_weight="2"
                     android:background="@android:color/transparent"
                     android:ems="10"
+                    android:textSize="16sp"
                     android:inputType="text"
                     android:gravity="right"
                     android:hint="Short"
@@ -212,11 +271,14 @@
 
 
         </TableLayout>
+
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/saveProfileChangesButton"
-            android:text="Save Changes"/>
+            android:text="Save Changes"
+            android:gravity="center"/>
 
 
     </LinearLayout>
