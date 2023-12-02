@@ -7,179 +7,196 @@
     android:orientation="vertical"
 
     tools:context=".MainActivity">
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/baseline_arrow_back_ios_new_24"
-        android:id="@+id/historyItemBackButton"
-        android:padding="15dp"
-        android:background="@null"
-        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:padding = "20dp"
-        android:layout_weight="1">
-        <TextView
-            android:id="@+id/logTitleTextView"
+        android:layout_weight="1"
+        android:background="@color/red">
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dogs Name"
-            android:padding="20sp"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            android:layout_centerHorizontal="true"
+            android:src="@drawable/baseline_arrow_back_ios_new_24"
+            android:id="@+id/historyItemBackButton"
+            android:padding="15dp"
+            app:tint="@color/white"
+            android:background="@null"
             />
-        <TextView
-            android:id="@+id/pictureTitleTextView"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Picture of the Day"
-            android:layout_below="@id/logTitleTextView"
-            android:textSize="18sp"
-            android:layout_centerHorizontal="true"
-          />
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding = "20dp"
+            android:background="@drawable/card_button_rounded_corners"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/white"
+            android:layout_weight="1">
 
-        <ImageView
-            android:id="@+id/pictureImageView"
-            android:src="@drawable/dog_profile_alt"
-            android:layout_width="400dp"
-            android:layout_height="400dp"
-            android:layout_below="@id/pictureTitleTextView"
-            android:layout_centerHorizontal="true"
-             />
-        <TableLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/historyItemTable"
-            android:minWidth="500dp"
-            android:padding="20dp">
-            <TableRow>
-                <TextView
-                    android:id="@+id/poopCountTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Number of poops:"
-                    android:textSize="18sp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_weight="1"
-                    android:visibility="gone"
-                    />
-                <TextView
-                    android:id="@+id/poopDateTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Last poop time:"
-                    android:textSize="18sp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_weight="1"
-                    android:visibility="gone"
+            <TextView
+                android:id="@+id/logTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dogs Name"
+                android:padding="20sp"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:layout_centerHorizontal="true"
+                />
+            <TextView
+                android:id="@+id/pictureTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Picture of the Day"
+                android:layout_below="@id/logTitleTextView"
+                android:textSize="18sp"
+                android:layout_centerHorizontal="true"
+                />
 
-                    />
+            <ImageView
+                android:id="@+id/pictureImageView"
+                android:src="@drawable/dog_profile_alt"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:layout_below="@id/pictureTitleTextView"
+                android:layout_centerHorizontal="true"
+                />
+            <TableLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/historyItemTable"
+                android:minWidth="500dp"
+                android:padding="20dp">
+                <TableRow>
+                    <TextView
+                        android:id="@+id/poopCountTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Number of poops:"
+                        android:textSize="18sp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        />
+                    <TextView
+                        android:id="@+id/poopDateTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Last poop time:"
+                        android:textSize="18sp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_weight="1"
+                        android:visibility="gone"
 
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:id="@+id/peeCountTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Number of pee:"
-                    android:textSize="18sp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:visibility="gone"
-                    />
-                <TextView
-                    android:id="@+id/peeDateTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Last pee time:"
-                    android:textSize="18sp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:visibility="gone"
-                    />
+                        />
 
-            </TableRow>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/peeCountTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Number of pee:"
+                        android:textSize="18sp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        />
+                    <TextView
+                        android:id="@+id/peeDateTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Last pee time:"
+                        android:textSize="18sp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        />
 
-            <TableRow>
-                <TextView
-                    android:id="@+id/foodCountTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Number of Meals:"
-                    android:textSize="18sp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:visibility="gone"
-                    />
+                </TableRow>
 
-                <TextView
-                    android:id="@+id/foodDateTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Food Count:"
-                    android:textSize="18sp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:visibility="gone"
-                    />
+                <TableRow>
+                    <TextView
+                        android:id="@+id/foodCountTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Number of Meals:"
+                        android:textSize="18sp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        />
 
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:id="@+id/walkCountTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Number of walk:"
-                    android:layout_below="@id/foodDateTextView"
-                    android:textSize="18sp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:visibility="gone"
-                    />
-                <TextView
-                    android:id="@+id/walkTimeTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Walk Time:"
-                    android:textSize="18sp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
-                    android:layout_weight="1"
-                    android:visibility="gone"
-                    />
+                    <TextView
+                        android:id="@+id/foodDateTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Food Count:"
+                        android:textSize="18sp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        />
 
-            </TableRow>
-            <TableRow>
-                <TextView
-                    android:id="@+id/stepsTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Steps:"
-                    android:textSize="18sp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="20dp"
-                    android:visibility="gone"
-                    />
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/walkCountTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Number of walk:"
+                        android:layout_below="@id/foodDateTextView"
+                        android:textSize="18sp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        />
+                    <TextView
+                        android:id="@+id/walkTimeTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Walk Time:"
+                        android:textSize="18sp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:layout_weight="1"
+                        android:visibility="gone"
+                        />
 
-            </TableRow>
-        </TableLayout>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/baseline_delete_24"
-            android:drawableTint="@color/white"
-            android:text="Delete Selected Log from History"
-            android:id="@+id/deleteDailyLogButton"/>
+                </TableRow>
+                <TableRow>
+                    <TextView
+                        android:id="@+id/stepsTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Steps:"
+                        android:textSize="18sp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:visibility="gone"
+                        />
+
+                </TableRow>
+            </TableLayout>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/baseline_delete_24"
+                android:drawableTint="@color/white"
+                android:text="Delete Selected Log from History"
+                android:textAllCaps="true"
+                android:textStyle="bold"
+                android:id="@+id/deleteDailyLogButton"/>
+
+    </LinearLayout>
+
+
 
 
 

@@ -9,77 +9,87 @@
     android:columnOrderPreserved="false"
     tools:context=".MainActivity"
     android:orientation="vertical">
-    <GridLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:columnCount="2"
-        android:rowCount="2"
-        android:padding="16dp"
-        android:alignmentMode="alignMargins"
-
-        android:columnOrderPreserved="false">
-
-        <ImageButton
-            android:id="@+id/walkBtn"
-            android:background="@drawable/card_button_rounded_corners"
-            android:padding="20sp"
-            android:layout_width="0dp"
+        android:orientation="vertical"
+        android:background="@color/red">
+        <GridLayout
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_margin="5dp"
-            android:layout_rowWeight="1"
-            android:scaleType="fitCenter"
-            android:src="@drawable/dog_walk"
-            android:backgroundTint="@color/cream"
-            app:tint="@color/darkRed" />
+            android:layout_weight="1"
+            android:columnCount="2"
+            android:rowCount="2"
+            android:padding="16dp"
+            android:alignmentMode="alignMargins"
 
-        <!-- ImageButton 2 -->
-        <ImageButton
-            android:id="@+id/foodBtn"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:background="@drawable/card_button_rounded_corners"
-            android:padding="20sp"
-            android:layout_margin="5dp"
-            android:layout_rowWeight="1"
-            android:scaleType="fitCenter"
-            android:src="@drawable/food"
-            android:backgroundTint="@color/cream"
-            app:tint="@color/darkRed"/>
+            android:columnOrderPreserved="false">
 
-        <!-- ImageButton 3 -->
-        <ImageButton
-            android:id="@+id/peeBtn"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/card_button_rounded_corners"
-            android:padding="20sp"
-            android:layout_margin="5dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
-            android:scaleType="fitCenter"
-            android:src="@drawable/pee"
-            android:backgroundTint="@color/cream"
-            app:tint="@color/darkRed"/>
+            <ImageButton
+                android:id="@+id/walkBtn"
+                android:background="@drawable/card_button_rounded_corners"
+                android:padding="20sp"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:layout_rowWeight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/dog_walk"
+                android:backgroundTint="@color/cream"
+                app:tint="@color/darkRed" />
 
-        <!-- ImageButton 4 -->
-        <ImageButton
-            android:id="@+id/poopBtn"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_margin="5dp"
-            android:layout_rowWeight="1"
-            android:scaleType="fitCenter"
-            android:src="@drawable/dog_poo"
-            android:background="@drawable/card_button_rounded_corners"
-            android:padding="20sp"
-            android:backgroundTint="@color/cream"
-            app:tint="@color/darkRed"/>
+            <!-- ImageButton 2 -->
+            <ImageButton
+                android:id="@+id/foodBtn"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_columnWeight="1"
+                android:background="@drawable/card_button_rounded_corners"
+                android:padding="20sp"
+                android:layout_margin="5dp"
+                android:layout_rowWeight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/food"
+                android:backgroundTint="@color/cream"
+                app:tint="@color/darkRed"/>
 
-    </GridLayout>
+            <!-- ImageButton 3 -->
+            <ImageButton
+                android:id="@+id/peeBtn"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/card_button_rounded_corners"
+                android:padding="20sp"
+                android:layout_margin="5dp"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/doggy_pee"
+                android:backgroundTint="@color/cream"
+                app:tint="@color/darkRed"/>
+
+            <!-- ImageButton 4 -->
+            <ImageButton
+                android:id="@+id/poopBtn"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_columnWeight="1"
+                android:layout_margin="5dp"
+                android:layout_rowWeight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/doggy_bag"
+                android:background="@drawable/card_button_rounded_corners"
+                android:padding="20sp"
+                android:backgroundTint="@color/cream"
+                app:tint="@color/darkRed"/>
+
+        </GridLayout>
+
+    </LinearLayout>
+
+
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/logBottomNavigation"
