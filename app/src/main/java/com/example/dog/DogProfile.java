@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.BarChart;
@@ -33,6 +34,7 @@ public class DogProfile extends AppCompatActivity implements RadioGroup.OnChecke
     BottomNavigationView appNavigation;
     EditText nameET,birthdayET, ageET, breedET, cityET, chipET, weightET, furTypeET;
     Button saveProfileChange;
+    TextView chartTitleTV;
 
     RadioGroup chartSelect;
     private static final String PREF_NAME = "DogPrefs";
@@ -66,6 +68,7 @@ public class DogProfile extends AppCompatActivity implements RadioGroup.OnChecke
         chartSelect.setOnCheckedChangeListener(this);
 
         barChart = findViewById(R.id.testBarChart);
+        chartTitleTV = findViewById(R.id.chartTitle);
 
 
         SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
@@ -110,10 +113,6 @@ public class DogProfile extends AppCompatActivity implements RadioGroup.OnChecke
         MyDatabase database = new MyDatabase(this);
         String dataForPee = database.getDataFromColumn("pee");
         Toast.makeText(this, dataForPee, Toast.LENGTH_LONG).show();
-//        createChart("step", "Number of steps");
-
-
-
 
     }
 
@@ -166,15 +165,22 @@ public class DogProfile extends AppCompatActivity implements RadioGroup.OnChecke
         barChartEntries = new ArrayList<>();
         xLabels = new ArrayList<>();
         MyDatabase database = new MyDatabase(this);
-        String dataColumn = database.getDataFromColumn(columnName);
-        String[] data = dataColumn.split("\n");
-        if(data.length > 0){
+        try {
+            String dataColumn = database.getDataFromColumn(columnName);
+            String[] data = dataColumn.split("\n");
             for (int i = 0; i < data.length; i ++){
                 String[] indiBarData = data[i].split(" ");
                 xLabels.add(indiBarData[0]);
                 barChartEntries.add(new BarEntry((float) i, Float.parseFloat(indiBarData[1])));
             }
+
         }
+        catch (Exception e){
+            Toast.makeText(this, "No Data Logged in this column", Toast.LENGTH_SHORT).show();
+        }
+
+
+
 
     }
 
@@ -182,44 +188,42 @@ public class DogProfile extends AppCompatActivity implements RadioGroup.OnChecke
         getBarEntries(columnName);
         barChart = findViewById(R.id.testBarChart);
 
-        barDataSet = new BarDataSet(barChartEntries, dataLabel);
-        barData = new BarData(barDataSet);
-        barChart.setData(barData);
+        if(barChartEntries.size() > 0){
+            barDataSet = new BarDataSet(barChartEntries, dataLabel);
+            barData = new BarData(barDataSet);
+            barChart.setData(barData);
 
-        XAxis xAxis = barChart.getXAxis();
-        barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xLabels));
+            XAxis xAxis = barChart.getXAxis();
+            barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xLabels));
 
+        }
+        else{
+
+        }
     }
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         if(group == chartSelect){
           if(checkedId == R.id.poopChartRadio){
-              Toast.makeText(this, "poop checked", Toast.LENGTH_SHORT).show();
               barChart.invalidate();
+              chartTitleTV.setText("Number of Poops");
               createChart("poo", "Number of Poops");
 
           }
           if(checkedId == R.id.peeChartRadio){
-              Toast.makeText(this, "pee checked", Toast.LENGTH_SHORT).show();
               barChart.invalidate();
+              chartTitleTV.setText("Number of Pees");
               createChart("pee", "Number of Pees");
 
           }
           if(checkedId == R.id.stepChartRadio){
-              Toast.makeText(this, "steps checked", Toast.LENGTH_SHORT).show();
               barChart.invalidate();
+              chartTitleTV.setText("Number of Steps");
               createChart("step", "Number of steps");
 
           }
         }
 
-    }
-
-    private void removeChart(){
-        barChartEntries = null;
-        barDataSet = null;
-        barData = null;
-        barChart.invalidate();
     }
 }
