@@ -45,7 +45,7 @@
 
         <ImageView
             android:id="@+id/pictureImageView"
-            android:src="@drawable/placeholder_image"
+            android:src="@drawable/dog_profile_alt"
             android:layout_width="400dp"
             android:layout_height="400dp"
             android:layout_below="@id/pictureTitleTextView"

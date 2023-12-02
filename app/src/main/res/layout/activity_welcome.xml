@@ -1,35 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp"
-    android:gravity="center">
-
-    <TextView
-        android:id="@+id/welcomeTextView"
-        android:layout_width="wrap_content"
+    android:gravity="center"
+    android:background="@color/red">
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Welcome to the Pupster's Diary!"
-        android:textSize="40sp"
+        android:orientation="vertical"
         android:gravity="center"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="100dp"
-       />
-    <TextView
-        android:id="@+id/infoTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Before starting we need some information from you"
-        android:textSize="14sp"
-        android:textStyle="bold"
-        android:gravity="center"/>
-    <Button
-        android:id="@+id/buttonNext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Continue"
-        android:layout_marginTop="15dp"/>
+        android:padding="20dp"
+        android:background="@drawable/card_button_rounded_corners"
+        android:backgroundTint="@color/white">
+        <TextView
+            android:id="@+id/welcomeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome to the Pupster's Diary!"
+            android:textSize="40sp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="545dp"
+            android:layout_weight="1"
+            android:src="@drawable/puppies_and_paws"
+            app:tint="@color/darkRed" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/infoTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Before starting we need some information from you"
+
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:gravity="center"/>
+        <Button
+            android:id="@+id/buttonNext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Continue"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"/>
+
+    </LinearLayout>
+
+
 </LinearLayout>
 
