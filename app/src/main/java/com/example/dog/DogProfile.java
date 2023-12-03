@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -24,6 +25,7 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.textfield.TextInputLayout;
@@ -192,7 +194,8 @@ public class DogProfile extends AppCompatActivity implements RadioGroup.OnChecke
             barDataSet = new BarDataSet(barChartEntries, dataLabel);
             barData = new BarData(barDataSet);
             barChart.setData(barData);
-
+            barChart.getDescription().setEnabled(false);
+            barDataSet.setValueTextColor(R.color.black);
             XAxis xAxis = barChart.getXAxis();
             barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xLabels));
 

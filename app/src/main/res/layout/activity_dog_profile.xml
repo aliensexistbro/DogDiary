@@ -74,13 +74,15 @@
                         android:textSize="12sp"
                         android:id="@+id/stepChartRadio"/>
                 </RadioGroup>
+
                 <com.github.mikephil.charting.charts.BarChart
 
-                    android:padding="40dp"
+                    android:id="@+id/testBarChart"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:id="@+id/testBarChart"
-                    android:layout_weight="4"/>
+                    android:layout_weight="4"
+                    android:padding="40dp"
+                    />
 
 
             </LinearLayout>
@@ -306,7 +308,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:menu="@menu/bottom_menu"
-
         tools:ignore="MissingConstraints" />
 
 </LinearLayout>
