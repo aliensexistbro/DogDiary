@@ -96,12 +96,6 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
         temperatureSensor = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
         temperatureSensor2 = sensorManager.getDefaultSensor(Sensor.TYPE_TEMPERATURE);
         accelometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        /*if (stepCounterSensor == null) {
-            // Handle the case where the step counter sensor is not available on the device
-            sensorManager.registerListener(this, accelometer, SensorManager.SENSOR_DELAY_NORMAL);
-        } else {
-            sensorManager.registerListener(this, stepCounterSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        }*/
         sensorManager.registerListener(this, accelometer, SensorManager.SENSOR_DELAY_NORMAL);
         if(temperatureSensor != null)
             sensorManager.registerListener(this, temperatureSensor,SensorManager.SENSOR_DELAY_NORMAL);

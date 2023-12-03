@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView logTitleTextView;
     private TextView titlePicTextView;
     private BottomNavigationView appNavigation;
-
+    private Button fakeEntry;
     @SuppressLint({"Range", "NonConstantResourceId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,6 +104,17 @@ public class MainActivity extends AppCompatActivity {
             // Display welcome message and dog's information
             displayWelcomeMessage();
         }
+
+        fakeEntry = findViewById(R.id.buttonFake);
+
+        fakeEntry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, FakeEntry.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     // Check if dog information exists in shared preferences

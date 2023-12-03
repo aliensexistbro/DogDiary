@@ -99,6 +99,13 @@
         <activity
             android:name=".HistoryItem"
             android:exported="false" />
+
+        <activity
+            android:name=".FakeEntry"
+            android:exported="false" />
+        <activity
+            android:name=".FakeCam"
+            android:exported="false" />
     </application>
 
 </manifest>
