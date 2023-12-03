@@ -178,8 +178,8 @@ public class HistoryItem extends AppCompatActivity {
     // Display activity information and set visibility based on count
     private void displayActivityInfo(int count, String key, int countTextViewId) {
         TextView countTextView = findViewById(countTextViewId);
-        countTextView.setText(key + ": " + count);
-        countTextView.setVisibility(count > 0 ? View.VISIBLE : View.GONE);
+        countTextView.setText(String.valueOf(count));
+//        countTextView.setVisibility(count > 0 ? View.VISIBLE : View.GONE);
     }
 
     //Method to display the photo if there is one

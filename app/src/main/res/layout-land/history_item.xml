@@ -29,6 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:gravity="center"
             android:background="@drawable/card_button_rounded_corners"
             android:backgroundTint="@color/white"
             >
@@ -76,134 +77,193 @@
 
 
                 </LinearLayout>
-
-                <TableLayout
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/historyItemTable"
-                    android:minWidth="500dp"
-                    android:padding="5dp">
-                    <TableRow>
-                        <TextView
-                            android:id="@+id/poopCountTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Number of poops:"
-                            android:textSize="18sp"
-                            android:layout_marginLeft="20dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_weight="1"
-                            />
-                        <TextView
-                            android:id="@+id/poopDateTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Last poop time:"
-                            android:textSize="18sp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_weight="1"
-                            />
-
-                    </TableRow>
-                    <TableRow>
-                        <TextView
-                            android:id="@+id/peeCountTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Number of pee:"
-                            android:layout_marginLeft="20dp"
-                            android:textSize="18sp"
-                            android:layout_centerHorizontal="true"
-
-                            android:layout_weight="1"
-                            />
-                        <TextView
-                            android:id="@+id/peeDateTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Last pee time:"
-
-                            android:textSize="18sp"
-                            android:layout_centerHorizontal="true"
-
-                            android:layout_weight="1"
-                            />
-
-                    </TableRow>
-
-                    <TableRow>
-                        <TextView
-                            android:id="@+id/foodCountTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Number of Meals:"
-                            android:layout_marginLeft="20dp"
-                            android:textSize="18sp"
-                            android:layout_centerHorizontal="true"
-
-                            android:layout_weight="1"
-                            />
-
-                        <TextView
-                            android:id="@+id/foodDateTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Food Count:"
-                            android:textSize="18sp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_weight="1"
-                            />
-
-                    </TableRow>
-                    <TableRow>
-                        <TextView
-                            android:id="@+id/walkCountTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:text="Number of walk:"
-                            android:layout_below="@id/foodDateTextView"
-                            android:textSize="18sp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_weight="1"
-                            />
-                        <TextView
-                            android:id="@+id/walkTimeTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Walk Time:"
-                            android:textSize="18sp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_weight="1"
-                            />
-
-                    </TableRow>
-                    <TableRow>
-                        <TextView
-                            android:id="@+id/stepsTextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="20dp"
-                            android:text="Steps:"
-                            android:textSize="18sp"
-                            android:layout_centerHorizontal="true"
-
-                            />
-
-                    </TableRow>
-                    <Button
+                    android:orientation="vertical">
+                    <GridLayout
                         android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20sp"
+                        android:columnCount="3"
+                        android:id="@+id/historyItemTable"
+                        android:alignmentMode="alignMargins"
+                        android:rowCount="2"
+                        android:padding="10dp"
+                        android:background="@drawable/dashboard_box">
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="5dp"
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Poop Count:"
+                                android:textAllCaps="true"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/poopCountTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_weight="1"
+                                android:text="0"
+                                android:textSize="25sp"
+
+                                />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="5dp">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Pee Count: "
+                                android:textAllCaps="true"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/peeCountTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:layout_weight="1"
+                                android:text="0"
+                                android:textSize="25sp"
+
+                                />
+
+                            />
+
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:padding="5dp"
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Meal Count:"
+                                android:textAllCaps="true"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/foodCountTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:text="0"
+                                android:textSize="25sp"
+
+
+                                />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:padding="5dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Walk Count:"
+                                android:textStyle="bold"
+                                android:textAllCaps="true"
+                                />
+                            <TextView
+                                android:id="@+id/walkCountTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textSize="25sp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_weight="1"
+
+                                />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:padding="5dp"
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Walk Time:"
+                                android:textStyle="bold"
+                                android:textAllCaps="true"
+                                />
+                            <TextView
+                                android:id="@+id/walkTimeTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textSize="25sp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_weight="1"
+
+                                />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_weight="1"
+                            android:padding="5dp"
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Step Count:"
+                                android:textStyle="bold"
+                                android:textAllCaps="true"
+                                />
+                            <TextView
+                                android:id="@+id/stepsTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:textSize="25sp"
+                                android:layout_centerHorizontal="true"
+                                android:layout_weight="1"
+
+                                />
+                        </LinearLayout>
+
+                    </GridLayout>
+                    <Button
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
                         android:drawableLeft="@drawable/baseline_delete_24"
-                        android:layout_marginTop="25dp"
+
                         android:drawableTint="@color/white"
-                        android:text="Delete Selected Log from History"
+                        android:text="Delete Log from History"
                         android:textAllCaps="true"
                         android:textStyle="bold"
                         android:id="@+id/deleteDailyLogButton"/>
 
-                </TableLayout>
+                </LinearLayout>
+
 
 
 
