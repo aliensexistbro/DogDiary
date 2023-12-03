@@ -178,7 +178,7 @@ public class HistoryItem extends AppCompatActivity {
     // Display activity information and set visibility based on count
     private void displayActivityInfo(int count, String key, int countTextViewId) {
         TextView countTextView = findViewById(countTextViewId);
-        countTextView.setText(String.valueOf(count));
+        countTextView.setText("" + count);
 //        countTextView.setVisibility(count > 0 ? View.VISIBLE : View.GONE);
     }
 
