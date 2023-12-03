@@ -12,274 +12,287 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:layout_weight="1">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Profile"
-            android:textSize="40sp"
-            android:textStyle="bold"
-            android:gravity="center"/>
+        android:layout_weight="1"
+        android:background="@color/red"
+        android:padding="20dp">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <LinearLayout
-                android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/card_button_rounded_corners"
+            android:backgroundTint="@color/white">
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/barChartLayout"
-                android:orientation="vertical"
-                android:layout_margin="20sp"
-                android:layout_weight="1"
+                android:text="Profile"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 >
-                <TextView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:id="@+id/chartTitle"
-                    android:text="Chart Title"
-                    android:textStyle="bold"
-                    android:textSize="25sp"
-                    android:gravity="center_horizontal"
-                    android:padding="5sp"/>
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="20sp"
-                    android:id="@+id/chartSelect">
-                    <RadioButton
-                        android:layout_width="wrap_content"
+                    android:id="@+id/barChartLayout"
+                    android:orientation="vertical"
+                    android:layout_weight="1"
+                    android:paddingHorizontal="10dp"
+                    >
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Poop Count"
-                        android:layout_weight="1"
-                        android:textSize="12sp"
-                        android:id="@+id/poopChartRadio"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
+                        android:id="@+id/chartTitle"
+                        android:text="Chart Title"
+                        android:textStyle="bold"
+                        android:textSize="25sp"
+                        android:gravity="center_horizontal"
+                        android:padding="5sp"/>
+                    <RadioGroup
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Pee Count"
-                        android:textSize="12sp"
-                        android:id="@+id/peeChartRadio"/>
-                    <RadioButton
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Step Count"
-                        android:textSize="12sp"
-                        android:id="@+id/stepChartRadio"/>
-                </RadioGroup>
-                <com.github.mikephil.charting.charts.BarChart
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="20sp"
+                        android:id="@+id/chartSelect">
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Poop Count"
+                            android:layout_weight="1"
+                            android:textSize="12sp"
+                            android:id="@+id/poopChartRadio"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Pee Count"
+                            android:textSize="12sp"
+                            android:id="@+id/peeChartRadio"/>
+                        <RadioButton
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Step Count"
+                            android:textSize="12sp"
+                            android:id="@+id/stepChartRadio"/>
+                    </RadioGroup>
 
-                    android:padding="40dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/testBarChart"
-                    android:minHeight="150dp"/>
+                    <com.github.mikephil.charting.charts.BarChart
+                        android:id="@+id/testBarChart"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:padding="40dp"
+                        android:minHeight="140dp"/>
 
+
+                </LinearLayout>
+
+                <TableLayout
+                    android:id="@+id/doggyInformationTable"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:padding="10sp"
+                    android:layout_weight="1"
+                    >
+                    <TableRow>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Name"
+                            android:textStyle="bold"
+
+                            android:textSize="16sp"
+                            android:id="@+id/prPersonalInfoNameTV"/>
+
+                        <EditText
+                            android:id="@+id/prEditTextName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:background="@android:color/transparent"
+                            android:ems="10"
+                            android:textSize="16sp"
+                            android:inputType="text"
+                            android:gravity="right"
+                            android:hint="Samuel"
+                            tools:ignore="TouchTargetSizeCheck" />
+                    </TableRow>
+                    <TableRow>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Age"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:id="@+id/prPersonalInfoAgeTV"/>
+
+                        <EditText
+                            android:id="@+id/prEditTextAge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:inputType="number"
+                            android:background="@android:color/transparent"
+                            android:ems="10"
+                            android:gravity="right"
+                            android:hint="10"
+                            tools:ignore="TouchTargetSizeCheck"
+                            android:textSize="16sp"/>
+                    </TableRow>
+                    <TableRow>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Birthday"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:id="@+id/prBirthdayTextView"/>
+
+                        <EditText
+                            android:id="@+id/prEditTextBirthday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:textSize="16sp"
+                            android:background="@android:color/transparent"
+                            android:ems="10"
+                            android:inputType="date"
+                            android:gravity="right"
+                            android:hint="2015-10-03"
+                            tools:ignore="TouchTargetSizeCheck" />
+                    </TableRow>
+                    <TableRow>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Breed"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:id="@+id/prPersonalInfoBreedTV"/>
+
+                        <EditText
+                            android:id="@+id/prEditTextBreed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:background="@android:color/transparent"
+                            android:ems="10"
+                            android:inputType="text"
+                            android:gravity="right"
+                            android:textSize="16sp"
+                            android:hint="Poodle"
+                            tools:ignore="TouchTargetSizeCheck" />
+                    </TableRow>
+                    <TableRow>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="City"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:id="@+id/prPersonalInfoCityTV"/>
+
+                        <EditText
+                            android:id="@+id/prEditTextCity"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:background="@android:color/transparent"
+                            android:ems="10"
+                            android:gravity="right"
+                            android:hint="Vancouver"
+                            android:inputType="text"
+                            android:textSize="16sp"
+                            tools:ignore="TouchTargetSizeCheck" />
+                    </TableRow>
+                    <TableRow>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Chip #"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:id="@+id/prPersonalInfoChipTV"/>
+
+                        <EditText
+                            android:id="@+id/prEditTextChip"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:background="@android:color/transparent"
+                            android:ems="10"
+                            android:inputType="number"
+                            android:gravity="right"
+                            android:hint="123456789"
+                            android:textSize="16sp"
+                            tools:ignore="TouchTargetSizeCheck" />
+                    </TableRow>
+                    <TableRow>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Weight (lbs)"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+
+                            android:id="@+id/prPersonalInfoWeightTV"/>
+
+                        <EditText
+                            android:id="@+id/prEditTextWeight"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:background="@android:color/transparent"
+                            android:ems="10"
+                            android:inputType="numberDecimal"
+                            android:gravity="right"
+                            android:hint="60"
+                            android:textSize="16sp"
+                            tools:ignore="TouchTargetSizeCheck" />
+                    </TableRow>
+
+                    <TableRow>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Fur Type"
+                            android:textStyle="bold"
+                            android:textSize="16sp"
+                            android:id="@+id/prPersonalInfoFurTV"/>
+
+                        <EditText
+                            android:id="@+id/prEditTextFurType"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:background="@android:color/transparent"
+                            android:ems="10"
+                            android:textSize="16sp"
+                            android:inputType="text"
+                            android:gravity="right"
+                            android:hint="Short"
+                            tools:ignore="TouchTargetSizeCheck" />
+                    </TableRow>
+                    <Button
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/saveProfileChangesButton"
+                        android:text="Save Changes"
+                        android:textStyle="bold"
+                        android:textAllCaps="true"
+                        android:gravity="center"/>
+
+
+                </TableLayout>
 
             </LinearLayout>
 
-            <TableLayout
-                android:id="@+id/doggyInformationTable"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:padding="15sp"
-                android:layout_weight="1"
-                >
-                <TableRow>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Name"
-                        android:textStyle="bold"
-
-                        android:textSize="16sp"
-                        android:id="@+id/prPersonalInfoNameTV"/>
-
-                    <EditText
-                        android:id="@+id/prEditTextName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:background="@android:color/transparent"
-                        android:ems="10"
-                        android:textSize="16sp"
-                        android:inputType="text"
-                        android:gravity="right"
-                        android:hint="Samuel"
-                        tools:ignore="TouchTargetSizeCheck" />
-                </TableRow>
-                <TableRow>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Age"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
-                        android:id="@+id/prPersonalInfoAgeTV"/>
-
-                    <EditText
-                        android:id="@+id/prEditTextAge"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:inputType="number"
-                        android:background="@android:color/transparent"
-                        android:ems="10"
-                        android:gravity="right"
-                        android:hint="10"
-                        tools:ignore="TouchTargetSizeCheck"
-                        android:textSize="16sp"/>
-                </TableRow>
-                <TableRow>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Birthday"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
-                        android:id="@+id/prBirthdayTextView"/>
-
-                    <EditText
-                        android:id="@+id/prEditTextBirthday"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:textSize="16sp"
-                        android:background="@android:color/transparent"
-                        android:ems="10"
-                        android:inputType="date"
-                        android:gravity="right"
-                        android:hint="2015-10-03"
-                        tools:ignore="TouchTargetSizeCheck" />
-                </TableRow>
-                <TableRow>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Breed"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
-                        android:id="@+id/prPersonalInfoBreedTV"/>
-
-                    <EditText
-                        android:id="@+id/prEditTextBreed"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:background="@android:color/transparent"
-                        android:ems="10"
-                        android:inputType="text"
-                        android:gravity="right"
-                        android:textSize="16sp"
-                        android:hint="Poodle"
-                        tools:ignore="TouchTargetSizeCheck" />
-                </TableRow>
-                <TableRow>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="City"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
-                        android:id="@+id/prPersonalInfoCityTV"/>
-
-                    <EditText
-                        android:id="@+id/prEditTextCity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:background="@android:color/transparent"
-                        android:ems="10"
-                        android:gravity="right"
-                        android:hint="Vancouver"
-                        android:inputType="text"
-                        android:textSize="16sp"
-                        tools:ignore="TouchTargetSizeCheck" />
-                </TableRow>
-                <TableRow>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Chip #"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:id="@+id/prPersonalInfoChipTV"/>
-
-                    <EditText
-                        android:id="@+id/prEditTextChip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:background="@android:color/transparent"
-                        android:ems="10"
-                        android:inputType="number"
-                        android:gravity="right"
-                        android:hint="123456789"
-                        android:textSize="16sp"
-                        tools:ignore="TouchTargetSizeCheck" />
-                </TableRow>
-                <TableRow>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Weight (lbs)"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
-
-                        android:id="@+id/prPersonalInfoWeightTV"/>
-
-                    <EditText
-                        android:id="@+id/prEditTextWeight"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:background="@android:color/transparent"
-                        android:ems="10"
-                        android:inputType="numberDecimal"
-                        android:gravity="right"
-                        android:hint="60"
-                        android:textSize="16sp"
-                        tools:ignore="TouchTargetSizeCheck" />
-                </TableRow>
-
-                <TableRow>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Fur Type"
-                        android:textStyle="bold"
-                        android:textSize="16sp"
-                        android:id="@+id/prPersonalInfoFurTV"/>
-
-                    <EditText
-                        android:id="@+id/prEditTextFurType"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:background="@android:color/transparent"
-                        android:ems="10"
-                        android:textSize="16sp"
-                        android:inputType="text"
-                        android:gravity="right"
-                        android:hint="Short"
-                        tools:ignore="TouchTargetSizeCheck" />
-                </TableRow>
-                <Button
-                    android:layout_marginTop="20dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/saveProfileChangesButton"
-                    android:text="Save Changes"
-                    android:textStyle="bold"
-                    android:textAllCaps="true"
-                    android:gravity="center"/>
-
-
-            </TableLayout>
-
         </LinearLayout>
+
 
 
 

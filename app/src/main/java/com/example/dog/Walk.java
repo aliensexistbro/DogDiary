@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,6 +70,7 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
     private long elapsedTime = 0;
     private Handler timerHandler;
     private Runnable timerRunnable;
+
     private static final float STEP_THRESHOLD = 12.0f; // Adjust this threshold based on your testing
     private static final int STEP_DELAY_NS = 250000000; // 250ms
     private long lastStepTimeNs = 0;
@@ -112,6 +114,8 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
         }
         sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
 
+
+
         // Retrieve the city from shared preferences
         String savedCity = sharedPreferences.getString(KEY_CITY, "");
 
@@ -119,6 +123,16 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
         String geoApiUrl = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&limit=5&appid=" + apiKey;
 
         new FetchCityCoordinatesTask().execute(geoApiUrl);
+
+        final ImageButton backButton = findViewById(R.id.walkBackButton);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               Intent intent = new Intent(Walk.this, ActivityLog.class);
+               startActivity(intent);
+
+            }
+        });
         final Button startStopButton = findViewById(R.id.startStopButton);
         startStopButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -318,7 +332,7 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
     // Method to update the elapsed time view
     private void updateElapsedTimeView() {
         TextView elapsedTimeTextView = findViewById(R.id.timeTextView);
-        elapsedTimeTextView.setText("Time: " + formatElapsedTime(elapsedTime));
+        elapsedTimeTextView.setText(formatElapsedTime(elapsedTime));
     }
 
     private String formatElapsedTime(long elapsedTime) { // Formatting time elapsed
@@ -369,7 +383,7 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
     }
 
     private void updateTemperatureView(float temperatureCelsius) {
-        temperatureTextView.setText("Temperature: " + temperatureCelsius + "°C");
+        temperatureTextView.setText(temperatureCelsius + "°C");
         if(!alert) {
             if (temperatureCelsius <= 0 ) { // Show dialogue if bellow freezing
                 // More than 5 minutes have elapsed
@@ -410,7 +424,7 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
     }
 
     private void updateStepsView() { // Updating steps
-        stepsTextView.setText("Steps: " + stepCount);
+        stepsTextView.setText(String.valueOf(stepCount));
     }
 
     private class FetchWeatherTask extends AsyncTask<String, Void, String> {

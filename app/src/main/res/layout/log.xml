@@ -38,6 +38,7 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/dog_walk"
                 android:backgroundTint="@color/cream"
+                android:backgroundTintMode="screen"
                 app:tint="@color/darkRed" />
 
             <!-- ImageButton 2 -->
@@ -53,6 +54,7 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/food"
                 android:backgroundTint="@color/cream"
+                android:backgroundTintMode="screen"
                 app:tint="@color/darkRed"/>
 
             <!-- ImageButton 3 -->
@@ -68,6 +70,7 @@
                 android:scaleType="fitCenter"
                 android:src="@drawable/doggy_pee"
                 android:backgroundTint="@color/cream"
+                android:backgroundTintMode="screen"
                 app:tint="@color/darkRed"/>
 
             <!-- ImageButton 4 -->
@@ -83,6 +86,7 @@
                 android:background="@drawable/card_button_rounded_corners"
                 android:padding="20sp"
                 android:backgroundTint="@color/cream"
+                android:backgroundTintMode="screen"
                 app:tint="@color/darkRed"/>
 
         </GridLayout>

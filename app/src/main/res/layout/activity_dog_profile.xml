@@ -34,7 +34,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/barChartLayout"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_weight="1">
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -77,9 +78,9 @@
 
                     android:padding="40dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
                     android:id="@+id/testBarChart"
-                    android:minHeight="150dp"/>
+                    android:layout_weight="4"/>
 
 
             </LinearLayout>
@@ -289,6 +290,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/saveProfileChangesButton"
                 android:text="Save Changes"
+                android:layout_margin="5dp"
                 android:textAllCaps="true"
                 android:textStyle="bold"
                 android:gravity="center"/>

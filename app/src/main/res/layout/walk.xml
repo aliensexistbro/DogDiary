@@ -11,75 +11,163 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_weight="1"
-        android:gravity="center">
-        <TextView
-            android:id="@+id/walkTextView"
+        android:background="@color/red"
+        android:padding="20dp"
+        >
+        <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Start your Walk!"
-            android:layout_marginTop="16dp"
-            android:textSize="40dp"
-            android:layout_centerHorizontal="true"
-            android:textStyle="bold"/>
+            android:src="@drawable/baseline_arrow_back_ios_new_24"
+            android:id="@+id/walkBackButton"
+            android:padding="15dp"
+            android:background="@null"
+            app:tint="@color/white"
+            />
 
-        <TextView
-            android:id="@+id/stepsTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Steps: 0"
-            android:layout_below="@id/walkTextView"
-            android:layout_marginTop="16dp"
-            android:layout_centerHorizontal="true"/>
-
-        <TextView
-            android:id="@+id/temperatureTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Temperature: N/A"
-            android:layout_below="@id/stepsTextView"
-
-            android:layout_marginTop="16dp"
-            android:layout_centerHorizontal="true"/>
-
-        <TextView
-            android:id="@+id/timeTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Time: N/A"
-            android:layout_below="@id/temperatureTextView"
-            android:layout_marginTop="16dp"
-            android:layout_centerHorizontal="true"/>
         <LinearLayout
-            android:layout_marginTop="75dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/card_button_rounded_corners"
+            android:backgroundTint="@color/white"
             android:gravity="center"
-            android:minWidth="350dp">
-            <Button
-                android:id="@+id/startStopButton"
-                android:layout_width="0dp"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+
+            <TextView
+                android:id="@+id/walkTextView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Start"
-                android:layout_marginRight="15dp"
-                android:layout_below="@id/timeTextView"
+                android:gravity="center"
+                android:layout_marginTop="16dp"
+                android:text="Start your Walk!"
+                android:textSize="40dp"
+                android:textStyle="bold"
+                />
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:src="@drawable/paws"
+                app:tint="@color/darkRed"
+                android:padding="20dp"
 
-                android:layout_centerHorizontal="true"/>
-            <Button
-                android:id="@+id/endButton"
-                android:layout_width="0dp"
+            />
 
+            <TableLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Log Walk"
-                android:layout_weight="1"
-                android:layout_below="@id/startStopButton"
+                >
+                <TableRow
+                    android:padding="5dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Steps:"
+                        android:textStyle="bold"
+                        android:layout_marginHorizontal="10dp"
+                        android:textSize="18sp"
+                        android:textAllCaps="true"
+                        />
+                    <TextView
+                        android:id="@+id/stepsTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/walkTextView"
+                        android:text="0"
+                        android:textSize="18sp"/>
 
-                android:layout_centerHorizontal="true"/>
+                </TableRow>
+                <TableRow
+                    android:padding="5dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginHorizontal="10dp"
+                        android:layout_height="wrap_content"
+                        android:text="Temperature:"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textAllCaps="true"
+                        />
+                    <TextView
+                        android:id="@+id/temperatureTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/stepsTextView"
+                        android:layout_centerHorizontal="true"
+                        android:text="Temperature: N/A"
+                        android:textSize="18sp"
+                        android:textAllCaps="true"/>
+
+                </TableRow>
+                <TableRow
+                    android:padding="5dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Time:"
+                        android:textStyle="bold"
+                        android:layout_marginHorizontal="10dp"
+                        android:textSize="18sp"
+                        android:textAllCaps="true"
+                        />
+                    <TextView
+                        android:id="@+id/timeTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/temperatureTextView"
+                        android:layout_centerHorizontal="true"
+                        android:text="N/A"
+                        android:textSize="18sp"/>
+                </TableRow>
+            </TableLayout>
+
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:minWidth="350dp"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/startStopButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_below="@id/timeTextView"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="1"
+                    android:text="Start"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    />
+
+                <Button
+                    android:id="@+id/endButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_below="@id/startStopButton"
+                    android:layout_centerHorizontal="true"
+                    android:layout_weight="1"
+                    android:text="Log Walk"
+                    android:textStyle="bold"
+
+                    android:textAllCaps="true" />
+
+            </LinearLayout>
+
 
         </LinearLayout>
-
-
 
 
     </LinearLayout>

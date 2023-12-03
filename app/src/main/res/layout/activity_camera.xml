@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".CameraActivity">
+    tools:context=".CameraActivity"
+    android:background="@color/red">
 
     <view
         android:id="@+id/previewView"
@@ -21,9 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:src="@drawable/camera_aperture"
-        app:tint="@color/white"
+        app:tint="@color/darkRed"
         android:background="@drawable/baseline_circle_75"
-        android:backgroundTint="@color/darkRed"
+        android:backgroundTint="@color/white"
         />
 
 </LinearLayout>
