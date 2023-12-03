@@ -111,11 +111,6 @@ public class DogProfile extends AppCompatActivity implements RadioGroup.OnChecke
         });
 
 
-
-        MyDatabase database = new MyDatabase(this);
-        String dataForPee = database.getDataFromColumn("pee");
-        Toast.makeText(this, dataForPee, Toast.LENGTH_LONG).show();
-
     }
 
 

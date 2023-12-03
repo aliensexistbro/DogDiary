@@ -17,11 +17,10 @@
         android:padding="20dp"
         android:layout_weight="1">
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-
-            android:padding="15sp"
+            android:padding="10dp"
             android:layout_gravity="center"
             android:background="@drawable/card_button_rounded_corners"
             android:backgroundTint="@color/white">
@@ -31,10 +30,9 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:gravity="center_horizontal"
-                android:padding="5dp"
 
                 android:text="Dogs Name"
-                android:textSize="40sp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
             <LinearLayout
                 android:layout_width="match_parent"
@@ -46,7 +44,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_weight="1">
+                    android:layout_weight="2">
                     <TextView
                         android:id="@+id/pictureTitleTextView"
                         android:layout_width="match_parent"
@@ -60,7 +58,7 @@
 
                     <ImageView
                         android:id="@+id/pictureImageView"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:src="@drawable/dog_profile_alt" />
@@ -84,17 +82,17 @@
                             android:id="@+id/cameraButton"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="5sp"
                             android:layout_weight="1"
+                            android:layout_marginRight="5dp"
                             android:drawableLeft="@drawable/camera_alt_24"
                             android:drawableTint="@color/white"
                             android:gravity="center"
                             android:onClick="takePhoto"
                             android:textAllCaps="true"
-                            android:padding="15dp"
+                            android:padding="10dp"
                             android:text="Add Photo"
                             android:textColor="@color/white"
-                            android:textSize="20dp"
+                            android:textSize="18dp"
                             android:textStyle="bold">
 
                         </Button>
@@ -103,16 +101,15 @@
                             android:id="@+id/logButton"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_margin="5sp"
                             android:layout_weight="1"
                             android:drawableLeft="@drawable/add_circle_24"
                             android:drawableTint="@color/white"
-                            android:padding="15dp"
+                            android:padding="10dp"
                             android:text="Add Log"
                             android:textColor="@color/white"
                             android:textAllCaps="true"
                             android:textStyle="bold"
-                            android:textSize="20dp" />
+                            android:textSize="18dp" />
 
 
                     </LinearLayout>
@@ -121,7 +118,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Today's Log"
-                        android:textSize="24sp"
+                        android:textSize="20sp"
                         android:textStyle="bold" />
                     <TableLayout
                         android:layout_width="wrap_content"
@@ -130,6 +127,9 @@
                         android:minWidth="375dp">
                         <TableRow>
                             <TextView
+                                android:drawableLeft="@drawable/doggy_bag_24"
+                                android:drawablePadding="10dip"
+                                android:drawableTint="@color/darkRed"
                                 android:id="@+id/poopCountTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -152,6 +152,9 @@
                         </TableRow>
                         <TableRow>
                             <TextView
+                                android:drawableLeft="@drawable/doggy_pee_24"
+                                android:drawablePadding="10dip"
+                                android:drawableTint="@color/darkRed"
                                 android:id="@+id/peeCountTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -160,6 +163,7 @@
                                 android:textSize="18sp"
                                 android:layout_weight="1"
                                 android:visibility="gone"
+
                                 />
                             <TextView
                                 android:id="@+id/peeDateTextView"
@@ -176,6 +180,9 @@
 
                         <TableRow>
                             <TextView
+                                android:drawableLeft="@drawable/food_24"
+                                android:drawablePadding="10dip"
+                                android:drawableTint="@color/darkRed"
                                 android:id="@+id/foodCountTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -184,6 +191,7 @@
                                 android:textSize="18sp"
                                 android:layout_weight="1"
                                 android:visibility="gone"
+
                                 />
                             <TextView
                                 android:id="@+id/foodDateTextView"
@@ -200,6 +208,9 @@
                         </TableRow>
                         <TableRow>
                             <TextView
+                                android:drawableLeft="@drawable/dog_walk_24"
+                                android:drawablePadding="10dip"
+                                android:drawableTint="@color/darkRed"
                                 android:id="@+id/walkCountTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -208,6 +219,7 @@
                                 android:textSize="18sp"
                                 android:layout_weight="1"
                                 android:visibility="gone"
+
                                 />
 
                             <TextView
@@ -235,6 +247,9 @@
 
                                 />
                             <TextView
+                                android:drawableLeft="@drawable/single_paw"
+                                android:drawablePadding="10dip"
+                                android:drawableTint="@color/darkRed"
                                 android:id="@+id/stepsTextView"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -243,6 +258,7 @@
                                 android:textSize="18sp"
                                 android:layout_weight="1"
                                 android:visibility="gone"
+
                                 />
 
                         </TableRow>

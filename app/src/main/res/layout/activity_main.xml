@@ -112,9 +112,14 @@
                 android:layout_height="wrap_content"
                 android:minWidth="375dp">
 
-                <TableRow>
+                <TableRow
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="20dp">
 
                     <TextView
+                        android:drawableLeft="@drawable/doggy_bag_24"
+                        android:drawablePadding="10dip"
+                        android:drawableTint="@color/darkRed"
                         android:id="@+id/poopCountTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -122,7 +127,9 @@
                         android:paddingTop="5sp"
                         android:text="Number of poops:"
                         android:textSize="18sp"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+
+                         />
 
                     <TextView
                         android:id="@+id/poopDateTextView"
@@ -132,12 +139,18 @@
                         android:paddingTop="5sp"
                         android:text="Last Poop Time:"
                         android:textSize="18sp"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        />
                 </TableRow>
 
-                <TableRow>
+                <TableRow
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="20dp">
 
                     <TextView
+                        android:drawableLeft="@drawable/doggy_pee_24"
+                        android:drawablePadding="10dip"
+                        android:drawableTint="@color/darkRed"
                         android:id="@+id/peeCountTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -145,7 +158,7 @@
                         android:paddingTop="5sp"
                         android:text="Number of pee:"
                         android:textSize="18sp"
-                        android:visibility="gone" />
+                        android:visibility="gone"/>
 
                     <TextView
                         android:id="@+id/peeDateTextView"
@@ -159,9 +172,14 @@
 
                 </TableRow>
 
-                <TableRow>
+                <TableRow
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="20dp">
 
                     <TextView
+                        android:drawableLeft="@drawable/food_24"
+                        android:drawablePadding="10dip"
+                        android:drawableTint="@color/darkRed"
                         android:id="@+id/foodCountTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -169,7 +187,8 @@
                         android:paddingTop="5sp"
                         android:text="Number of food:"
                         android:textSize="18sp"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                         />
 
                     <TextView
                         android:id="@+id/foodDateTextView"
@@ -184,9 +203,14 @@
 
                 </TableRow>
 
-                <TableRow>
+                <TableRow
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="20dp">
 
                     <TextView
+                        android:drawableLeft="@drawable/dog_walk_24"
+                        android:drawablePadding="10dip"
+                        android:drawableTint="@color/darkRed"
                         android:id="@+id/walkCountTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -194,7 +218,8 @@
                         android:paddingTop="5sp"
                         android:text="Number of walk:"
                         android:textSize="18sp"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        />
 
                     <TextView
                         android:id="@+id/lastWalkTimeTextView"
@@ -207,7 +232,9 @@
                         android:visibility="gone" />
                 </TableRow>
 
-                <TableRow>
+                <TableRow
+                    android:paddingVertical="5dp"
+                    android:paddingHorizontal="20dp">
 
                     <TextView
                         android:id="@+id/walkTimeTextView"
@@ -223,6 +250,9 @@
                         />
 
                     <TextView
+                        android:drawableLeft="@drawable/single_paw"
+                        android:drawablePadding="10dip"
+                        android:drawableTint="@color/darkRed"
                         android:id="@+id/stepsTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -230,7 +260,8 @@
                         android:paddingTop="5sp"
                         android:text="Steps:"
                         android:textSize="18sp"
-                        android:visibility="gone" />
+                        android:visibility="gone"
+                        />
 
                 </TableRow>
 
