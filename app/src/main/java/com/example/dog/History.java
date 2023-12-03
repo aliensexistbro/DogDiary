@@ -44,7 +44,10 @@ public class History extends AppCompatActivity {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
                 // Handle the selected date change
-                String selectedDate = year + "-" + (month + 1) + "-" + dayOfMonth;
+                String formattedMonth = String.format("%02d", month + 1); // Add leading zero if needed
+                String formattedDay = String.format("%02d", dayOfMonth);  // Add leading zero if needed
+                String selectedDate = year + "-" + formattedMonth + "-" + formattedDay;
+
                 Intent intent = new Intent(History.this, HistoryItem.class);
                 // Pass the selected date as an extra to the new activity
                 intent.putExtra("SELECTED_DATE", selectedDate);
