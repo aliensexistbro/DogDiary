@@ -45,7 +45,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/chartTitle"
-                        android:text="Chart Title"
+                        android:text="Pick Weekly Chart"
                         android:textStyle="bold"
                         android:textSize="25sp"
                         android:gravity="center_horizontal"
