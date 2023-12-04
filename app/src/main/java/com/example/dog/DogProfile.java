@@ -200,12 +200,7 @@ public class DogProfile extends AppCompatActivity implements RadioGroup.OnChecke
             // If no data is logged for that column the chart should not be visible
             Toast.makeText(this, "No Data Logged in this Column", Toast.LENGTH_SHORT).show();
             barChart.setVisibility(View.GONE);
-
         }
-
-
-
-
     }
     // Creates the bar chart using the data and the data labels
     private void createChart (String columnName, String dataLabel){

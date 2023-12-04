@@ -61,7 +61,6 @@ public class ImagePreviewActivity extends AppCompatActivity {
         }
         backButton = findViewById(R.id.imgBackButton);
         backButton.setOnClickListener(new View.OnClickListener(){
-
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ImagePreviewActivity.this, CameraActivity.class);
@@ -112,13 +111,13 @@ public class ImagePreviewActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    private void deletePhoto() {
+    private void deletePhoto() { // Method to delete photo
         // Get the image ID from the content resolver
         String[] projection = {MediaStore.Images.Media._ID};
         String selection = MediaStore.Images.Media.DATA + "=?";
-        String[] selectionArgs = {imageUri.getPath()};
+        String[] selectionArgs = {imageUri.getPath()}; // Get the Uri path
 
-        try (Cursor cursor = getContentResolver().query(
+        try (Cursor cursor = getContentResolver().query( // Finding the photo to delete
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
             projection,
             selection,
@@ -147,7 +146,7 @@ public class ImagePreviewActivity extends AppCompatActivity {
 
 
     private void sharePhoto() {
-        // Share the photo using Implicit Intent
+        // Share the photo using implicit intent
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("image/*");
         shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);

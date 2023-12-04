@@ -54,8 +54,8 @@ public class HistoryItem extends AppCompatActivity {
         pictureImageView = findViewById(R.id.pictureImageView);
         historyItemButton = findViewById(R.id.historyItemBackButton);
         deleteBtn = findViewById(R.id.deleteDailyLogButton);
-        // Display welcome message and set up navigation
-        displayWelcomeMessage();
+
+        displayEntry();
         setUpNavigation();
 
         // Back button click listener
@@ -67,19 +67,20 @@ public class HistoryItem extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        deleteBtn.setOnClickListener(new View.OnClickListener() {
+        deleteBtn.setOnClickListener(new View.OnClickListener() { // Deleting data
             @Override
             public void onClick(View v) {
                 deleteData();
             }
         });
     }
-    private void deleteData() {
+    private void deleteData() { // Method to delete a diary entry
         String selectedDate = getIntent().getStringExtra("SELECTED_DATE");
         MyDatabase myDatabase = new MyDatabase(this);
         Cursor cursor = myDatabase.getDataForDate(selectedDate);
 
         if (cursor != null && cursor.getCount() > 0) {
+            //Alert dialog asking if the user is sure they wish to delete data
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setTitle("Delete Entry");
             builder.setMessage("Are you sure you want to delete this entry?");
@@ -87,7 +88,7 @@ public class HistoryItem extends AppCompatActivity {
             builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    // User clicked Yes button
+                    // User clicked Yes button, deletes data
                     proceedWithDelete();
                 }
             });
@@ -95,7 +96,7 @@ public class HistoryItem extends AppCompatActivity {
             builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-                    // User clicked No button, do nothing
+                    // User clicked No button, close dialog and do nothing
                     dialog.dismiss();
                 }
             });
@@ -104,7 +105,7 @@ public class HistoryItem extends AppCompatActivity {
             AlertDialog dialog = builder.create();
             dialog.show();
         } else {
-            // No entry to delete, show a dialog
+            // No entry to delete, show a dialog saying there is no entry to delete
             AlertDialog.Builder noEntryBuilder = new AlertDialog.Builder(this);
             noEntryBuilder.setTitle("No Entry");
             noEntryBuilder.setMessage("There is no entry to delete.");
@@ -144,7 +145,7 @@ public class HistoryItem extends AppCompatActivity {
 
 
     // Display user activity information
-    //Gets the information from the database through iterating through the data of the date specified user and assigning that information to text views.
+    // Gets the information from the database through iterating through the data of the date specified user and assigning that information to text views.
     private void displayInfo(Cursor cursor1)
     {
         String selectedDate = getIntent().getStringExtra("SELECTED_DATE");
@@ -179,7 +180,6 @@ public class HistoryItem extends AppCompatActivity {
     private void displayActivityInfo(int count, String key, int countTextViewId) {
         TextView countTextView = findViewById(countTextViewId);
         countTextView.setText(String.valueOf(count));
-//        countTextView.setVisibility(count > 0 ? View.VISIBLE : View.GONE);
     }
 
     //Method to display the photo if there is one
@@ -188,8 +188,7 @@ public class HistoryItem extends AppCompatActivity {
     }
 
     //Method that displays the headings of the page like the log date and name of the dog
-    //if there is a picture available in the database it will assign the picture to display, if not it will handle it.
-    private void displayWelcomeMessage() {
+    private void displayEntry() {
         SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, MODE_PRIVATE);
         String selectedDate = getIntent().getStringExtra("SELECTED_DATE");
         String name = sharedPreferences.getString(KEY_NAME, "");
@@ -201,7 +200,7 @@ public class HistoryItem extends AppCompatActivity {
         if (cursor != null && cursor.getCount() > 0) {
             cursor.moveToFirst();
             @SuppressLint("Range") String photoPath = cursor.getString(cursor.getColumnIndex(Constants.PHOTO_PATH));
-            if (!photoPath.equals("none")) {
+            if (!photoPath.equals("none")) { // If there is a picture available in the database it will assign the picture to display, if not it will handle it.
                 displayPhoto(photoPath);
                 titlePicTextView.setText("Picture of the Day");
             } else {

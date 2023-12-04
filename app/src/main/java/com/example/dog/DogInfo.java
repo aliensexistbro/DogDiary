@@ -17,7 +17,7 @@ import com.google.android.material.navigation.NavigationBarView;
 //Initial Activity which saves the user's Data upon opening the app for the first time
 public class DogInfo extends AppCompatActivity {
 
-    //Name of the shared preferences file used to store user's dog's information
+    // Name of the shared preferences to store user's dog's information
     private static final String PREF_NAME = "DogPrefs";
 
 
@@ -26,9 +26,9 @@ public class DogInfo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dog_info);
 
-        //initialization of the submit button
+        // Initialization of the submit button
         Button submitButton = findViewById(R.id.buttonSubmit);
-        //setting onClick Functionality of button
+        // Setting onClick Functionality of button
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -49,7 +49,7 @@ public class DogInfo extends AppCompatActivity {
 
     }
 
-    //Method for saving Values. Takes values required as arguments edits the shared preferences accordingly.
+    // Method for saving values. Takes values required as arguments edits the shared preferences accordingly.
     private void saveDogInfo(String name, String birthday, int age, String breed, String city,
                              int chip, double weight, String furType) {
         SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);

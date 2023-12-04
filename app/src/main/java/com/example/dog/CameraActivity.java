@@ -125,7 +125,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    // Capture a photo
+    // Method to capture a photo
     private void capturePhoto() {
         long timeStamp = System.currentTimeMillis();
         ContentValues contentValues = new ContentValues();
@@ -138,7 +138,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                         contentValues
                 ).build(),
                 getExecutor(),
-                new ImageCapture.OnImageSavedCallback() {
+                new ImageCapture.OnImageSavedCallback() { // On image capture get the uri and send it to the image preview activity
                     @Override
                     public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
                         Uri savedImageUri = outputFileResults.getSavedUri();

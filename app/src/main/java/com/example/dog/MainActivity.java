@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
     private TextView logTitleTextView;
     private TextView titlePicTextView;
     private BottomNavigationView appNavigation;
-    private Button fakeEntry;
     @SuppressLint({"Range", "NonConstantResourceId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {

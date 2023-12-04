@@ -35,28 +35,28 @@ public class ActivityLog extends AppCompatActivity {
         walkBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Move to DogInfo activity
+                // Move to Walk activity
                 Intent intent = new Intent(ActivityLog.this, Walk.class);
                 startActivity(intent);
-                finish(); // Finish current activity to prevent going back to it with the back button
+                finish(); // Finish current activity
             }
         });
         poopBtn = findViewById(R.id.poopBtn);
         poopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Move to DogInfo activity
+                // Log poop data, move to Main activity
                 saveToDatabase(Constants.POOP_COUNT);
                 Intent intent = new Intent(ActivityLog.this, MainActivity.class);
                 startActivity(intent);
-                finish(); // Finish current activity to prevent going back to it with the back button
+                finish(); // Finish current activity
             }
         });
         peeBtn = findViewById(R.id.peeBtn);
         peeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Move to DogInfo activity
+                // Log pee data, move to Main activity
                 saveToDatabase(Constants.PEE_COUNT);
                 Intent intent = new Intent(ActivityLog.this, MainActivity.class);
                 startActivity(intent);
@@ -68,11 +68,11 @@ public class ActivityLog extends AppCompatActivity {
         foodBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Move to DogInfo activity
+                // Log food data, move to Main activity
                 saveToDatabase(Constants.FOOD_COUNT);
                 Intent intent = new Intent(ActivityLog.this, MainActivity.class);
                 startActivity(intent);
-                finish(); // Finish current activity to prevent going back to it with the back button
+                finish(); // Finish current activity
             }
         });
 
@@ -98,13 +98,12 @@ public class ActivityLog extends AppCompatActivity {
         });
     }
     private void saveToDatabase(String constant) {
-        // Save to database
+        // Method to save to database
         MyDatabase myDatabase = new MyDatabase(this);
         Cursor cursor = myDatabase.getColumnDataForToday();
         if (cursor != null && cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
                 cursor.moveToFirst();
-                // Get the count values
                 @SuppressLint("Range") int count = cursor.getInt(cursor.getColumnIndex(constant)) +1;
                 myDatabase.updateIntData(constant, getCurrentDate(), count);
                 saveDogInfo(constant, getCurrentTime());
@@ -123,7 +122,7 @@ public class ActivityLog extends AppCompatActivity {
             cursor.close();
         }
     }
-    public static String getCurrentDate() { // Getting date
+    public static String getCurrentDate() { // Getting today's date
         Calendar calendar = Calendar.getInstance();
         Date currentDate = calendar.getTime();
 
@@ -141,7 +140,7 @@ public class ActivityLog extends AppCompatActivity {
         return String.format(Locale.getDefault(), "%02d:%02d", hours, minutes);
     }
 
-    private void saveDogInfo(String constant, String time) { // Saving info to shared pref
+    private void saveDogInfo(String constant, String time) { // Saving last time info to shared pref
         SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(constant, time);
