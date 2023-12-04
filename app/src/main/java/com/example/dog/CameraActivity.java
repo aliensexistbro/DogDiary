@@ -131,7 +131,6 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         ContentValues contentValues = new ContentValues();
         contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, timeStamp);
         contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg");
-
         imageCapture.takePicture(
                 new ImageCapture.OutputFileOptions.Builder( // Saving photo
                         getContentResolver(),

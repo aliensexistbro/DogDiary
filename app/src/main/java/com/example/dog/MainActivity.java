@@ -105,16 +105,6 @@ public class MainActivity extends AppCompatActivity {
             displayWelcomeMessage();
         }
 
-        fakeEntry = findViewById(R.id.buttonFake);
-
-        fakeEntry.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, FakeEntry.class);
-                startActivity(intent);
-            }
-        });
-
     }
 
     // Check if dog information exists in shared preferences

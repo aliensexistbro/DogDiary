@@ -34,16 +34,6 @@
                 android:text="Dogs Name"
                 android:textSize="40sp"
                 android:textStyle="bold" />
-            <Button
-                android:id="@+id/buttonFake"
-                android:layout_width="match_parent"
-                android:layout_margin="20sp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/logTitleTextView"
-                android:textAllCaps="true"
-                android:textStyle="bold"
-                android:layout_marginTop="16dp"
-                android:text="fake entry"/>
 
             <TextView
                 android:id="@+id/pictureTitleTextView"
