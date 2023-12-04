@@ -234,6 +234,19 @@
                 <TableRow
                     android:paddingVertical="5dp"
                     android:paddingHorizontal="20dp">
+                    <TextView
+                        android:drawableLeft="@drawable/single_paw"
+                        android:drawablePadding="10dip"
+                        android:drawableTint="@color/darkRed"
+                        android:id="@+id/stepsTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:paddingTop="5sp"
+                        android:text="Steps:"
+                        android:textSize="18sp"
+                        android:visibility="gone"
+                        />
 
                     <TextView
                         android:id="@+id/walkTimeTextView"
@@ -248,19 +261,7 @@
 
                         />
 
-                    <TextView
-                        android:drawableLeft="@drawable/single_paw"
-                        android:drawablePadding="10dip"
-                        android:drawableTint="@color/darkRed"
-                        android:id="@+id/stepsTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:paddingTop="5sp"
-                        android:text="Steps:"
-                        android:textSize="18sp"
-                        android:visibility="gone"
-                        />
+
 
                 </TableRow>
 

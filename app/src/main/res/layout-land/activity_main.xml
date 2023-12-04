@@ -235,18 +235,6 @@
                         </TableRow>
                         <TableRow>
                             <TextView
-                                android:id="@+id/walkTimeTextView"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:paddingTop="5sp"
-                                android:text="Walk Time:"
-                                android:textSize="18sp"
-                                android:layout_weight="1"
-                                android:visibility="gone"
-
-
-                                />
-                            <TextView
                                 android:drawableLeft="@drawable/single_paw"
                                 android:drawablePadding="10dip"
                                 android:drawableTint="@color/darkRed"
@@ -260,6 +248,19 @@
                                 android:visibility="gone"
 
                                 />
+                            <TextView
+                                android:id="@+id/walkTimeTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingTop="5sp"
+                                android:text="Walk Time:"
+                                android:textSize="18sp"
+                                android:layout_weight="1"
+                                android:visibility="gone"
+
+
+                                />
+
 
                         </TableRow>
 
