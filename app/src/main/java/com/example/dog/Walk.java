@@ -56,7 +56,6 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
     private SensorManager sensorManager;
     private Sensor stepCounterSensor;
     private TextView stepsTextView;
-    private Sensor temperatureSensor;
     private Sensor accelometer;
 
     private String apiKey = "942622e72df2c7325f9f997a8adc8a1a";
@@ -80,7 +79,6 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
     private TextView temperatureTextView;
     private BottomNavigationView appNavigation;
     private boolean alert = false;
-    private Sensor temperatureSensor2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,23 +90,9 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         // Check if the step counter sensor is available
         stepCounterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
-        // Check if the temperature sensor is available
-        temperatureSensor = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
-        temperatureSensor2 = sensorManager.getDefaultSensor(Sensor.TYPE_TEMPERATURE);
         accelometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(this, accelometer, SensorManager.SENSOR_DELAY_NORMAL);
-        if(temperatureSensor != null)
-            sensorManager.registerListener(this, temperatureSensor,SensorManager.SENSOR_DELAY_NORMAL);
-        else if (temperatureSensor2 != null)
-        {
-            sensorManager.registerListener(this, temperatureSensor2,SensorManager.SENSOR_DELAY_NORMAL);
-        } else {
-            String apiUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid=686a979a082d839e1167a81db85dfcf0";
-            new FetchWeatherTask().execute(apiUrl);
-        }
         sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-
-
 
         // Retrieve the city from shared preferences
         String savedCity = sharedPreferences.getString(KEY_CITY, "");
@@ -295,7 +279,7 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
     {
         MyDatabase myDatabase = new MyDatabase(this);
         Cursor cursor = myDatabase.getColumnDataForToday();
-        int hours = (int) TimeUnit.MILLISECONDS.toHours(elapsedTime);
+        int hours = (int) TimeUnit.MILLISECONDS.toMinutes(elapsedTime);
         if (cursor != null && cursor.getCount() > 0) {
             while (cursor.moveToNext()) { // If there is already an entry
                 cursor.moveToFirst();
@@ -357,22 +341,8 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
         // Check if the event is from the step counter sensor
         if (isTracking) {
-            /*if (stepCounterSensor == null) { // Checks for step sensor, uses accelometer instead if null
-                detectStep(event.values[0], event.values[1], event.values[2], event.timestamp);
-            } else {
-                if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
-                    // The event values contain the total number of steps taken since the last device reboot
-                    stepCount = (int) event.values[0];
-                    updateStepsView();
-                }
-            }*/
             if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER)
                     detectStep(event.values[0], event.values[1], event.values[2], event.timestamp);
-        }
-        // Check for temperature event
-        if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE || event.sensor.getType() == Sensor.TYPE_TEMPERATURE) {
-            float temperatureCelsius = event.values[0];
-            updateTemperatureView(temperatureCelsius);
         }
     }
 

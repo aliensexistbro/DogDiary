@@ -125,16 +125,15 @@ public class DogProfile extends AppCompatActivity implements RadioGroup.OnChecke
         editor.putString("breed", breed);
         editor.putString("city", city);
         editor.putInt("chip", chip);
-        editor.putFloat("weight", (float) weight); // using putFloat for double, as SharedPreferences doesn't support double
+        editor.putFloat("weight", (float) weight);
         editor.putString("furType", furType);
 
         editor.commit();
     }
 
 
-    private void setDogInfo(){
+    private void setDogInfo(){ //Setting dog's information
         SharedPreferences sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
-        Log.i("Shared Preferences: ", "Shared Prefs" + sharedPreferences.getString("name", DEFAULT));
         if(sharedPreferences != null){
             String name = sharedPreferences.getString("name", DEFAULT);
             String birthday = sharedPreferences.getString("birthday", DEFAULT);
@@ -153,7 +152,6 @@ public class DogProfile extends AppCompatActivity implements RadioGroup.OnChecke
             cityET.setText(city);
             weightET.setText(String.valueOf(weight));
             furTypeET.setText(furType);
-
         }
 
     }
