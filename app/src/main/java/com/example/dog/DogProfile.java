@@ -79,7 +79,7 @@ public class DogProfile extends AppCompatActivity implements RadioGroup.OnChecke
         barChart.setVisibility(View.GONE);
         chartTitleTV = findViewById(R.id.chartTitle);
 
-        
+
         setDogInfo();
 
         // Set the saving of the on click listener for the preferences.
