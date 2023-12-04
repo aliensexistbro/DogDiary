@@ -1,7 +1,4 @@
 <resources>
     <string name="app_name">Pupsters Diary</string>
-    <string name="photo_gallery_name">Photo Gallery</string>
-    <string name="home_button">Home</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
