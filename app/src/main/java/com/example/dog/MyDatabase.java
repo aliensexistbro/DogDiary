@@ -199,9 +199,9 @@ public class MyDatabase {
         return rowsDeleted > 0;
     }
 
+    // Retrieve all the data from a specific column
     public String getDataFromColumn(String columnName){
         SQLiteDatabase db = helper.getWritableDatabase();
-        int inquiryIndex = 0;
         String selection = "";
         // All columns in the table
         String[] columns = {
@@ -215,6 +215,7 @@ public class MyDatabase {
                 Constants.WALK_STEP_COUNT,
                 Constants.WALK_TIME
         };
+        //Gets the column string from database based on a short hand column name from the parameter
         switch (columnName){
             case "pee":
                 selection = Constants.PEE_COUNT;
@@ -232,17 +233,24 @@ public class MyDatabase {
                 selection = Constants.TIMESTAMP;
         }
 
+        // Creates query for the selection from the table
         Cursor cursor = db.query(Constants.TABLE_NAME, columns, selection, null, null, null, null);
+        // Creates a buffer string to place all the results into
         StringBuffer buffer = new StringBuffer();
+        // Moves through the database to get the selection and places it into the buffer
         while (cursor.moveToNext()){
+            // Gets the indexes for the required data
             int timeIndex = cursor.getColumnIndex(Constants.TIMESTAMP);
             int selectionIndex = cursor.getColumnIndex(selection);
+            // Retrieves the data at those indexes
             String time = cursor.getString(timeIndex);
             String selectData = cursor.getString(selectionIndex);
+            // Append to buffer
             buffer.append(time + " " + selectData + "\n");
 
         }
 
+        // Returns the buffer as a string to be read.
         return buffer.toString();
     }
 
