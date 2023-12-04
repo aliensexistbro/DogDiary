@@ -168,7 +168,7 @@ public class DogProfile extends AppCompatActivity implements RadioGroup.OnChecke
             String[] data = dataColumn.split("\n");
             ArrayList<String> dataForWeek = new ArrayList<>();
             for (int j = daylimitor; j > 0; j --){
-                int dataIndex = data.length-1 - j;
+                int dataIndex = data.length - j;
                 dataForWeek.add(data[dataIndex]);
 
             }
