@@ -71,6 +71,7 @@ public class DogProfile extends AppCompatActivity implements RadioGroup.OnChecke
         chartSelect.setOnCheckedChangeListener(this);
 
         barChart = findViewById(R.id.testBarChart);
+        barChart.setVisibility(View.GONE);
         chartTitleTV = findViewById(R.id.chartTitle);
 
 
@@ -186,6 +187,8 @@ public class DogProfile extends AppCompatActivity implements RadioGroup.OnChecke
         }
         catch (Exception e){
             Toast.makeText(this, "No Data Logged in this column", Toast.LENGTH_SHORT).show();
+            barChart.setVisibility(View.INVISIBLE);
+
         }
 
 
@@ -205,6 +208,7 @@ public class DogProfile extends AppCompatActivity implements RadioGroup.OnChecke
             barDataSet.setValueTextColor(R.color.black);
             XAxis xAxis = barChart.getXAxis();
             barChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(xLabels));
+            barChart.setVisibility(View.VISIBLE);
 
         }
         else{
@@ -215,7 +219,9 @@ public class DogProfile extends AppCompatActivity implements RadioGroup.OnChecke
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         if(group == chartSelect){
+            barChart.setVisibility(View.GONE);
           if(checkedId == R.id.poopChartRadio){
+
               barChart.invalidate();
               chartTitleTV.setText("Number of Poops");
               createChart("poo", "Number of Poops");
@@ -233,6 +239,8 @@ public class DogProfile extends AppCompatActivity implements RadioGroup.OnChecke
               createChart("step", "Number of steps");
 
           }
+
+
         }
 
     }
