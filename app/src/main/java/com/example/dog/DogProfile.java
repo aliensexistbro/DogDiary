@@ -46,6 +46,7 @@ public class DogProfile extends AppCompatActivity implements RadioGroup.OnChecke
     BarData barData;
     BarDataSet barDataSet;
     BarChart barChart;
+    int daylimitor;
 
 
     public static final String DEFAULT = "not availiable";
@@ -110,6 +111,8 @@ public class DogProfile extends AppCompatActivity implements RadioGroup.OnChecke
             }
         });
 
+        daylimitor = 7;
+
 
     }
 
@@ -163,8 +166,15 @@ public class DogProfile extends AppCompatActivity implements RadioGroup.OnChecke
         try {
             String dataColumn = database.getDataFromColumn(columnName);
             String[] data = dataColumn.split("\n");
-            for (int i = 0; i < data.length; i ++){
-                String[] indiBarData = data[i].split(" ");
+            ArrayList<String> dataForWeek = new ArrayList<>();
+            for (int j = daylimitor; j > 0; j --){
+                int dataIndex = data.length-1 - j;
+                dataForWeek.add(data[dataIndex]);
+
+            }
+
+            for (int i = 0; i < dataForWeek.size(); i ++){
+                String[] indiBarData = dataForWeek.get(i).split(" ");
                 xLabels.add(indiBarData[0]);
                 barChartEntries.add(new BarEntry((float) i, Float.parseFloat(indiBarData[1])));
             }

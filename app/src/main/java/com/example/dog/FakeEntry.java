@@ -4,12 +4,17 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 public class FakeEntry extends AppCompatActivity {
 
@@ -48,6 +53,25 @@ public class FakeEntry extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveDataToDatabase();
+            }
+        });
+        BottomNavigationView appNavigation;
+        appNavigation = findViewById(R.id.fakeBottomNavigation);
+        appNavigation.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                Intent intent;
+                if (item.getItemId() == R.id.homeMenuItem){
+                    intent = new Intent(FakeEntry.this, MainActivity.class);
+                    startActivity(intent);
+                }
+                if(item.getItemId() == R.id.historyMenuItem){
+                    intent = new Intent(FakeEntry.this, History.class);
+                    startActivity(intent);
+                }
+                if(item.getItemId() == R.id.profileMenuItem){
+                }
+                return true;
             }
         });
     }
