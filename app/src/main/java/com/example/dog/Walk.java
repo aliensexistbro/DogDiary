@@ -65,13 +65,13 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
     // Step tracking variables
     private int stepCount = 0;
     private double currentLatitude, currentLongitude;
-    private static final long TIMER_UPDATE_INTERVAL = 1000; // 1 second
+    private static final long TIMER_UPDATE_INTERVAL = 1000;
     private long elapsedTime = 0;
     private Handler timerHandler;
     private Runnable timerRunnable;
 
-    private static final float STEP_THRESHOLD = 12.0f; // Adjust this threshold based on your testing
-    private static final int STEP_DELAY_NS = 250000000; // 250ms
+    private static final float STEP_THRESHOLD = 12.0f;
+    private static final int STEP_DELAY_NS = 250000000;
     private long lastStepTimeNs = 0;
     private boolean isTracking = false;
 
@@ -205,17 +205,16 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
             super.onPostExecute(s);
 
             if (s != null) {
-                try {
+                try { //Trying to get latitude and longitude from the data
                     JSONArray jsonArray = new JSONArray(s);
                     JSONObject firstEntry = jsonArray.getJSONObject(0);
                     currentLatitude = firstEntry.getDouble("lat");
                     currentLongitude = firstEntry.getDouble("lon");
 
                     DecimalFormat decimalFormat = new DecimalFormat("#.##");
-                    // Use the format method to round the latitude and longitude to two decimal places
+                    // Rounding the latitude and longitude to two decimal places
                     String roundedLatitude = decimalFormat.format(currentLatitude);
                     String roundedLongitude = decimalFormat.format(currentLongitude);
-
                     // Convert the formatted strings back to double values
                     double roundedLatitudeValue = Double.parseDouble(roundedLatitude);
                     double roundedLongitudeValue = Double.parseDouble(roundedLongitude);
@@ -223,7 +222,6 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
                     currentLatitude = roundedLatitudeValue;
                     currentLongitude = roundedLongitudeValue;
 
-                    showToast("Latitude: " + currentLatitude + ", Longitude: " + currentLongitude);
                     // Now, after obtaining the coordinates, fetch the weather data
                     String apiUrl;
                     if (currentLatitude != 0.0 && currentLongitude != 0.0) {
@@ -271,7 +269,8 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
     }
 
     public void unregSensor()
-    {
+    { // Unregistering sensor
+
         sensorManager.unregisterListener(this);
     }
 
@@ -319,24 +318,7 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
         long seconds = TimeUnit.MILLISECONDS.toSeconds(elapsedTime) % 60;
         return String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds);
     }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // Register the sensor listener
-        if (stepCounterSensor != null) {
-            sensorManager.registerListener(this, stepCounterSensor, SensorManager.SENSOR_DELAY_NORMAL);
-        }
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        // Unregister the sensor listener
-        if (stepCounterSensor != null) {
-            sensorManager.unregisterListener(this);
-        }
-    }
-
+    
     @Override
     public void onSensorChanged(SensorEvent event) {
         // Check if the event is from the step counter sensor
@@ -444,12 +426,6 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
                 // Handle the case where the API request fails or returns null
             }
         }
-    }
-
-    public void showToast(String mess)
-    {
-        Toast.makeText(this, mess, Toast.LENGTH_SHORT).show();
-
     }
 }
 
