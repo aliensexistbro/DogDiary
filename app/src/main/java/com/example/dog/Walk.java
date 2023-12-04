@@ -54,7 +54,6 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
     // Sensor-related variables
 
     private SensorManager sensorManager;
-    private Sensor stepCounterSensor;
     private TextView stepsTextView;
     private Sensor accelometer;
 
@@ -88,8 +87,6 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
         temperatureTextView = findViewById(R.id.temperatureTextView);
         // Get the sensor manager
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        // Check if the step counter sensor is available
-        stepCounterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
         accelometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         sensorManager.registerListener(this, accelometer, SensorManager.SENSOR_DELAY_NORMAL);
         sharedPreferences = getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
@@ -116,12 +113,12 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
             @Override
             public void onClick(View v) {
                 if (isTracking) {
-                    // Stop tracking
+                    // Stop tracking walk: stop updating timer and tracking steps
                     isTracking = false;
                     startStopButton.setText("Start Walk");
                     timerHandler.removeCallbacks(timerRunnable);
                 } else {
-                    // Start tracking
+                    // Start tracking walk again: updating timer and tracking steps
                     isTracking = true;
                     startStopButton.setText("End");
                     timerHandler.postDelayed(timerRunnable, TIMER_UPDATE_INTERVAL);
@@ -138,15 +135,15 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
             }
         };
         final Button endBtn = findViewById(R.id.endButton);
-        endBtn.setOnClickListener(new View.OnClickListener() {
+        endBtn.setOnClickListener(new View.OnClickListener() { //If user ends the walk
             @Override
             public void onClick(View v) {
                 long seconds = TimeUnit.MILLISECONDS.toSeconds(elapsedTime) % 60;
-                unregSensor();
-                saveInfo();
+                unregSensor(); // Unregistering sensor
+                saveInfo(); // Saving information to the database
                 Intent intent = new Intent(Walk.this, MainActivity.class);
                 startActivity(intent);
-                finish(); // Finish current activity to prevent going back to it with the back button
+                finish(); // Finish current activity
             }
         });
 
@@ -179,7 +176,7 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
         @Override
         protected String doInBackground(String... params) {
             String result = "";
-            try {
+            try { // Trying to fetch data from the URL
                 URL url = new URL(params[0]);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 InputStream inputStream = connection.getInputStream();
@@ -222,7 +219,7 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
                     currentLatitude = roundedLatitudeValue;
                     currentLongitude = roundedLongitudeValue;
 
-                    // Now, after obtaining the coordinates, fetch the weather data
+                    // After getting the coordinates, fetch the weather data
                     String apiUrl;
                     if (currentLatitude != 0.0 && currentLongitude != 0.0) {
                         apiUrl = "https://api.openweathermap.org/data/2.5/forecast?lat=" + currentLatitude + "&lon=" + currentLongitude + "&appid=" + apiKey;
@@ -234,7 +231,6 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
                     e.printStackTrace();
                 }
             } else {
-                // Handle the case where the API request fails or returns null
             }
         }
     }
@@ -263,14 +259,11 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
         outState.putInt("stepCount", stepCount);
         outState.putLong("elapsedTime", elapsedTime);
         outState.putBoolean("isTracking", isTracking);
-
-        // Always call the superclass so it can save the view hierarchy state
         super.onSaveInstanceState(outState);
     }
 
     public void unregSensor()
     { // Unregistering sensor
-
         sensorManager.unregisterListener(this);
     }
 
@@ -318,7 +311,7 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
         long seconds = TimeUnit.MILLISECONDS.toSeconds(elapsedTime) % 60;
         return String.format(Locale.getDefault(), "%02d:%02d:%02d", hours, minutes, seconds);
     }
-    
+
     @Override
     public void onSensorChanged(SensorEvent event) {
         // Check if the event is from the step counter sensor
@@ -332,17 +325,17 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
         temperatureTextView.setText(temperatureCelsius + "°C");
         if(!alert) {
             if (temperatureCelsius <= 0 ) { // Show dialogue if bellow freezing
-                // More than 5 minutes have elapsed
-                if(elapsedTime >= TimeUnit.MINUTES.toMillis(5))
-                    showDialog("Brr! It's cold out! Head back home soon.");
-                else
-                    showDialog("Brr! It's cold out! Make sure to have your dog wear a coat before leaving the house");
+                showDialog("Brr! It's cold out! Make sure to have your dog wear a coat before leaving the house");
+                alert = true;
+            }
+            if (temperatureCelsius >= 30 ) { // Show dialogue if too hot outside
+                showDialog("It's hot out! Best for your pup to stay inside or bring water on your walk");
                 alert = true;
             }
         }
     }
 
-    private void showDialog(String message) { // Show dialogue if cold
+    private void showDialog(String message) { // Show dialogue if cold/hot
         AlertDialog.Builder builder = new AlertDialog.Builder(Walk.this);
         builder.setMessage(message)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -356,7 +349,7 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
     private void detectStep(float x, float y, float z, long timestamp) {
         // Calculate the magnitude of acceleration
         float acceleration = (float) Math.sqrt(x * x + y * y + z * z);
-        // Check if acceleration exceeds the threshold and if enough time has passed since the last step
+        // If acceleration exceeds the threshold and if enough time has passed since the last step
         if (acceleration > STEP_THRESHOLD && timestamp - lastStepTimeNs > STEP_DELAY_NS) {
             stepCount++;
             lastStepTimeNs = timestamp;
@@ -375,7 +368,7 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
 
     private class FetchWeatherTask extends AsyncTask<String, Void, String> {
         @Override
-        protected String doInBackground(String... params) {
+        protected String doInBackground(String... params) { // Getting data from the URL
             String result = "";
             try {
                 URL url = new URL(params[0]);
@@ -410,12 +403,12 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
                     JSONObject main = firstEntry.getJSONObject("main");
                     double temperature = main.getDouble("temp");
 
-                    // Convert temperature from Kelvin to Celsius
+                    // Converting temperature from Kelvin to Celsius
                     temperature -= 273.15;
                     DecimalFormat decimalFormat = new DecimalFormat("#.#");
-                    // Use the format method to round the number to two decimal places
+                    // Round the number to two decimal places
                     String roundedNumber = decimalFormat.format(temperature);
-                    // Convert the formatted string back to a double if needed
+                    // Converting the formatted string back to a double
                     double roundedValue = Double.parseDouble(roundedNumber);
                     updateTemperatureView((float) roundedValue);
 
@@ -423,7 +416,6 @@ public class Walk extends AppCompatActivity implements SensorEventListener {
                     e.printStackTrace();
                 }
             } else {
-                // Handle the case where the API request fails or returns null
             }
         }
     }
